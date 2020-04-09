@@ -1,0 +1,86 @@
+.post {
+  background: rgba($blue, 0.85);
+  padding: rem(16px);
+  border-style: solid;
+  border-width: 3px;
+  border-top-color:  $blue;
+  border-left-color:  $blue;
+  border-right-color:  $blue;
+  border-bottom-color: rgba($blue-light, 0.3);
+  cursor: pointer;
+  margin: rem(0 0 40px 0);
+  overflow: hidden;
+  color: $white;
+  transition: all .3s ease;
+
+  @include hover-supported() {
+    background: $blue-alt;
+
+    .post-title a {
+      color: $blue-light;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  figure {
+    width: rem(110px);
+    height: rem(110px);
+    margin: rem(0 16px 0 0);
+    background: $blue;
+    float: left;
+  }
+
+  .post-title {
+    // prettier-ignore
+    @include responsive('font-size', (xs: rem(20px), m: rem(23px)));
+
+    font-weight: 900;
+    margin: rem(0 0 16px 0);
+    line-height: 1;
+
+    a {
+      transition: all .3s ease;
+      color: $white;
+      text-decoration: none;
+
+      @include hover-supported() {
+        color: $blue-light;
+      }
+    }
+  }
+
+  .post-location {
+    font-weight: 900;
+  }
+
+  .post-subject {
+    color: $blue-light;
+    line-height: 1;
+  }
+
+  .post-content-wrapper {
+    display: flex;
+    margin: rem(0 0 16px 0);
+  }
+
+  .post-date {
+    color: $blue-light;
+    width: rem(40px);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin: rem(0 16px 0 0);
+
+    span {
+      display: block;
+      line-height: 1;
+
+      &.post-date-day {
+        font-size: rem(35px);
+      }
+    }
+  }
+}

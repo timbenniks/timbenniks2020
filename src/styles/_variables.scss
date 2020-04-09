@@ -1,0 +1,24 @@
+// Colors
+$white: #fff;
+$grey-light: #eafaff;
+$grey-light-alt: #dbf2f9;
+$blue: #0c2235;
+$blue-light: #3590d5;
+$blue-alt: #0a1d2d;
+
+// Breakpoints
+$s-breakpoint: rem(375px);
+$m-breakpoint: rem(768px);
+$l-breakpoint: rem(1024px);
+
+// hamburger menu
+$hamburger-padding-x: 0;
+$hamburger-padding-y: 0;
+$hamburger-layer-width: 25px;
+$hamburger-layer-height: 3px;
+$hamburger-layer-spacing: 4px;
+$hamburger-layer-color: $blue-light;
+$hamburger-layer-border-radius: 4px;
+$hamburger-hover-opacity: 0.7;
+$hamburger-active-layer-color: $hamburger-layer-color;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity;
