@@ -1,37 +1,51 @@
 <template>
   <Layout>
     <div class="content-wrapper speaking">
-      <navigation/>
+      <navigation />
 
       <main id="main-content">
+        <heading
+          :breadcrumb="true"
+          titletag="h1"
+          :title="$page.Prismic.speaking.title"
+        />
 
-        <heading :breadcrumb="true" titletag="h1" :title="$page.Prismic.speaking.title"/>
+        <prismic-single-text
+          class="post-title-sep"
+          tag="h3"
+          :field="$page.Prismic.speaking.upcoming_talks"
+        />
 
-        <prismic-single-text class="post-title-sep" tag="h3" :field="$page.Prismic.speaking.upcoming_talks" />
-        <!-- <div v-if="upcomingTalks.length > 0" class="posts">
-          <talk v-for="talk in upcomingTalks" :talk="talk" :key="talk.date"/>
+        <div v-if="upcomingTalks.length > 0" class="posts">
+          <talk
+            v-for="talk in upcomingTalks"
+            :key="talk.node._meta.uid"
+            :talk="talk.node"
+          />
         </div>
-        <p v-else class="no-upcoming-talks">No upcoming talks at the moment.</p> -->
 
-        <prismic-single-text class="post-title-sep" tag="h3" :field="$page.Prismic.speaking.older_talks" />
-        <!-- <div class="posts">
-          <talk v-for="talk in oldTalks" :talk="talk" :key="talk.date"/>
-        </div> -->
+        <prismic-single-text
+          v-else
+          class="no-upcoming-talks"
+          tag="p"
+          :field="$page.Prismic.speaking.no_upcoming"
+        />
 
+        <prismic-single-text
+          class="post-title-sep"
+          tag="h3"
+          :field="$page.Prismic.speaking.older_talks"
+        />
+
+        <div class="posts">
+          <talk
+            v-for="talk in oldTalks"
+            :key="talk.node._meta.uid"
+            :talk="talk.node"
+          />
+        </div>
       </main>
     </div>
-
-
-
-
-
-    
-
-    <!-- <div class="posts" v-for="talk in $page.Prismic.allTalks.edges" :key="talk.node._meta.uid">
-      <article class="post">
-        <prismic-single-text tag="h2" :field="talk.node.title" />
-      </article>
-    </div> -->
   </Layout>
 </template>
 
@@ -45,13 +59,16 @@ query {
             uid
           }
           title
-          description
           date
           location
-          url {
-            _linkType
+          description
+          subject
+          link_to_event {
+            ... on Prismic__ExternalLink {
+              url
+              _linkType
+            }
           }
-          subject        
         }
       }
     },
@@ -59,19 +76,22 @@ query {
       title
       upcoming_talks
       older_talks
+      no_upcoming
     }
   }
 }
 </page-query>
 
 <script>
-import Navigation from '../components/navigation.vue';
-import Heading from '../components/heading.vue';
+import Navigation from '../components/navigation.vue'
+import Heading from '../components/heading.vue'
+import Talk from '../components/talk.vue'
 
 export default {
   components: {
     Navigation,
-    Heading
+    Heading,
+    Talk,
   },
   metaInfo() {
     return {
@@ -81,17 +101,45 @@ export default {
           name: 'description',
           property: 'og:description',
           content: 'An overview of my conference speaking engagements',
-          hid: 'description'
+          hid: 'description',
         },
         { property: 'og:title', content: 'Tim Benniks Speaking' },
         {
           property: 'twitter:description',
-          content: 'An overview of my conference speaking engagements'
+          content: 'An overview of my conference speaking engagements',
         },
-
-      ]
+      ],
     }
-  }
+  },
+  data() {
+    return {
+      oldTalks: [],
+      upcomingTalks: [],
+    }
+  },
+  mounted() {
+    this.$page.Prismic.allTalks.edges.forEach((talk) => {
+      if (this.isDateBeforeToday(new Date(talk.node.date))) {
+        this.oldTalks.push(talk)
+      } else {
+        this.upcomingTalks.push(talk)
+      }
+    })
+
+    this.oldTalks.sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+
+    this.upcomingTalks.sort((a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime()
+    })
+  },
+
+  methods: {
+    isDateBeforeToday(date) {
+      return new Date(date.toDateString()) < new Date(new Date().toDateString())
+    },
+  },
 }
 </script>
 

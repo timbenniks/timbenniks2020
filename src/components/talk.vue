@@ -2,18 +2,29 @@
   <article class="post">
     <div class="post-content-wrapper">
       <div class="post-date">
-        <span class="post-date-day">{{ getDay(talk.date) }}</span>
-        <span class="post-date-month">{{ getMonth(talk.date) }}</span>
-        <span class="post-date-year">{{ getYear(talk.date) }}</span>
+        <span class="post-date-day">{{ $prismic.asDay(talk.date) }}</span>
+        <span class="post-date-month">{{ $prismic.asMonth(talk.date) }}</span>
+        <span class="post-date-year">{{ $prismic.asYear(talk.date) }}</span>
       </div>
       <div class="post-titles">
         <p class="post-title">
-          <a :href="talk.link" target="_blank" rel="noopener">{{ talk.title }}</a>
+          <a
+            :href="$prismic.asLink(talk.link_to_event)"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ $prismic.asText(talk.title) }}
+          </a>
         </p>
-        <p class="post-subject">{{ talk.subject }}</p>
+        <p class="post-subject">
+          {{ talk.subject }}
+        </p>
       </div>
     </div>
-    <p class="post-description"><span class="post-location">{{ talk.location }}</span> &mdash; {{ talk.description }}</p>
+    <p class="post-description">
+      <span class="post-location">{{ talk.location }}</span> &mdash;
+      {{ $prismic.asText(talk.description) }}
+    </p>
   </article>
 </template>
 
@@ -25,24 +36,8 @@ export default {
       type: Object,
       default: () => {
         return {}
-      }
-    }
+      },
+    },
   },
-  methods: {
-    getDay(date) {
-      const day = new Date(date).getDate().toString()
-      return day.padStart(2, '0')
-    },
-
-    getMonth(date) {
-      return new Date(date)
-        .toLocaleString('en-us', { month: 'short' })
-        .toString()
-    },
-
-    getYear(date) {
-      return new Date(date).getFullYear().toString()
-    }
-  }
 }
 </script>

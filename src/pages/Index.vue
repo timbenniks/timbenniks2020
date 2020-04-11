@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="content-wrapper home">
-      <navigation/>
+      <navigation />
 
       <main id="main-content">
         <div class="homepage">
@@ -9,7 +9,10 @@
           <div class="home-copy-wrapper">
             <prismic-single-text :field="$page.Prismic.home.main_title" />
             <prismic-single-text :field="$page.Prismic.home.sub_title" />
-            <prismic-rich-text class="homepage-description" :field="$page.Prismic.home.description" /> 
+            <prismic-rich-text
+              class="homepage-description"
+              :field="$page.Prismic.home.description"
+            />
           </div>
         </div>
       </main>
@@ -18,12 +21,14 @@
 </template>
 
 <script>
-import Navigation from '../components/navigation.vue';
+import Navigation from '../components/navigation.vue'
+import LinkMixin from '../prismic/linkMixin'
 
 export default {
   components: {
-    Navigation
+    Navigation,
   },
+  mixins: [LinkMixin],
   metaInfo() {
     return {
       title: 'Tim Benniks, web-developer, speaker, Parisian',
@@ -33,11 +38,11 @@ export default {
           property: 'og:description',
           content:
             'This is the personal website of Tim Benniks. This is the place where you can find my public speaking schedule and where I share my opinions.',
-          hid: 'description'
+          hid: 'description',
         },
         {
           property: 'og:title',
-          content: 'Tim Benniks, web-developer, speaker, Parisian.'
+          content: 'Tim Benniks, web-developer, speaker, Parisian.',
         },
         {
           property: 'twitter:description',
@@ -45,10 +50,13 @@ export default {
             'This is the personal website of Tim Benniks. This is the place where you can find my public speaking schedule and where I share my opinions.'
         },
         { property: 'og:image', content: 'https://timbenniks.nl/icon.png' },
-        { property: 'twitter:image', content: 'https://timbenniks.nl/icon.png' }
-      ] 
+        {
+          property: 'twitter:image',
+          content: 'https://timbenniks.nl/icon.png',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

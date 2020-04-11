@@ -1,7 +1,7 @@
 <template>
   <nav class="navigation" aria-label="Main Navigation">
     <g-link to="/" class="head-link">
-      <g-image alt="Tim Benniks" src="~/assets/tim.png" />
+      <g-image alt="Tim Benniks" src="~/assets/tim.png" width="20" />
       <span>TIM BENNIKS</span>
     </g-link>
 
@@ -17,12 +17,16 @@
       @click="showMenu"
     >
       <span class="hamburger-box">
-        <span class="hamburger-inner"/>
+        <span class="hamburger-inner" />
       </span>
     </button>
     <ul id="menu" class="dropdown-menu">
       <li>
-        <g-link :class="$route.name === 'writings-slug' ? 'active' : ''" to="/writings/">Writings.</g-link>
+        <g-link
+          :class="$route.name === 'writings-slug' ? 'active' : ''"
+          to="/writings/">
+          Writings.
+        </g-link>
       </li>
       <li>
         <g-link to="/speaking/">Speaking.</g-link>

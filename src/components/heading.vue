@@ -1,11 +1,19 @@
 <template>
   <div class="heading">
-    <ol v-if="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <ol
+      v-if="breadcrumb"
+      itemscope
+      itemtype="https://schema.org/BreadcrumbList"
+    >
+      <li
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
+      >
         <g-link to="/" itemtype="https://schema.org/Thing" itemprop="item">
           <span itemprop="name">Home</span>
         </g-link>
-        <meta itemprop="position" content="1">
+        <meta itemprop="position" content="1" />
       </li>
       <li
         v-for="(crumb, index) in crumbs"
@@ -22,13 +30,12 @@
           <span itemprop="name">{{ crumb.text }}</span>
         </g-link>
 
-        <meta :content="index + 2" itemprop="position">
+        <meta :content="index + 2" itemprop="position" />
       </li>
     </ol>
 
-    <prismic-single-text :tag="titletag" v-if="title" :field="title" />
-    <prismic-single-text :tag="subtitletag" v-if="subtitle" :field="subtitle" />
-
+    <prismic-single-text v-if="title" :tag="titletag" :field="title" />
+    <prismic-single-text v-if="subtitle" :tag="subtitletag" :field="subtitle" />
   </div>
 </template>
 
@@ -39,31 +46,31 @@ export default {
     title: {
       type: [Array, Boolean],
       required: false,
-      default: false
+      default: false,
     },
     subtitle: {
       type: [Array, Boolean],
       required: false,
-      default: false
+      default: false,
     },
     titletag: {
       type: String,
       required: false,
-      default: 'h1'
+      default: 'h1',
     },
     subtitletag: {
       type: String,
       required: false,
-      default: 'h2'
+      default: 'h2',
     },
     breadcrumb: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
-    crumbs: function() {
+    crumbs: function () {
       const pathArray = this.$route.path.split('/')
       pathArray.shift()
 
@@ -78,16 +85,16 @@ export default {
               .replace(/-/g, ' ')
               .toLowerCase()
               .split(' ')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ')
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' '),
           })
         }
         return breadcrumbArray
       }, [])
 
       return breadcrumbs
-    }
-  }
+    },
+  },
 }
 </script>
 
