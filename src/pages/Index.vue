@@ -5,7 +5,14 @@
 
       <main id="main-content">
         <div class="homepage">
-          <g-image alt="Tim Benniks" src="~/assets/tim.png" />
+          <twic-image
+            ratio="1/1"
+            :alt="$prismic.asText($page.Prismic.home.main_title)"
+            :url="$page.Prismic.home.image.url"
+            extra-class="opacity-only"
+            :caption="false"
+          />
+
           <div class="home-copy-wrapper">
             <prismic-single-text :field="$page.Prismic.home.main_title" />
             <prismic-single-text :field="$page.Prismic.home.sub_title" />
@@ -23,10 +30,12 @@
 <script>
 import Navigation from '../components/navigation.vue'
 import LinkMixin from '../prismic/linkMixin'
+import TwicImage from '../components/image.vue'
 
 export default {
   components: {
     Navigation,
+    TwicImage,
   },
   mixins: [LinkMixin],
   metaInfo() {
@@ -67,12 +76,13 @@ query {
       main_title
       sub_title
       description
+      image
     }
   }
 }
 </page-query>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .homepage {
   width: 80%;
   max-width: rem(800px);

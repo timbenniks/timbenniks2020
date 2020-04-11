@@ -16,15 +16,14 @@
             :key="post.node._meta.uid"
             class="post"
           >
-            <figure style="--aspect-ratio: 1/1;">
-              <img
-                :data-src="post.node.image.url"
-                :alt="post.node.title"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                class="twic"
-                data-src-transform="cover=1:1"
-              />
-            </figure>
+            <twic-image
+              ratio="1/1"
+              :alt="$prismic.asText(post.node.title)"
+              :url="post.node.image.url"
+              transform="cover=1:1"
+              :caption="false"
+            />
+
             <div class="post-content-wrap">
               <p class="post-title">
                 <g-link :to="`/writings/${post.node._meta.uid}/`">
@@ -74,11 +73,13 @@ query {
 <script>
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
+import TwicImage from '../components/image.vue'
 
 export default {
   components: {
     Navigation,
     Heading,
+    TwicImage,
   },
   metaInfo: {
     title: 'Writings',

@@ -17,24 +17,21 @@ export default function (type, element, content, children) {
     return result
   }
 
-  // // If the image is also a link to a Prismic Document, it will return a <g-link> component
-  // if (type === Elements.image) {
-  //   let result = `<img src="${element.url}" alt="${element.alt || ''}" copyright="${element.copyright || ''}">`
+  if (type === Elements.image) {
+    let result = `
+      <figure style="--aspect-ratio:${element.dimensions.width}/${element.dimensions.height};">
+        <img
+          data-src="${element.url}"
+          alt="${element.alt}"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          class="twic"
+        />
+        <figcaption>${element.alt}</figcaption>
+      </figure>
+      `
 
-  //   if (element.linkTo) {
-  //     const url = prismicDOM.Link.url(element.linkTo, linkResolver)
-
-  //     if (element.linkTo.link_type === 'Document') {
-  //       result = `<a href="${url}" data-internal-link>${content}</a>`
-  //     } else {
-  //       const target = element.linkTo.target ? `target="${element.linkTo.target}" rel="noopener"` : ''
-  //       result = `<a href="${url}" ${target}>${result}</a>`
-  //     }
-  //   }
-  //   const wrapperClassList = [element.label || '', 'block-img']
-  //   result = `<p class="${wrapperClassList.join(' ')}">${result}</p>`
-  //   return result
-  // }
+    return result
+  }
 
   return null
 }

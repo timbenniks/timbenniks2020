@@ -41,18 +41,22 @@ export default function (Vue, { router, head, isClient }) {
     name: 'google-site-verification',
     content: 'El5Wtr19CHQY1u_sQOjbuusrXqYCt6I6n3OJSyZEPAg',
   })
+
   head.meta.push({
     property: 'og:type',
     content: 'website',
   })
+
   head.meta.push({
     property: 'og:site_name',
     content: 'timbenniks',
   })
+
   head.meta.push({
     property: 'og:image',
     content: 'https://timbenniks.nl/icon.png',
   })
+
   head.meta.push({
     property: 'twitter:image',
     content: 'https://timbenniks.nl/icon.png',
@@ -68,14 +72,17 @@ export default function (Vue, { router, head, isClient }) {
     type: 'image/x-icon',
     href: '/favicon.ico',
   })
+
   head.link.push({
     rel: 'preconnect',
     href: 'https://www.google-analytics.com',
   })
-  // head.link.push({
-  //   rel: 'preconnect',
-  //   href: 'https://i.twic.pics',
-  // })
+
+  head.link.push({
+    rel: 'preconnect',
+    href: 'https://i.twic.pics',
+  })
+
   head.link.push({
     rel: 'preload',
     as: 'font',
@@ -86,7 +93,7 @@ export default function (Vue, { router, head, isClient }) {
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
   })
 
-  // head.script.push({ src: 'https://i.twic.pics/v1/script', async: '' })
+  head.script.push({ src: 'https://i.twic.pics/v1/script', async: '' })
 
   router.beforeEach((to, _from, next) => {
     const url = `https://timbenniks.nl/${to.path}`

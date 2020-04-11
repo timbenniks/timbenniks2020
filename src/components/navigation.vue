@@ -1,7 +1,13 @@
 <template>
   <nav class="navigation" aria-label="Main Navigation">
     <g-link to="/" class="head-link">
-      <g-image alt="Tim Benniks" src="~/assets/tim.png" width="20" />
+      <twic-image
+        ratio="1/1"
+        alt="Tim Benniks, logo in drawn in vector"
+        url="/icon.png"
+        extra-class="no-animation"
+        :caption="false"
+      />
       <span>TIM BENNIKS</span>
     </g-link>
 
@@ -36,21 +42,26 @@
 </template>
 
 <script>
+import TwicImage from './image.vue'
+
 export default {
+  components: {
+    TwicImage,
+  },
   data() {
     return {
-      burgerActive: false
+      burgerActive: false,
     }
   },
   methods: {
     showMenu() {
       this.burgerActive = !this.burgerActive
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .navigation {
   position: -webkit-sticky;
   position: sticky;
