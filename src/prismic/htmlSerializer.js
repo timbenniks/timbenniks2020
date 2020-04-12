@@ -11,7 +11,9 @@ export default function (type, element, content, children) {
     if (element.data.link_type === 'Document') {
       result = `<a href="${url}" data-internal-link>${content}</a>`
     } else {
-      const target = element.data.target ? `target="'${element.data.target}'" rel="noopener"` : ''
+      const target = element.data.target
+        ? `target="'${element.data.target}'" rel="noopener"`
+        : ''
       result = `<a href="${url}" ${target}>${content}</a>`
     }
     return result
@@ -29,6 +31,28 @@ export default function (type, element, content, children) {
         <figcaption>${element.alt}</figcaption>
       </figure>
       `
+
+    return result
+  }
+
+  if (type === Elements.embed) {
+    let result = ''
+
+    if (element.oembed.provider_name === 'YouTube') {
+      result = `
+        <figure style="--aspect-ratio:16/9;">
+          <iframe 
+            width="16" 
+            height="9" 
+            allowfullscreen 
+            frameborder="0" 
+            data-src="${element.oembed.embed_url.replace(
+              'watch?v=',
+              'embed/'
+            )}"></iframe>
+        </figure>
+      `
+    }
 
     return result
   }

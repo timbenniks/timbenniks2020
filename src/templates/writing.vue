@@ -24,6 +24,7 @@
 
 <script>
 import LinkMixin from '../prismic/linkMixin'
+import IframeMixin from '../prismic/iframeMixin'
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 
@@ -32,7 +33,7 @@ export default {
     Navigation,
     Heading,
   },
-  mixins: [LinkMixin],
+  mixins: [LinkMixin, IframeMixin],
 }
 </script>
 

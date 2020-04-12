@@ -1,23 +1,11 @@
 <template>
   <div class="wrapper">
-    <a href="#main-content" aria-hidden="false" class="goToContent">{{ $static.metadata.skiplink }}</a>
-    <div class="bg-triangle"/>
-    <slot/>
+    <a href="#main-content" aria-hidden="false" class="goToContent">{{
+      $static.metadata.skiplink
+    }}</a>
+    <div class="bg-triangle" />
+    <slot />
   </div>
-
-  <!-- <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/writings/">Writing</g-link>
-        <g-link class="nav__link" to="/speaking/">Speaking</g-link>
-      </nav>
-    </header>
-    <slot/>
-  </div> -->
 </template>
 
 <static-query>

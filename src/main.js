@@ -15,6 +15,8 @@ import {
   asYear,
 } from '~/prismic/methods'
 
+import { page } from 'vue-analytics'
+
 import './styles/index.scss'
 
 export default function (Vue, { router, head, isClient }) {
@@ -108,6 +110,8 @@ export default function (Vue, { router, head, isClient }) {
       rel: 'canonical',
       href: url,
     })
+
+    page(to.fullPath)
 
     next()
   })
