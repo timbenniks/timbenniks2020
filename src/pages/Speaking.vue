@@ -77,6 +77,26 @@ query {
       upcoming_talks
       older_talks
       no_upcoming
+      body {
+        ... on Prismic_SpeakingBodyGeneral_card {
+          type
+          primary {
+            title
+            description
+            image
+          }
+        }
+        ... on Prismic_SpeakingBodyTwitter_card {
+          type
+          primary {
+            twitter_handle
+            title
+            description
+            image
+          }
+        }
+        __typename
+      }
     }
   }
 }
@@ -86,6 +106,7 @@ query {
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import Talk from '../components/talk.vue'
+import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
   components: {
@@ -94,22 +115,7 @@ export default {
     Talk,
   },
   metaInfo() {
-    return {
-      title: 'Tim Benniks Speaking',
-      meta: [
-        {
-          name: 'description',
-          property: 'og:description',
-          content: 'An overview of my conference speaking engagements',
-          hid: 'description',
-        },
-        { property: 'og:title', content: 'Tim Benniks Speaking' },
-        {
-          property: 'twitter:description',
-          content: 'An overview of my conference speaking engagements',
-        },
-      ],
-    }
+    return mapMetaInfo(this.$page.Prismic.speaking.body)
   },
   data() {
     return {

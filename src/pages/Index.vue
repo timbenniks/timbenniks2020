@@ -29,8 +29,8 @@
 
 <script>
 import Navigation from '../components/navigation.vue'
-import LinkMixin from '../prismic/linkMixin'
 import TwicImage from '../components/image.vue'
+import LinkMixin from '../prismic/linkMixin'
 import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
@@ -54,25 +54,25 @@ query {
       description
       image
       body {
-      ... on Prismic_HomeBodyGeneral_card {
-        type
-        primary {
-          title
-          description
-          image
+        ... on Prismic_HomeBodyGeneral_card {
+          type
+          primary {
+            title
+            description
+            image
+          }
         }
-      }
-      ... on Prismic_HomeBodyTwitter_card {
-        type
-        primary {
-          twitter_handle
-          title
-          description
-          image
+        ... on Prismic_HomeBodyTwitter_card {
+          type
+          primary {
+            twitter_handle
+            title
+            description
+            image
+          }
         }
+        __typename
       }
-      __typename
-    }
     }
   }
 }
