@@ -31,6 +31,7 @@
 import Navigation from '../components/navigation.vue'
 import LinkMixin from '../prismic/linkMixin'
 import TwicImage from '../components/image.vue'
+import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
   components: {
@@ -39,32 +40,7 @@ export default {
   },
   mixins: [LinkMixin],
   metaInfo() {
-    return {
-      title: 'Tim Benniks, web-developer, speaker, Parisian',
-      meta: [
-        {
-          name: 'description',
-          property: 'og:description',
-          content:
-            'This is the personal website of Tim Benniks. This is the place where you can find my public speaking schedule and where I share my opinions.',
-          hid: 'description',
-        },
-        {
-          property: 'og:title',
-          content: 'Tim Benniks, web-developer, speaker, Parisian.',
-        },
-        {
-          property: 'twitter:description',
-          content:
-            'This is the personal website of Tim Benniks. This is the place where you can find my public speaking schedule and where I share my opinions.'
-        },
-        { property: 'og:image', content: 'https://timbenniks.nl/icon.png' },
-        {
-          property: 'twitter:image',
-          content: 'https://timbenniks.nl/icon.png',
-        },
-      ],
-    }
+    return mapMetaInfo(this.$page.Prismic.home.body)
   },
 }
 </script>
@@ -77,6 +53,26 @@ query {
       sub_title
       description
       image
+      body {
+      ... on Prismic_HomeBodyGeneral_card {
+        type
+        primary {
+          title
+          description
+          image
+        }
+      }
+      ... on Prismic_HomeBodyTwitter_card {
+        type
+        primary {
+          twitter_handle
+          title
+          description
+          image
+        }
+      }
+      __typename
+    }
     }
   }
 }

@@ -17,6 +17,8 @@ import {
 
 import { page } from 'vue-analytics'
 
+import gridsomeConfig from '../gridsome.config'
+
 import './styles/index.scss'
 
 export default function (Vue, { router, head, isClient }) {
@@ -41,7 +43,7 @@ export default function (Vue, { router, head, isClient }) {
 
   head.meta.push({
     name: 'google-site-verification',
-    content: 'El5Wtr19CHQY1u_sQOjbuusrXqYCt6I6n3OJSyZEPAg',
+    content: process.env.GOOGLE_SITE_VERIFICATION,
   })
 
   head.meta.push({
@@ -51,28 +53,33 @@ export default function (Vue, { router, head, isClient }) {
 
   head.meta.push({
     property: 'og:site_name',
+    content: gridsomeConfig.siteName,
+  })
+
+  head.meta.push({
+    property: 'twitter:card',
+    content: 'summary',
+  })
+
+  head.meta.push({
+    property: 'twitter:handle',
     content: 'timbenniks',
   })
 
   head.meta.push({
-    property: 'og:image',
-    content: 'https://timbenniks.nl/icon.png',
-  })
-
-  head.meta.push({
-    property: 'twitter:image',
-    content: 'https://timbenniks.nl/icon.png',
-  })
-
-  head.meta.push({
     name: 'author',
-    content: 'Tim Benniks',
+    content: gridsomeConfig.siteName,
+  })
+
+  head.meta.push({
+    name: 'robots',
+    content: 'index, follow',
   })
 
   head.link.push({
     rel: 'icon',
     type: 'image/x-icon',
-    href: '/favicon.ico',
+    href: `${gridsomeConfig.siteUrl}/${gridsomeConfig.icon}`,
   })
 
   head.link.push({
@@ -90,6 +97,7 @@ export default function (Vue, { router, head, isClient }) {
     as: 'font',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
   })
+
   head.link.push({
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
@@ -98,11 +106,15 @@ export default function (Vue, { router, head, isClient }) {
   head.script.push({ src: 'https://i.twic.pics/v1/script', async: '' })
 
   router.beforeEach((to, _from, next) => {
-    const url = `https://timbenniks.nl/${to.path}`
+    const url = `${gridsomeConfig.siteUrl}${to.path}`
 
     head.meta.push({
-      key: 'og:url',
-      name: 'og:url',
+      property: 'og:url',
+      content: url,
+    })
+
+    head.meta.push({
+      property: 'twitter:url',
       content: url,
     })
 

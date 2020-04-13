@@ -25,6 +25,7 @@ export default function (type, element, content, children) {
         <img
           data-src="${element.url}"
           alt="${element.alt}"
+          title="${element.alt}"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           class="twic"
         />
