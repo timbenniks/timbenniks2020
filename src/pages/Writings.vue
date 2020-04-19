@@ -17,10 +17,10 @@
             class="post"
           >
             <twic-image
-              ratio="1/1"
+              ratio="16/9"
               :alt="$prismic.asText(post.node.title)"
               :url="post.node.image.url"
-              transform="cover=1:1"
+              transform="cover=16:9"
               :caption="false"
             />
 
