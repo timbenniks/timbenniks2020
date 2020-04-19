@@ -65,6 +65,26 @@ query {
     },
     writings(uid: "writings", lang: "en-us") {
       title
+      body {
+        ... on Prismic_WritingsBodyGeneral_card {
+          type
+          primary {
+            title
+            description
+            image
+          }
+        }
+        ... on Prismic_WritingsBodyTwitter_card {
+          type
+          primary {
+            twitter_handle
+            title
+            description
+            image
+          }
+        }
+        __typename
+      }
     }
   }
 }
@@ -74,6 +94,7 @@ query {
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import TwicImage from '../components/image.vue'
+import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
   components: {
@@ -81,32 +102,8 @@ export default {
     Heading,
     TwicImage,
   },
-  metaInfo: {
-    title: 'Writings',
-    meta: [
-      {
-        name: 'description',
-        property: 'og:description',
-        content: 'An overview of my writings',
-        hid: 'description',
-      },
-      {
-        property: 'og:title',
-        content: 'Writings',
-      },
-      {
-        property: 'twitter:description',
-        content: 'An overview of my writings',
-      },
-      {
-        property: 'og:image',
-        content: 'https://timbenniks.nl/icon.png',
-      },
-      {
-        property: 'twitter:image',
-        content: 'https://timbenniks.nl/icon.png',
-      },
-    ],
+  metaInfo() {
+    return mapMetaInfo(this.$page.Prismic.writings, 'writings')
   },
 }
 </script>

@@ -16,38 +16,93 @@ function getPropType(fields, type, prop) {
   }
 }
 
-export default function (fields) {
-  return {
-    title: getPropType(fields, 'general_card', 'title'),
+export default function (fields, pageType) {
+  const metaData = {
+    title: getPropType(fields.body, 'general_card', 'title'),
     meta: [
       {
         property: 'og:title',
-        content: getPropType(fields, 'general_card', 'title'),
+        content: getPropType(fields.body, 'general_card', 'title'),
       },
       {
         property: 'twitter:title',
-        content: getPropType(fields, 'twitter_card', 'title'),
+        content: getPropType(fields.body, 'twitter_card', 'title'),
       },
       {
         name: 'description',
-        content: getPropType(fields, 'general_card', 'description'),
+        content: getPropType(fields.body, 'general_card', 'description'),
       },
       {
         property: 'og:description',
-        content: getPropType(fields, 'general_card', 'description'),
+        content: getPropType(fields.body, 'general_card', 'description'),
       },
       {
         property: 'twitter:description',
-        content: getPropType(fields, 'twitter_card', 'description'),
+        content: getPropType(fields.body, 'twitter_card', 'description'),
       },
       {
         property: 'og:image',
-        content: getPropType(fields, 'general_card', 'image'),
+        content: getPropType(fields.body, 'general_card', 'image'),
       },
       {
         property: 'twitter:image',
-        content: getPropType(fields, 'twitter_card', 'image'),
+        content: getPropType(fields.body, 'twitter_card', 'image'),
       },
     ],
   }
+
+  if (pageType === 'home') {
+    metaData.script = [
+      {
+        innerHTML: JSON.stringify({
+          '@context': 'http://schema.org',
+          '@type': 'Website',
+          url: 'https://timbenniks.nl',
+        }),
+        type: 'application/ld+json',
+      },
+    ]
+  }
+
+  if (pageType === 'writing') {
+    metaData.script = [
+      {
+        innerHTML: JSON.stringify({
+          '@context': 'http://schema.org',
+          '@type': 'BlogPosting',
+          headline: getPropType(fields.body, 'general_card', 'title'),
+          image: getPropType(fields.body, 'general_card', 'image'),
+          wordcount: asText(fields.content)
+            .split(' ')
+            .filter((n) => {
+              return n != ''
+            }).length,
+          url: `https://timbenniks.nl/writings/${fields._meta.uid}`,
+          datePublished: `${fields.publication_date}T00:00:00`,
+          dateCreated: `${fields.publication_date}T00:00:00`,
+          dateModified: fields._meta.lastPublicationDate,
+          description: getPropType(fields.body, 'general_card', 'description'),
+          publisher: {
+            '@type': 'Organization',
+            name: 'Tim Benniks',
+            logo: {
+              '@type': 'ImageObject',
+              url: getPropType(fields.body, 'general_card', 'image'),
+            },
+          },
+          author: {
+            '@type': 'Person',
+            name: 'Tim Benniks',
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://google.com/article`,
+          },
+        }),
+        type: 'application/ld+json',
+      },
+    ]
+  }
+
+  return metaData
 }

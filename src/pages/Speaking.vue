@@ -115,7 +115,7 @@ export default {
     Talk,
   },
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.speaking.body)
+    return mapMetaInfo(this.$page.Prismic.speaking, 'speaking')
   },
   data() {
     return {

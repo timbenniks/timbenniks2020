@@ -27,11 +27,15 @@ import LinkMixin from '../prismic/linkMixin'
 import IframeMixin from '../prismic/iframeMixin'
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
+import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
   components: {
     Navigation,
     Heading,
+  },
+  metaInfo() {
+    return mapMetaInfo(this.$page.Prismic.writing, 'writing')
   },
   mixins: [LinkMixin, IframeMixin],
 }
@@ -41,10 +45,36 @@ export default {
 query Writing ($uid: String!) {
   Prismic {
     writing(uid: $uid, lang: "en-us") {
+      publication_date
       title
       sub_title
       content
       image
+      _meta {
+        firstPublicationDate
+        lastPublicationDate
+        uid
+      }
+      body {
+        ... on Prismic_WritingBodyGeneral_card {
+          type
+          primary {
+            title
+            description
+            image
+          }
+        }
+        ... on Prismic_WritingBodyTwitter_card {
+          type
+          primary {
+            twitter_handle
+            title
+            description
+            image
+          }
+        }
+        __typename
+      }
     }
   }
 }
