@@ -52,9 +52,21 @@ module.exports = {
         },
       },
     },
-    // {
-    //   use: 'gridsome-plugin-purgecss',
-    // },
+    {
+      use: 'gridsome-plugin-pwa',
+      options: {
+        title: 'Tim Benniks',
+        disableServiceWorker: false,
+        shortName: 'TimBenniks',
+        themeColor: '#3590d5',
+        backgroundColor: '#3590d5',
+        icon: './src/assets/tim.png',
+        msTileColor: '#3590d5',
+      },
+    },
+    {
+      use: 'gridsome-plugin-purgecss',
+    },
   ],
   chainWebpack(config) {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
