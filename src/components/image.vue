@@ -7,7 +7,6 @@
       :title="alt"
       class="twic"
       :class="extraClass"
-      :data-src-transform="transform"
     >
     <figcaption v-if="caption">
       {{ alt }}
