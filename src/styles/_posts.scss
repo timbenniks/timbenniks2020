@@ -32,6 +32,10 @@
     @include responsive('float', (xs: none, m: left));
     background: $blue;
     border-bottom: 1px solid $blue-light;
+
+    img {
+      object-fit: cover;
+    }
   }
 
   .post-title {
