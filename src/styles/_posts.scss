@@ -26,11 +26,12 @@
   }
 
   figure {
-    width: rem(200px);
-    height: rem(112px);
-    margin: rem(0 16px 0 0);
+    @include responsive('width', (xs: 100%, m: rem(200px)));
+    @include responsive('height', (xs: auto, m: rem(112px)));
+    @include responsive('margin', (xs: rem(0 16px 16px 0), m: rem(0 16px 0 0)));
+    @include responsive('float', (xs: none, m: left));
     background: $blue;
-    float: left;
+    border-bottom: 1px solid $blue-light;
   }
 
   .post-title {

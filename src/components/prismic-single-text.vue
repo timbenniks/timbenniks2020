@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'prismic-single-text',
+  name: 'PrismicSingleText',
   props: {
     field: { type: Array, required: true },
     tag: { type: String, required: false },
