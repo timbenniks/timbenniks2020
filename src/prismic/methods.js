@@ -27,6 +27,17 @@ export function asYear(date) {
   return new Date(date).getFullYear().toString()
 }
 
+export function asDate(date) {
+  console.log(date)
+  return new Date(date)
+    .toLocaleString('en-us', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+    .toString()
+}
+
 export function toType(type) {
   switch (type) {
     case RichText.Elements.heading1:

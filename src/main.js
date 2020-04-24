@@ -13,6 +13,7 @@ import {
   asDay,
   asMonth,
   asYear,
+  asDate,
 } from '~/prismic/methods'
 
 import { page } from 'vue-analytics'
@@ -32,6 +33,7 @@ export default function (Vue, { router, head, isClient }) {
     asDay,
     asMonth,
     asYear,
+    asDate,
   }
 
   Vue.component('Layout', DefaultLayout)
