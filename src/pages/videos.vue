@@ -12,35 +12,35 @@
 
         <div class="posts videos">
           <article
-            v-for="post in $page.Prismic.allVideos.edges"
-            :key="post.node._meta.uid"
+            v-for="video in filteredVideos"
+            :key="video._meta.uid"
             class="post video"
           >
-            <lazy-image
-              ratio="16/9"
-              :alt="$prismic.asText(post.node.title)"
-              :url="post.node.image.url"
-              :caption="false"
-              :widths="[300, 400, 500, 600, 680]"
-              sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
-            />
+            <g-link :to="`/videos/${video._meta.uid}/`">
+              <lazy-image
+                ratio="16/9"
+                :alt="$prismic.asText(video.title)"
+                :url="video.image.url"
+                :caption="false"
+                :widths="[300, 400, 500, 600, 680]"
+                sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
+              />
+            </g-link>
 
             <div class="post-content-wrap">
-              <div class="post-description">
-                <span class="post-date">
-                  {{ $prismic.asDay(post.node.publication_date) }}
-                  {{ $prismic.asMonth(post.node.publication_date) }}
-                  {{ $prismic.asYear(post.node.publication_date) }}
-                </span>
-                <ul class="post-tags">
-                  <li v-for="tag in post.node._meta.tags" :key="tag">
-                    {{ tag }}
-                  </li>
-                </ul>
-              </div>
+              <p class="post-tags">
+                <button
+                  v-for="tag in video._meta.tags"
+                  :key="tag"
+                  class="tag"
+                  @click="filter(tag)"
+                >
+                  {{ tag }}
+                </button>
+              </p>
               <p class="post-title">
-                <g-link :to="`/videos/${post.node._meta.uid}/`">
-                  {{ $prismic.asText(post.node.title) }}
+                <g-link :to="`/videos/${video._meta.uid}/`">
+                  {{ $prismic.asText(video.title) }}
                 </g-link>
               </p>
             </div>
@@ -106,22 +106,50 @@ export default {
     Heading,
     LazyImage,
   },
-  data() {
-    return {
-      tags: [],
-    }
-  },
   metaInfo() {
     return mapMetaInfo(this.$page.Prismic.videos, 'videos')
   },
-  mounted() {
-    this.$page.Prismic.allVideos.edges.forEach((edge) => {
-      edge.node._meta.tags.forEach((tag) => {
-        this.tags.push(tag)
+  computed: {
+    filteredVideos: {
+      get: function () {
+        return this.$page.Prismic.allVideos.edges.map((edge) => {
+          return edge.node
+        })
+      },
+      set: function (newValue) {
+        this.filteredVideos = newValue
+      },
+    },
+    tags: function () {
+      const tags = []
+      this.$page.Prismic.allVideos.edges.forEach((edge) => {
+        edge.node._meta.tags.forEach((tag) => {
+          if (!tags.find((t) => t.tag === tag)) {
+            tags.push({ tag, selected: false })
+          }
+        })
       })
-    })
 
-    this.tags = [...new Set(this.tags)]
+      return tags
+    },
+  },
+  methods: {
+    filter(tag) {
+      this.filteredVideos = []
+
+      this.tags.find((t) => t.tag === tag).selected = !this.tags.find(
+        (t) => t.tag === tag
+      ).selected
+
+      this.$page.Prismic.allVideos.edges.forEach((edge) => {
+        edge.node._meta.tags.forEach((tag) => {
+          const tagFound = this.tags.find((t) => t.tag === tag)
+          if (tagFound.selected) {
+            this.filteredVideos.push(edge.node)
+          }
+        })
+      })
+    },
   },
 }
 </script>
@@ -132,15 +160,8 @@ export default {
   grid-gap: 1rem;
   min-width: 0;
 
-  @include responsive(
-    'grid-template-columns',
-    (
-      xs: 100%,
-      s: repeat(2, 47.5%),
-      m: repeat(3, 32%),
-      l: repeat(4, 23.5%),
-    )
-  );
+  // prettier-ignore
+  @include responsive('grid-template-columns', (xs: 100%, s: repeat(2, 47.5%), m: repeat(3, 32%)));
 
   .video {
     width: auto;
@@ -153,11 +174,34 @@ export default {
       margin: rem(0 0 16px 0);
     }
 
+    .post-tags {
+      margin: 0 0 0.7rem 0;
+
+      button {
+        background: none;
+        padding: 0;
+        border: none;
+        appearance: none;
+        color: $white;
+        background: $blue-light;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 0.2rem;
+        margin: 0 0.5rem 0 0;
+        cursor: pointer;
+
+        &:hover {
+          background: $grey-light;
+          color: $blue;
+        }
+      }
+    }
+
     .post-date {
       font-weight: 400;
       float: none;
       margin: 0;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
 
     .post-title {
