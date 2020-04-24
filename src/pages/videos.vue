@@ -7,12 +7,12 @@
         <heading
           :breadcrumb="true"
           titletag="h1"
-          :title="$page.Prismic.writings.title"
+          :title="$page.Prismic.videos.title"
         />
 
         <div class="posts">
           <article
-            v-for="post in $page.Prismic.allWritings.edges"
+            v-for="post in $page.Prismic.allVideos.edges"
             :key="post.node._meta.uid"
             class="post"
           >
@@ -27,7 +27,7 @@
 
             <div class="post-content-wrap">
               <p class="post-title">
-                <g-link :to="`/writings/${post.node._meta.uid}/`">
+                <g-link :to="`/videos/${post.node._meta.uid}/`">
                   {{ $prismic.asText(post.node.title) }}
                 </g-link>
               </p>
@@ -37,7 +37,6 @@
                   {{ $prismic.asMonth(post.node.publication_date) }}
                   {{ $prismic.asYear(post.node.publication_date) }}
                 </span>
-                &mdash; {{ $prismic.asText(post.node.sub_title) }}
               </p>
             </div>
           </article>
@@ -50,24 +49,24 @@
 <page-query>
 query {
   Prismic {
-    allWritings {
+    allVideos {
       edges {
         node {
           _meta {
             uid
+            tags
           }
           title
-          sub_title
-          content
-          image
+          video_embed
           publication_date
+          image
         }
       }
     },
-    writings(uid: "writings", lang: "en-us") {
+    videos(uid: "videos", lang: "en-us") {
       title
       body {
-        ... on Prismic_WritingsBodyGeneral_card {
+        ... on Prismic_VideosBodyGeneral_card {
           type
           primary {
             title
@@ -75,7 +74,7 @@ query {
             image
           }
         }
-        ... on Prismic_WritingsBodyTwitter_card {
+        ... on Prismic_VideosBodyTwitter_card {
           type
           primary {
             twitter_handle
@@ -104,7 +103,7 @@ export default {
     LazyImage,
   },
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.writings, 'writings')
+    return mapMetaInfo(this.$page.Prismic.videos, 'videos')
   },
 }
 </script>

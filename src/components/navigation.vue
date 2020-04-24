@@ -1,13 +1,12 @@
 <template>
   <nav class="navigation" aria-label="Main Navigation">
     <g-link to="/" class="head-link">
-      <twic-image
-        ratio="1/1"
-        alt="Tim Benniks, logo in drawn in vector"
-        url="/icon.png"
-        extra-class="no-animation"
-        :caption="false"
-      />
+      <figure style="--aspect-ratio: 1/1;">
+        <img
+          src="data:image/jpeg;base64,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"
+          alt="Tim Benniks, logo in drawn in vector"
+        >
+      </figure>
       <span>TIM BENNIKS</span>
     </g-link>
 
@@ -30,24 +29,30 @@
       <li>
         <g-link
           :class="$route.name === 'writings-slug' ? 'active' : ''"
-          to="/writings/">
+          to="/writings/"
+        >
           Writings.
         </g-link>
       </li>
       <li>
-        <g-link to="/speaking/">Speaking.</g-link>
+        <g-link
+          :class="$route.name === 'videos-slug' ? 'active' : ''"
+          to="/videos/"
+        >
+          Videos.
+        </g-link>
+      </li>
+      <li>
+        <g-link to="/speaking/">
+          Speaking.
+        </g-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import TwicImage from './image.vue'
-
 export default {
-  components: {
-    TwicImage,
-  },
   data() {
     return {
       burgerActive: false,

@@ -88,11 +88,6 @@ export default function (Vue, { router, head, isClient }) {
   })
 
   head.link.push({
-    rel: 'preconnect',
-    href: 'https://i.twic.pics',
-  })
-
-  head.link.push({
     rel: 'preload',
     as: 'font',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
@@ -102,8 +97,6 @@ export default function (Vue, { router, head, isClient }) {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
   })
-
-  head.script.push({ src: 'https://i.twic.pics/v1/script', async: '' })
 
   router.beforeEach((to, _from, next) => {
     const url = `${gridsomeConfig.siteUrl}${to.path}`

@@ -5,12 +5,14 @@
 
       <main id="main-content">
         <div class="homepage">
-          <twic-image
+          <lazy-image
             ratio="1/1"
             :alt="$prismic.asText($page.Prismic.home.main_title)"
             :url="$page.Prismic.home.image.url"
             extra-class="opacity-only"
             :caption="false"
+            :widths="[130]"
+            sizes="130px"
           />
 
           <div class="home-copy-wrapper">
@@ -35,14 +37,14 @@
 
 <script>
 import Navigation from '../components/navigation.vue'
-import TwicImage from '../components/image.vue'
+import LazyImage from '../components/lazy-image.vue'
 import LinkMixin from '../prismic/linkMixin'
 import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {
   components: {
     Navigation,
-    TwicImage,
+    LazyImage,
   },
   mixins: [LinkMixin],
   metaInfo() {

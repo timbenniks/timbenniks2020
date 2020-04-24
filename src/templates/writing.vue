@@ -25,6 +25,7 @@
 <script>
 import LinkMixin from '../prismic/linkMixin'
 import IframeMixin from '../prismic/iframeMixin'
+import ImageMixin from '../prismic/imageMixin'
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
@@ -37,7 +38,7 @@ export default {
   metaInfo() {
     return mapMetaInfo(this.$page.Prismic.writing, 'writing')
   },
-  mixins: [LinkMixin, IframeMixin],
+  mixins: [LinkMixin, IframeMixin, ImageMixin],
 }
 </script>
 
