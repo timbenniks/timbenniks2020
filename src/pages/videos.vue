@@ -10,13 +10,26 @@
           :title="$page.Prismic.videos.title"
         />
 
+        <div class="filters">
+          <button
+            v-for="tag in tags"
+            :key="tag.tag"
+            class="filter"
+            :class="{ selected: tag.selected }"
+            @click="tagClick(tag)"
+          >
+            {{ tag.tag }}
+
+            <span v-if="tag.selected" class="selected"><span>+</span></span>
+          </button>
+        </div>
         <div class="posts videos">
           <article
             v-for="video in filteredVideos"
-            :key="video._meta.uid"
+            :key="video.slug"
             class="post video"
           >
-            <g-link :to="`/videos/${video._meta.uid}/`">
+            <g-link :to="`/videos/${video.slug}/`">
               <lazy-image
                 ratio="16/9"
                 :alt="$prismic.asText(video.title)"
@@ -29,17 +42,12 @@
 
             <div class="post-content-wrap">
               <p class="post-tags">
-                <button
-                  v-for="tag in video._meta.tags"
-                  :key="tag"
-                  class="tag"
-                  @click="filter(tag)"
-                >
+                <span v-for="tag in video.tags" :key="tag">
                   {{ tag }}
-                </button>
+                </span>
               </p>
               <p class="post-title">
-                <g-link :to="`/videos/${video._meta.uid}/`">
+                <g-link :to="`/videos/${video.slug}/`">
                   {{ $prismic.asText(video.title) }}
                 </g-link>
               </p>
@@ -62,7 +70,6 @@ query {
             tags
           }
           title
-          publication_date
           image
         }
       }
@@ -99,6 +106,7 @@ import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import LazyImage from '../components/lazy-image.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -106,55 +114,75 @@ export default {
     Heading,
     LazyImage,
   },
+
   metaInfo() {
     return mapMetaInfo(this.$page.Prismic.videos, 'videos')
   },
-  computed: {
-    filteredVideos: {
-      get: function () {
-        return this.$page.Prismic.allVideos.edges.map((edge) => {
-          return edge.node
-        })
-      },
-      set: function (newValue) {
-        this.filteredVideos = newValue
-      },
-    },
-    tags: function () {
-      const tags = []
-      this.$page.Prismic.allVideos.edges.forEach((edge) => {
-        edge.node._meta.tags.forEach((tag) => {
-          if (!tags.find((t) => t.tag === tag)) {
-            tags.push({ tag, selected: false })
-          }
-        })
-      })
 
-      return tags
-    },
+  computed: mapGetters(['filteredVideos', 'tags']),
+
+  mounted() {
+    this.setInitalVideos(this.$page.Prismic.allVideos.edges)
   },
+
   methods: {
-    filter(tag) {
-      this.filteredVideos = []
-
-      this.tags.find((t) => t.tag === tag).selected = !this.tags.find(
-        (t) => t.tag === tag
-      ).selected
-
-      this.$page.Prismic.allVideos.edges.forEach((edge) => {
-        edge.node._meta.tags.forEach((tag) => {
-          const tagFound = this.tags.find((t) => t.tag === tag)
-          if (tagFound.selected) {
-            this.filteredVideos.push(edge.node)
-          }
-        })
-      })
+    tagClick(tag) {
+      this.filter(tag)
     },
+
+    ...mapActions(['setInitalVideos', 'setInitalTags', 'filter']),
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.filters {
+  margin: 0 0 0.7rem 0;
+
+  button {
+    background: none;
+    padding: 0;
+    border: none;
+    appearance: none;
+    color: $white;
+    background: $blue-light;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.2rem 0.3rem;
+    margin: 0 0.5rem 0 0;
+    cursor: pointer;
+
+    span.selected {
+      display: inline-block;
+      background: $blue-light;
+      color: $white;
+      padding: rem(0 3px);
+      margin: rem(0 0 0 4px);
+
+      span {
+        transform: rotate(45deg);
+        transform-origin: center;
+        display: block;
+      }
+    }
+
+    &:hover,
+    &.selected {
+      background: $grey-light;
+      color: $blue;
+
+      &:focus {
+        outline: 1px solid $blue;
+        background: $grey-light-alt;
+      }
+    }
+
+    &:focus {
+      outline: 1px solid $white;
+    }
+  }
+}
+
 .videos {
   display: grid;
   grid-gap: 1rem;
@@ -175,25 +203,15 @@ export default {
     }
 
     .post-tags {
-      margin: 0 0 0.7rem 0;
+      font-weight: 400;
+      color: darken($blue-light, 20);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin: rem(0 0 10px 0);
 
-      button {
-        background: none;
-        padding: 0;
-        border: none;
-        appearance: none;
-        color: $white;
-        background: $blue-light;
-        text-transform: uppercase;
-        font-weight: 600;
-        padding: 0.2rem;
+      span {
         margin: 0 0.5rem 0 0;
-        cursor: pointer;
-
-        &:hover {
-          background: $grey-light;
-          color: $blue;
-        }
+        display: inline-block;
       }
     }
 

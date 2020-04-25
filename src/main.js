@@ -1,5 +1,6 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import PrismicTextComponent from '~/components/prismic-single-text.vue'
+import Store from './store'
 
 // Prismic stuff
 import { common } from 'prismic-vue/components/common'
@@ -22,7 +23,7 @@ import gridsomeConfig from '../gridsome.config'
 
 import './styles/index.scss'
 
-export default function (Vue, { router, head, isClient }) {
+export default function (Vue, { router, head, appOptions }) {
   Vue.prototype.$prismic = {
     linkResolver,
     htmlSerializer,
@@ -35,6 +36,8 @@ export default function (Vue, { router, head, isClient }) {
     asYear,
     asDate,
   }
+
+  appOptions.store = Store
 
   Vue.component('Layout', DefaultLayout)
   Vue.component(PrismicTextComponent.name, PrismicTextComponent)

@@ -50,6 +50,9 @@ export default {
   metaInfo() {
     return mapMetaInfo(this.$page.Prismic.home, 'home')
   },
+  mounted() {
+    console.log(this.$store)
+  },
 }
 </script>
 
