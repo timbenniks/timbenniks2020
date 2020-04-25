@@ -136,53 +136,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filters {
-  margin: 0 0 0.7rem 0;
-
-  button {
-    background: none;
-    padding: 0;
-    border: none;
-    appearance: none;
-    color: $white;
-    background: $blue-light;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 0.2rem 0.3rem;
-    margin: 0 0.5rem 0 0;
-    cursor: pointer;
-
-    span.selected {
-      display: inline-block;
-      background: $blue-light;
-      color: $white;
-      padding: rem(0 3px);
-      margin: rem(0 0 0 4px);
-
-      span {
-        transform: rotate(45deg);
-        transform-origin: center;
-        display: block;
-      }
-    }
-
-    &:hover,
-    &.selected {
-      background: $grey-light;
-      color: $blue;
-
-      &:focus {
-        outline: 1px solid $blue;
-        background: $grey-light-alt;
-      }
-    }
-
-    &:focus {
-      outline: 1px solid $white;
-    }
-  }
-}
-
 .videos {
   display: grid;
   grid-gap: 1rem;

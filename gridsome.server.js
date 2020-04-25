@@ -13,10 +13,15 @@ module.exports = function (api) {
                 _meta {
                   uid
                 }
-                title
-                sub_title
-                content
-                image
+              }
+            }
+          }
+          allVideos {
+            edges {
+              node {
+                _meta {
+                  uid
+                }
               }
             }
           }
@@ -30,6 +35,16 @@ module.exports = function (api) {
         component: './src/templates/writing.vue',
         context: {
           uid: writing.node._meta.uid,
+        },
+      })
+    })
+
+    data.Prismic.allVideos.edges.forEach((video) => {
+      createPage({
+        path: `/videos/${video.node._meta.uid}`,
+        component: './src/templates/video.vue',
+        context: {
+          uid: video.node._meta.uid,
         },
       })
     })

@@ -17,12 +17,7 @@
 
           <div class="home-copy-wrapper">
             <prismic-single-text :field="$page.Prismic.home.main_title" />
-            <prismic-single-text :field="$page.Prismic.home.sub_title" />
-
-            <prismic-rich-text
-              wrapper="h2"
-              :field="$page.Prismic.home.sub_title"
-            />
+            <prismic-rich-text :field="$page.Prismic.home.sub_title" />
 
             <prismic-rich-text
               class="homepage-description"
