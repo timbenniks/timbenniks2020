@@ -66,6 +66,19 @@ export default function (type, element, content, children) {
       `
     }
 
+    if (element.oembed.provider_name === 'Tims_Strava') {
+      result = `
+        <figure style="--aspect-ratio:16/9;">
+          <iframe
+            width="16"
+            height="9"
+            allowfullscreen
+            frameborder="0"
+            data-src="${element.oembed.embed_url}"></iframe>
+        </figure>
+      `
+    }
+
     return result
   }
 
