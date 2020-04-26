@@ -1,11 +1,11 @@
 .post {
-  background: rgba($blue, 0.85);
+  background: rgba($blue-main, 0.85);
   padding: rem(16px);
   border-style: solid;
   border-width: 3px;
-  border-top-color:  $blue;
-  border-left-color:  $blue;
-  border-right-color:  $blue;
+  border-top-color:  $blue-main;
+  border-left-color:  $blue-main;
+  border-right-color:  $blue-main;
   border-bottom-color: rgba($blue-light, 0.3);
   margin: rem(0 0 40px 0);
   overflow: hidden;
@@ -21,7 +21,7 @@
     @include responsive('height', (xs: auto, m: rem(112px)));
     @include responsive('margin', (xs: rem(0 16px 16px 0), m: rem(0 16px 0 0)));
     @include responsive('float', (xs: none, m: left));
-    background: $blue;
+    background: $blue-main;
     border-bottom: 1px solid $blue-light;
 
     img {

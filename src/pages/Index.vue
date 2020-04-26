@@ -11,13 +11,28 @@
             :url="$page.Prismic.home.image.url"
             extra-class="opacity-only"
             :caption="false"
-            :widths="[130]"
+            :widths="[200]"
             sizes="130px"
           />
 
           <div class="home-copy-wrapper">
-            <prismic-single-text :field="$page.Prismic.home.main_title" />
-            <prismic-rich-text :field="$page.Prismic.home.sub_title" />
+            <fancy-title
+              :field="$page.Prismic.home.main_title"
+              tag="h1"
+              color="blue-main"
+              type="big"
+              offset="0"
+              :uppercase="true"
+            />
+
+            <fancy-title
+              :field="$page.Prismic.home.sub_title"
+              tag="h2"
+              color="red"
+              type="medium"
+              offset="0"
+              :uppercase="true"
+            />
 
             <prismic-rich-text
               class="homepage-description"
@@ -32,6 +47,7 @@
 
 <script>
 import Navigation from '../components/navigation.vue'
+import FancyTitle from '../components/title.vue'
 import LazyImage from '../components/lazy-image.vue'
 import LinkMixin from '../prismic/linkMixin'
 import mapMetaInfo from '../prismic/mapMetaInfo'
@@ -40,13 +56,11 @@ export default {
   components: {
     Navigation,
     LazyImage,
+    FancyTitle,
   },
   mixins: [LinkMixin],
   metaInfo() {
     return mapMetaInfo(this.$page.Prismic.home, 'home')
-  },
-  mounted() {
-    console.log(this.$store)
   },
 }
 </script>
@@ -88,6 +102,7 @@ query {
 .homepage {
   width: 80%;
   max-width: rem(800px);
+  text-align: center;
 
   // prettier-ignore
   @include responsive('margin', (xs: rem(45px auto 0), m: rem(0)));
@@ -113,6 +128,7 @@ query {
 
     img {
       border-radius: 100%;
+      border: 3px solid $white;
     }
   }
 }

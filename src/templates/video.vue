@@ -134,7 +134,7 @@ query Video ($uid: String!) {
 
   blockquote {
     border-left: 3px solid $blue-light;
-    background: $blue;
+    background: $blue-main;
     padding: rem(0 0 0 10px);
 
     p {
@@ -146,14 +146,14 @@ query Video ($uid: String!) {
   figure {
     margin: rem(0 0 32px);
     display: block;
-    background: $blue;
+    background: $blue-main;
     position: relative;
     border-bottom: 3px solid $blue-light;
 
     figcaption {
       position: absolute;
       bottom: 0;
-      background: rgba($blue, 0.8);
+      background: rgba($blue-main, 0.8);
       padding: rem(3px 7px);
       font-size: inherit;
       font-size: rem(16px);

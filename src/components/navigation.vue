@@ -70,14 +70,13 @@ export default {
 .navigation {
   position: -webkit-sticky;
   position: sticky;
-  background: $blue;
+  background: darken($blue-dark, 3);
   min-height: rem(64px);
-  border-bottom: 1px solid $blue-alt;
+  border-bottom: 1px solid darken($blue-main, 20);
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1;
-  box-shadow: 0 0 20px -5px rgba(#000, 0.6);
 
   ul {
     margin: 0;
@@ -114,6 +113,7 @@ export default {
 
       img {
         border-radius: 100%;
+        border: 2px solid $white;
       }
     }
   }
@@ -159,7 +159,7 @@ export default {
   @include responsive('right', (xs: auto, m: 0));
 
   // prettier-ignore
-  @include responsive('background', (xs: rgba($blue, 0.97), m: none));
+  @include responsive('background', (xs: rgba($blue-main, 0.97), m: none));
 
   // prettier-ignore
   @include responsive('box-shadow', (xs: 0 10px 22px -6px rgba(#000, 0.8), m: none));

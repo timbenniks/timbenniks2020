@@ -17,11 +17,10 @@ button {
 
 h1 {
   font-weight: 900;
-  margin: rem(0 0 20px 0);
   line-height: 1;
 
   // prettier-ignore
-  @include responsive('font-size', (xs: rem(36px), m: rem(48px), l: rem(64px)));
+  @include responsive('font-size', (xs: rem(36px), m: rem(48px)));
 }
 
 h2 {
@@ -82,7 +81,7 @@ pre code {
 
 p code {
   font-size: rem(18px);
-  background: $blue;
+  background: $blue-main;
   padding: rem(4px);
 }
 

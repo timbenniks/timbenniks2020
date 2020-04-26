@@ -34,10 +34,10 @@
     &:hover,
     &.selected {
       background: $grey-light;
-      color: $blue;
+      color: $blue-main;
 
       &:focus {
-        outline: 1px solid $blue;
+        outline: 1px solid $blue-main;
         background: $grey-light-alt;
       }
     }

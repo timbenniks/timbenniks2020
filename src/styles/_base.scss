@@ -6,7 +6,7 @@
 }
 
 body {
-  background: $blue-alt;
+  background: $blue-bg;
 }
 
 pre {
@@ -47,7 +47,7 @@ main {
 
   &:hover {
     background: $white;
-    color: $blue;
+    color: $blue-main;
   }
 
   &:active,

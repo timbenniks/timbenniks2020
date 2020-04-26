@@ -13,7 +13,7 @@
         <g-link to="/" itemtype="https://schema.org/Thing" itemprop="item">
           <span itemprop="name">Home</span>
         </g-link>
-        <meta itemprop="position" content="1" />
+        <meta itemprop="position" content="1">
       </li>
       <li
         v-for="(crumb, index) in crumbs"
@@ -30,7 +30,7 @@
           <span itemprop="name">{{ crumb.text }}</span>
         </g-link>
 
-        <meta :content="index + 2" itemprop="position" />
+        <meta :content="index + 2" itemprop="position">
       </li>
     </ol>
 
@@ -115,7 +115,7 @@ ol {
   font-size: 12px;
 
   .no-link {
-    color: $blue-alt;
+    color: $blue-main;
   }
 
   li {

@@ -27,8 +27,8 @@ query {
   // prettier-ignore
   @include responsive(
     'background', (
-      xs: linear-gradient(to bottom right, transparent 50%, $blue 50%) bottom right/375px 375px no-repeat,
-      l: linear-gradient(to bottom right, transparent 50%, $blue 50%) bottom right/600px 700px no-repeat
+      xs: linear-gradient(to bottom right, transparent 50%, $blue-main 50%) bottom right/175px 175px no-repeat,
+      l: linear-gradient(to bottom right, transparent 50%, $blue-main 50%) bottom right/400px 400px no-repeat
     )
   );
 }
