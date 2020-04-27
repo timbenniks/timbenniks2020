@@ -21,7 +21,7 @@
               tag="h1"
               color="blue-main"
               type="big"
-              offset="0"
+              offset="1"
               :uppercase="true"
             />
 
@@ -102,7 +102,6 @@ query {
 .homepage {
   width: 80%;
   max-width: rem(800px);
-  text-align: center;
 
   // prettier-ignore
   @include responsive('margin', (xs: rem(45px auto 0), m: rem(0)));
@@ -114,6 +113,10 @@ query {
   @include responsive('left', (m: 50%));
   // prettier-ignore
   @include responsive('transform',  (xs: none, m: translate(-50%, -50%)));
+
+  .homepage-description {
+    margin: rem(50px 0 0 0);
+  }
 
   p {
     // prettier-ignore

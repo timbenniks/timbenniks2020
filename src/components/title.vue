@@ -17,10 +17,7 @@ export default {
     color: { type: String, required: false, default: 'blue-main' },
     type: { type: String, required: false, default: 'large' },
     uppercase: { type: Boolean, required: false, default: true },
-    offset: { type: Number, required: false, default: 0 },
-  },
-  mounted() {
-    console.log(this.field, this.tag, this.color, this.type)
+    offset: { type: String, required: false, default: '0' },
   },
 }
 </script>
@@ -30,7 +27,7 @@ export default {
   position: relative;
   z-index: 1;
   display: inline-block;
-  padding: rem(5px 10px);
+  padding: rem(3px 8px);
   font-weight: 900;
 
   &.uppercase {
@@ -55,12 +52,20 @@ export default {
     }
   }
 
+  &.yellow {
+    color: #000;
+
+    &::before {
+      background: $yellow;
+    }
+  }
+
   &.large {
     font-size: 3rem;
   }
 
   &.medium {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   &::before {
