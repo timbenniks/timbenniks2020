@@ -4,7 +4,7 @@
     :tag="tag"
     class="fancy-title"
     :class="[color, type, { uppercase }]"
-    :style="{ left: `${offset}rem` }"
+    :style="{ top: `${offset[0]}rem`, left: `${offset[1]}rem` }"
   />
 </template>
 
@@ -17,7 +17,7 @@ export default {
     color: { type: String, required: false, default: 'blue-main' },
     type: { type: String, required: false, default: 'large' },
     uppercase: { type: Boolean, required: false, default: true },
-    offset: { type: String, required: false, default: '0' },
+    offset: { type: Array, required: false, default: () => [0, 0] },
   },
 }
 </script>
@@ -61,11 +61,13 @@ export default {
   }
 
   &.large {
-    font-size: 3rem;
+    // prettier-ignore
+    @include responsive('font-size', (xs: rem(22px), sm: rem(30px), m: rem(45px)));
   }
 
-  &.medium {
-    font-size: 2rem;
+  &.small {
+    // prettier-ignore
+    @include responsive('font-size', (xs: rem(18px), sm: rem(22px), m: rem(30px)));
   }
 
   &::before {

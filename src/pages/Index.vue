@@ -12,25 +12,25 @@
             extra-class="opacity-only"
             :caption="false"
             :widths="[200]"
-            sizes="130px"
+            sizes="200px"
           />
 
           <div class="home-copy-wrapper">
             <fancy-title
               :field="$page.Prismic.home.main_title"
               tag="h1"
-              color="blue-main"
-              type="big"
-              offset="1"
+              color="red"
+              type="large"
+              :offset="[0, 1]"
               :uppercase="true"
             />
 
             <fancy-title
               :field="$page.Prismic.home.sub_title"
               tag="h2"
-              color="red"
-              type="medium"
-              offset="0"
+              color="blue-main"
+              type="small"
+              :offset="[-0.18, 0]"
               :uppercase="true"
             />
 
@@ -100,9 +100,10 @@ query {
 
 <style lang="scss">
 .homepage {
-  width: 80%;
   max-width: rem(800px);
 
+  // prettier-ignore
+  @include responsive('width', (xs: 100%, m: 80%));
   // prettier-ignore
   @include responsive('margin', (xs: rem(45px auto 0), m: rem(0)));
   // prettier-ignore
@@ -115,7 +116,10 @@ query {
   @include responsive('transform',  (xs: none, m: translate(-50%, -50%)));
 
   .homepage-description {
-    margin: rem(50px 0 0 0);
+    // prettier-ignore
+    @include responsive('margin', (xs: rem(20px 0 0), m: rem(50px 0 0 0)));
+    // prettier-ignore
+    @include responsive('width', (xs: 80%, m: 100%));
   }
 
   p {
@@ -123,15 +127,25 @@ query {
     @include responsive('font-size', (xs: rem(18px), m: rem(24px)));
   }
 
+  h1 {
+    z-index: 2;
+  }
+
+  h2 {
+    z-index: 1;
+  }
+
   figure {
-    margin: rem(0 auto 40px);
+    position: relative;
+    top: rem(20px);
+    left: rem(20px);
 
     // prettier-ignore
-    @include responsive('width', (xs: rem(100px), m: rem(130px)));
+    @include responsive('width', (xs: rem(100px), m: rem(140px)));
 
     img {
       border-radius: 100%;
-      border: 3px solid $white;
+      border: 5px solid $white;
     }
   }
 }
