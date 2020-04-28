@@ -86,12 +86,6 @@ export default function (Vue, { router, head, appOptions }) {
   })
 
   head.link.push({
-    rel: 'icon',
-    type: 'image/x-icon',
-    href: `${gridsomeConfig.siteUrl}/${gridsomeConfig.icon}`,
-  })
-
-  head.link.push({
     rel: 'preconnect',
     href: 'https://www.google-analytics.com',
   })
