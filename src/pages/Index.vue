@@ -121,16 +121,18 @@ query {
 
   .homepage-description {
     // prettier-ignore
-    @include responsive('margin', (xs: rem(20px auto 0), m: rem(50px 0 0 0)));
+    @include responsive('margin', (xs: rem(0), m: 0));
     // prettier-ignore
-    @include responsive('width', (xs: 80%, m: 100%));
+    @include responsive('padding', (xs: rem(0 0 0 1rem)));
+    // prettier-ignore
+    @include responsive('width', (xs: 90%));
   }
 
   p {
     // prettier-ignore
-    @include responsive('text-align', (xs: center, m: left));
+    @include responsive('text-align', (xs: left, m: left));
     // prettier-ignore
-    @include responsive('font-size', (xs: rem(20px), m: rem(20px)));
+    @include responsive('font-size', (xs: rem(20px), m: rem(24px)));
   }
 
   h1 {
