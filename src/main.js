@@ -52,7 +52,7 @@ export default function (Vue, { router, head, appOptions }) {
 
   head.meta.push({
     name: 'google-site-verification',
-    content: process.env.GOOGLE_SITE_VERIFICATION,
+    content: 'El5Wtr19CHQY1u_sQOjbuusrXqYCt6I6n3OJSyZEPAg',
   })
 
   head.meta.push({
