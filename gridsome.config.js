@@ -16,7 +16,7 @@ function addStyleResource(rule) {
 module.exports = {
   siteName: 'Tim Benniks',
   siteUrl: 'https://reverent-lichterman-7d23b1.netlify.app',
-  icon: './src/assets/tim.png',
+  icon: './src/icon.png',
   plugins: [
     {
       use: 'gridsome-source-graphql-prismic',
@@ -56,11 +56,11 @@ module.exports = {
       use: 'gridsome-plugin-pwa',
       options: {
         title: 'Tim Benniks',
-        disableServiceWorker: true,
+        disableServiceWorker: false,
         shortName: 'TimBenniks',
         themeColor: '#3590d5',
         backgroundColor: '#3590d5',
-        icon: './src/assets/tim.png',
+        icon: './src/icon.png',
         msTileColor: '#3590d5',
       },
     },
