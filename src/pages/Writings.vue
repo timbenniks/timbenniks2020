@@ -105,7 +105,11 @@ export default {
     LazyImage,
   },
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.writings, 'writings')
+    return mapMetaInfo(
+      this.$page.Prismic.writings,
+      'writings',
+      this.$router.currentRoute
+    )
   },
 }
 </script>

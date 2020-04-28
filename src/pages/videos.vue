@@ -48,7 +48,7 @@
                   <span
                     v-if="index + 1 < video.tags.length"
                     class="post-tags-sep"
-                    >,
+                  >,
                   </span>
                 </span>
               </p>
@@ -122,7 +122,11 @@ export default {
   },
 
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.videos, 'videos')
+    return mapMetaInfo(
+      this.$page.Prismic.videos,
+      'videos',
+      this.$router.currentRoute
+    )
   },
 
   computed: mapGetters(['filteredVideos', 'tags']),

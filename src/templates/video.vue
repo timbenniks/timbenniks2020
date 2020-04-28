@@ -65,7 +65,11 @@ export default {
     Heading,
   },
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.video, 'video')
+    return mapMetaInfo(
+      this.$page.Prismic.video,
+      'video',
+      this.$router.currentRoute
+    )
   },
   mixins: [LinkMixin, IframeMixin, ImageMixin],
 }

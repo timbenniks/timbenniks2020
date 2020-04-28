@@ -37,7 +37,11 @@ export default {
     Heading,
   },
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.writing, 'writing')
+    return mapMetaInfo(
+      this.$page.Prismic.writing,
+      'writing',
+      this.$router.currentRoute
+    )
   },
   mixins: [LinkMixin, IframeMixin, ImageMixin],
 }

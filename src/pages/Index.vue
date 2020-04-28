@@ -60,7 +60,11 @@ export default {
   },
   mixins: [LinkMixin],
   metaInfo() {
-    return mapMetaInfo(this.$page.Prismic.home, 'home')
+    return mapMetaInfo(
+      this.$page.Prismic.home,
+      'home',
+      this.$router.currentRoute
+    )
   },
 }
 </script>

@@ -1,6 +1,7 @@
 import { RichText } from 'prismic-dom'
 import linkResolver from './linkResolver'
 import htmlSerializer from './htmlSerializer'
+import gridsomeConfig from '../../gridsome.config'
 
 function asText(field) {
   return RichText.asText(field, linkResolver, htmlSerializer)
@@ -16,9 +17,17 @@ function getPropType(fields, type, prop) {
   }
 }
 
-export default function (fields, pageType) {
+export default function (fields, pageType, route) {
+  const url = `${gridsomeConfig.siteUrl}${route.path}`
+
   const metaData = {
     title: getPropType(fields.body, 'general_card', 'title'),
+    link: [
+      {
+        rel: 'canonical',
+        href: url,
+      },
+    ],
     meta: [
       {
         property: 'og:title',
@@ -47,6 +56,14 @@ export default function (fields, pageType) {
       {
         property: 'twitter:image',
         content: getPropType(fields.body, 'twitter_card', 'image'),
+      },
+      {
+        property: 'og:url',
+        content: url,
+      },
+      {
+        property: 'twitter:url',
+        content: url,
       },
     ],
   }

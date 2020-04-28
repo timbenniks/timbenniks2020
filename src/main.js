@@ -111,30 +111,4 @@ export default function (Vue, { router, head, appOptions }) {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
   })
-
-  head.link.push({
-    rel: 'canonical',
-    href: gridsomeConfig.siteUrl,
-  })
-
-  router.beforeEach((to, _from, next) => {
-    const url = `${gridsomeConfig.siteUrl}${to.path}`
-
-    head.meta.push({
-      property: 'og:url',
-      content: url,
-    })
-
-    head.meta.push({
-      property: 'twitter:url',
-      content: url,
-    })
-
-    head.link.push({
-      rel: 'canonical',
-      href: url,
-    })
-
-    next()
-  })
 }
