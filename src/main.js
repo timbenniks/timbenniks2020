@@ -97,6 +97,11 @@ export default function (Vue, { router, head, appOptions }) {
   })
 
   head.link.push({
+    rel: 'preconnect',
+    href: 'https://images.prismic.io',
+  })
+
+  head.link.push({
     rel: 'preload',
     as: 'font',
     href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
