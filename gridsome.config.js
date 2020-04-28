@@ -56,7 +56,7 @@ module.exports = {
       use: 'gridsome-plugin-pwa',
       options: {
         title: 'Tim Benniks',
-        disableServiceWorker: false,
+        disableServiceWorker: true,
         shortName: 'TimBenniks',
         themeColor: '#3590d5',
         backgroundColor: '#3590d5',
