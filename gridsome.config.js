@@ -15,7 +15,7 @@ function addStyleResource(rule) {
 
 module.exports = {
   siteName: 'Tim Benniks',
-  siteUrl: 'https://timbenniks.nl',
+  siteUrl: 'https://reverent-lichterman-7d23b1.netlify.app',
   icon: './src/assets/tim.png',
   plugins: [
     {
