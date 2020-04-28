@@ -28,24 +28,26 @@
           :field="$page.Prismic.video.content"
         />
 
-        <figure class="youtube" style="--aspect-ratio: 16/9;">
-          <iframe
-            width="16"
-            height="9"
-            allowfullscreen
-            frameborder="0"
-            :data-src="
-              $page.Prismic.video.video_embed.embed_url.replace(
-                'watch?v=',
-                'embed/'
-              )
-            "
-          />
-          <prismic-single-text
-            :field="$page.Prismic.video.title"
-            tag="figcaption"
-          />
-        </figure>
+        <div class="post-content">
+          <figure class="youtube" style="--aspect-ratio: 16/9;">
+            <iframe
+              width="16"
+              height="9"
+              allowfullscreen
+              frameborder="0"
+              :data-src="
+                $page.Prismic.video.video_embed.embed_url.replace(
+                  'watch?v=',
+                  'embed/'
+                )
+              "
+            />
+            <!-- <prismic-single-text
+              :field="$page.Prismic.video.title"
+              tag="figcaption"
+            /> -->
+          </figure>
+        </div>
       </main>
     </div>
   </Layout>
