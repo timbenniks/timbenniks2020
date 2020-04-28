@@ -13,7 +13,7 @@
         <g-link to="/" itemtype="https://schema.org/Thing" itemprop="item">
           <span itemprop="name">Home</span>
         </g-link>
-        <meta itemprop="position" content="1">
+        <meta itemprop="position" content="1" >
       </li>
       <li
         v-for="(crumb, index) in crumbs"
@@ -30,18 +30,52 @@
           <span itemprop="name">{{ crumb.text }}</span>
         </g-link>
 
-        <meta :content="index + 2" itemprop="position">
+        <meta :content="index + 2" itemprop="position" />
       </li>
     </ol>
 
-    <prismic-single-text v-if="title" :tag="titletag" :field="title" />
-    <prismic-single-text v-if="subtitle" :tag="subtitletag" :field="subtitle" />
+    <fancy-title
+      v-if="title && useFancyTitles"
+      :tag="titletag"
+      :field="title"
+      color="red"
+      type="large"
+      :offset="[0, 0]"
+      :uppercase="uppercase"
+    />
+
+    <fancy-title
+      v-if="subtitle && useFancyTitles"
+      :tag="subtitletag"
+      :field="subtitle"
+      color="blue-main"
+      type="medium"
+      :offset="[0, 0]"
+      :uppercase="uppercase"
+    />
+
+    <prismic-single-text
+      v-if="title && !useFancyTitles"
+      :tag="titletag"
+      :field="title"
+    />
+
+    <prismic-single-text
+      v-if="subtitle && !useFancyTitles"
+      :tag="subtitletag"
+      :field="subtitle"
+    />
   </div>
 </template>
 
 <script>
+import FancyTitle from '../components/title.vue'
+
 export default {
   name: 'Heading',
+  components: {
+    FancyTitle,
+  },
   props: {
     title: {
       type: [Array, Boolean],
@@ -67,6 +101,16 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    uppercase: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    useFancyTitles: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
   },
   computed: {

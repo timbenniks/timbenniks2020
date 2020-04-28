@@ -10,6 +10,7 @@
           :breadcrumb="true"
           titletag="h1"
           subtitletag="h2"
+          :use-fancy-titles="false"
         />
 
         <prismic-rich-text
@@ -85,6 +86,11 @@ query Writing ($uid: String!) {
 .blogpost .heading {
   margin: rem(0 auto 20px) !important;
   max-width: rem(800px);
+
+  h1,
+  h2 {
+    line-height: 1.2;
+  }
 }
 
 .post-content {

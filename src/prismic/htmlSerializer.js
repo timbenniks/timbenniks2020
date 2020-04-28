@@ -47,6 +47,14 @@ export default function (type, element, content, children) {
     return result
   }
 
+  if (type === Elements.heading3) {
+    return `<h3 class="fancy-title red">${element.text}</h3>`
+  }
+
+  if (type === Elements.heading4) {
+    return `<h4 class="fancy-title blue-main">${element.text}</h4>`
+  }
+
   if (type === Elements.embed) {
     let result = ''
 
@@ -68,10 +76,11 @@ export default function (type, element, content, children) {
 
     if (element.oembed.provider_name === 'Tims_Strava') {
       result = `
-        <figure style="--aspect-ratio:16/9;">
+        <p class="for-small-screens">Strava embeds do not work on small screens. Click <a title="direct strava link" href="${element.oembed.embed_url}" target="_blank" rel="noopener">here</a> for the direct strava link.</p>  
+        <figure style="--aspect-ratio:590/293;" class="strava-embed">
           <iframe
-            width="16"
-            height="9"
+            width="590"
+            height="293"
             allowfullscreen
             frameborder="0"
             data-src="${element.oembed.embed_url}"></iframe>

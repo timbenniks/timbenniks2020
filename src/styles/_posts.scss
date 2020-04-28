@@ -1,17 +1,15 @@
 .post {
-  background: rgba($blue-main, 0.85);
+  background: darken($blue-main, 15);
   padding: rem(16px);
   border-style: solid;
-  border-width: 3px;
-  border-top-color:  $blue-main;
-  border-left-color:  $blue-main;
-  border-right-color:  $blue-main;
-  border-bottom-color: rgba($blue-light, 0.3);
+  border-width: 0 0 3px;
+  border-bottom-color: $blue-main;
   margin: rem(0 0 40px 0);
   overflow: hidden;
   color: $white;
-  transition: all .3s ease;
-
+  display: flex;
+  @include responsive('flex-direction', (xs: column, m: row));
+  
   p {
     margin: 0;
   }
@@ -20,9 +18,9 @@
     @include responsive('width', (xs: 100%, m: rem(200px)));
     @include responsive('height', (xs: auto, m: rem(112px)));
     @include responsive('margin', (xs: rem(0 16px 16px 0), m: rem(0 16px 0 0)));
-    @include responsive('float', (xs: none, m: left));
     background: $blue-main;
-    border-bottom: 1px solid $blue-light;
+    border-bottom: 2px solid $blue-main;
+    flex: 2;
 
     img {
       object-fit: cover;
@@ -34,37 +32,51 @@
     @include responsive('font-size', (xs: rem(20px), m: rem(23px)));
 
     font-weight: 900;
-    margin: rem(0 0 16px 0);
+    margin: rem(0 0 6px 0);
     line-height: 1;
 
     a {
       transition: all .3s ease;
       color: $white;
       text-decoration: none;
+      
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: calc(100%);
+        left: rem(-1.5px);
+        bottom: -2px;
+        background: $white;
+        opacity: 0;
+        transition: all 200ms ease;
+      }
+
 
       @include hover-supported() {
-        color: $blue-light;
+        &:after {
+          opacity: 1;
+        }
       }
     }
   }
 
   .post-location {
-    font-weight: 900;
+    color: $white;
   }
 
   .post-subject {
     color: $blue-light;
-    line-height: 1;
+    line-height: 1.2;
   }
 
   .post-content-wrapper {
-    display: flex;
-    margin: rem(0 0 16px 0);
+    flex: 5;
   }
 
   .post-date {
-    color: $blue-light;
-    width: rem(40px);
+    color: $white;
     text-align: center;
     text-transform: uppercase;
     font-weight: 900;

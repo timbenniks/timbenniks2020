@@ -8,6 +8,7 @@
           :breadcrumb="true"
           titletag="h1"
           :title="$page.Prismic.videos.title"
+          :uppercase="true"
         />
 
         <div class="filters">
@@ -42,8 +43,13 @@
 
             <div class="post-content-wrap">
               <p class="post-tags">
-                <span v-for="tag in video.tags" :key="tag">
+                <span v-for="(tag, index) in video.tags" :key="tag">
                   {{ tag }}
+                  <span
+                    v-if="index + 1 < video.tags.length"
+                    class="post-tags-sep"
+                    >,
+                  </span>
                 </span>
               </p>
               <p class="post-title">
@@ -142,11 +148,12 @@ export default {
   min-width: 0;
 
   // prettier-ignore
-  @include responsive('grid-template-columns', (xs: 100%, s: repeat(2, 47.5%), m: repeat(3, 32%)));
+  @include responsive('grid-template-columns', (xs: 100%, sm: repeat(2, 47.5%), m: repeat(3, 32%)));
 
   .video {
     width: auto;
     margin: 0;
+    flex-direction: column;
 
     figure {
       float: none;
@@ -157,15 +164,10 @@ export default {
 
     .post-tags {
       font-weight: 400;
-      color: darken($blue-light, 20);
+      color: $blue-light;
       font-size: 0.8rem;
       text-transform: uppercase;
       margin: rem(0 0 10px 0);
-
-      span {
-        margin: 0 0.5rem 0 0;
-        display: inline-block;
-      }
     }
 
     .post-date {

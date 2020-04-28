@@ -8,6 +8,7 @@
           :breadcrumb="true"
           titletag="h1"
           :title="$page.Prismic.writings.title"
+          :uppercase="true"
         />
 
         <div class="posts">
@@ -25,8 +26,8 @@
               sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
             />
 
-            <div class="post-content-wrap">
-              <p class="post-title">
+            <div class="post-content-wrapper">
+              <p class="post-title fancy-title red">
                 <g-link :to="`/writings/${post.node._meta.uid}/`">
                   {{ $prismic.asText(post.node.title) }}
                 </g-link>

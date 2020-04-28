@@ -42,7 +42,8 @@ main {
   padding: rem(5px 10px);
   overflow: hidden;
   color: $white;
-  background: $blue-light;
+  text-transform: uppercase;
+  background: $blue-main;
   text-decoration: none;
 
   &:hover {
@@ -71,31 +72,20 @@ iframe {
   margin: rem(0 0 16px);
   border: none;
   background: none;
+  width: rem(590px);
+  height: rem(405px);
 
-  figcaption {
-    margin: rem(0 0 8px);
-    display: block;
-    position: static;
-    background: none;
-    font-weight: 400;
-    padding: 0;
-  }
+  // prettier-ignore
+  @include responsive('display', (xs: none !important, l: block !important ));
+}
 
-  iframe {
-    width: rem(590px);
-    height: rem(405px);
+.for-small-screens {
+  border: 1px solid $blue-light;
+  padding: rem(4px 6px);
+  margin: 0 0 1rem 0;
+  font-size: rem(14px);
+  background: $blue-main;
 
-    // prettier-ignore
-    @include responsive('display', (xs: none, l: block ));
-  }
-
-  .for-small-screens {
-    background: $white;
-    border: 1px solid $blue-light;
-    padding: rem(5px);
-    margin: 0;
-
-    // prettier-ignore
-    @include responsive('display', (xs: block, l: none));
-  }
+  // prettier-ignore
+  @include responsive('display', (xs: block, l: none));
 }

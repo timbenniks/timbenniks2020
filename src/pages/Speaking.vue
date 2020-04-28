@@ -8,6 +8,7 @@
           :breadcrumb="true"
           titletag="h1"
           :title="$page.Prismic.speaking.title"
+          :uppercase="true"
         />
 
         <prismic-single-text

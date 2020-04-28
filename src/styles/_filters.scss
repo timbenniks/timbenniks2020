@@ -8,19 +8,31 @@
     border: none;
     appearance: none;
     color: $white;
-    background: $blue-light;
     text-transform: uppercase;
     font-weight: 600;
-    padding: 0.2rem 0.3rem;
+    padding: 0.3rem 0.4rem;
     margin: 0 0.5rem 0 0;
     cursor: pointer;
     text-decoration: none;
     font-size: 0.8rem;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      background: $red;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: -1;
+      transform: skew(-4deg);
+    }
 
     span.selected {
       display: inline-block;
-      background: $blue-light;
-      color: $white;
+      background: $white;
+      color: #000;
       padding: rem(0 3px);
       margin: rem(0 0 0 4px);
 
@@ -33,12 +45,16 @@
 
     &:hover,
     &.selected {
-      background: $grey-light;
-      color: $blue-main;
+      &:before {
+        background: $blue-main;
+      }
 
       &:focus {
-        outline: 1px solid $blue-main;
-        background: $grey-light-alt;
+        outline: 1px solid $blue-light;
+        
+        &:before {
+          background: $blue-main;
+        }
       }
     }
 

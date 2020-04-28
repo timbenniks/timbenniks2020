@@ -8,6 +8,7 @@
           :title="$page.Prismic.video.title"
           :breadcrumb="true"
           titletag="h1"
+          :use-fancy-titles="false"
         />
 
         <div class="filters">
