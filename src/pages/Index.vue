@@ -121,14 +121,16 @@ query {
 
   .homepage-description {
     // prettier-ignore
-    @include responsive('margin', (xs: rem(20px 0 0), m: rem(50px 0 0 0)));
+    @include responsive('margin', (xs: rem(20px auto 0), m: rem(50px 0 0 0)));
     // prettier-ignore
     @include responsive('width', (xs: 80%, m: 100%));
   }
 
   p {
     // prettier-ignore
-    @include responsive('font-size', (xs: rem(18px), m: rem(24px)));
+    @include responsive('text-align', (xs: center, m: left));
+    // prettier-ignore
+    @include responsive('font-size', (xs: rem(20px), m: rem(20px)));
   }
 
   h1 {
