@@ -48,7 +48,7 @@
                   <span
                     v-if="index + 1 < video.tags.length"
                     class="post-tags-sep"
-                  >,
+                    >,
                   </span>
                 </span>
               </p>
@@ -68,7 +68,7 @@
 <page-query>
 query {
   Prismic {
-    allVideos {
+    allVideos(sortBy:publication_date_DESC) {
       edges {
         node {
           _meta {
