@@ -95,14 +95,14 @@ export default function (Vue, { router, head, appOptions }) {
     href: 'https://images.prismic.io',
   })
 
-  head.link.push({
-    rel: 'preload',
-    as: 'font',
-    href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
-  })
+  // head.link.push({
+  //   rel: 'preload',
+  //   as: 'font',
+  //   href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
+  // })
 
-  head.link.push({
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
-  })
+  // head.link.push({
+  //   rel: 'stylesheet',
+  //   href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
+  // })
 }
