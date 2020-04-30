@@ -17,14 +17,16 @@
             :key="post.node._meta.uid"
             class="post"
           >
-            <lazy-image
-              ratio="16/9"
-              :alt="$prismic.asText(post.node.title)"
-              :url="post.node.image.url"
-              :caption="false"
-              :widths="[300, 400, 500, 600, 680]"
-              sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
-            />
+            <g-link :to="`/writings/${post.node._meta.uid}/`">
+              <lazy-image
+                ratio="16/9"
+                :alt="$prismic.asText(post.node.title)"
+                :url="post.node.image.url"
+                :caption="false"
+                :widths="[300, 400, 500, 600, 680]"
+                sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
+              />
+            </g-link>
 
             <div class="post-content-wrapper">
               <p class="post-title fancy-title red">
