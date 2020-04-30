@@ -11,11 +11,13 @@
     text-transform: uppercase;
     font-weight: 600;
     padding: 0.3rem 0.4rem;
-    margin: 0 0.5rem 0 0;
     cursor: pointer;
     text-decoration: none;
     font-size: 0.8rem;
     position: relative;
+
+    // prettier-ignore
+    @include responsive('margin', (xs: 0 0.5rem 0.5rem 0, m: 0 0.5rem 0 0));
 
     &:before {
       content: '';
