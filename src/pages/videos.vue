@@ -7,7 +7,7 @@
         <heading
           :breadcrumb="true"
           titletag="h1"
-          :title="$page.Prismic.videos.title"
+          :title="$page.Prismic.youtube.title"
           :uppercase="true"
         />
 
@@ -80,10 +80,10 @@ query {
         }
       }
     },
-    videos(uid: "videos", lang: "en-us") {
+    youtube(uid: "youtube", lang: "en-us") {
       title
       body {
-        ... on Prismic_VideosBodyGeneral_card {
+        ... on Prismic_YoutubeBodyGeneral_card {
           type
           primary {
             title
@@ -91,7 +91,7 @@ query {
             image
           }
         }
-        ... on Prismic_VideosBodyTwitter_card {
+        ... on Prismic_YoutubeBodyTwitter_card {
           type
           primary {
             twitter_handle
@@ -123,7 +123,7 @@ export default {
 
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.videos,
+      this.$page.Prismic.youtube,
       'videos',
       this.$router.currentRoute
     )

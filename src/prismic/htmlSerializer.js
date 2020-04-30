@@ -9,6 +9,8 @@ export default function (type, element, content, children) {
     let result = ''
     const url = prismicDOM.Link.url(element.data, linkResolver)
 
+    console.log(url)
+
     if (element.data.link_type === 'Document') {
       result = `<a href="${url}" data-internal-link>${content}</a>`
     } else {
