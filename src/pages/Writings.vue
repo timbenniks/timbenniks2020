@@ -51,7 +51,7 @@
 <page-query>
 query {
   Prismic {
-    allWritings {
+    allWritings(sortBy:publication_date_DESC) {
       edges {
         node {
           _meta {
