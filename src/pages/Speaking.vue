@@ -138,11 +138,11 @@ export default {
     })
 
     this.oldTalks.sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
+      return new Date(b.node.date).getTime() - new Date(a.node.date).getTime()
     })
 
     this.upcomingTalks.sort((a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime()
+      return new Date(a.node.date).getTime() - new Date(b.node.date).getTime()
     })
   },
 
