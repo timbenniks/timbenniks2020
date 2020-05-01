@@ -55,6 +55,10 @@ export default function (type, element, content, children) {
     return `<h4 class="fancy-title blue-main">${element.text}</h4>`
   }
 
+  if (type === Elements.heading5) {
+    return `<h5 class="fancy-title yellow">${element.text}</h5>`
+  }
+
   if (type === Elements.embed) {
     let result = ''
 

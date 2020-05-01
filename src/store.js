@@ -126,6 +126,7 @@ export default new Vuex.Store({
           tags: edge.node._meta.tags,
           title: edge.node.title,
           image: edge.node.image,
+          date: edge.node.publication_date,
           shown: true,
         }
       })

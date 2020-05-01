@@ -42,20 +42,22 @@
             </g-link>
 
             <div class="post-content-wrap">
-              <p class="post-tags">
-                <span v-for="(tag, index) in video.tags" :key="tag">
-                  {{ tag }}
-                  <span
-                    v-if="index + 1 < video.tags.length"
-                    class="post-tags-sep"
-                    >,
-                  </span>
-                </span>
-              </p>
               <p class="post-title">
                 <g-link :to="`/videos/${video.slug}/`">
                   {{ $prismic.asText(video.title) }}
                 </g-link>
+              </p>
+              <p class="post-tags">
+                <span v-for="(tag, index) in video.tags" :key="tag">
+                  <span class="tag">{{ tag }}</span>
+                  <template v-if="index + 1 < video.tags.length">, </template>
+                </span>
+              </p>
+
+              <p class="post-date fancy-title yellow">
+                {{ $prismic.asDay(video.date) }}
+                {{ $prismic.asMonth(video.date) }}
+                {{ $prismic.asYear(video.date) }}
               </p>
             </div>
           </article>
@@ -77,6 +79,7 @@ query {
           }
           title
           image
+          publication_date
         }
       }
     },
@@ -175,10 +178,10 @@ export default {
     }
 
     .post-date {
-      font-weight: 400;
       float: none;
+      text-align: left;
       margin: 0;
-      font-size: 1rem;
+      font-size: rem(13px);
     }
 
     .post-title {
