@@ -35,13 +35,7 @@
             />
           </div>
 
-          <video
-            playsinline
-            src="/assets/media/goat.mp4"
-            width="400"
-            autoplay
-            loop
-          />
+          <video playsinline src="../goat.mp4" width="400" autoplay loop />
         </div>
       </main>
     </div>
