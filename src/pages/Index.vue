@@ -49,7 +49,7 @@
 import Navigation from '../components/navigation.vue'
 import FancyTitle from '../components/title.vue'
 import LazyImage from '../components/lazy-image.vue'
-import LinkMixin from '../prismic/linkMixin'
+import LinkMixin from '../mixins/linkMixin'
 import mapMetaInfo from '../prismic/mapMetaInfo'
 
 export default {

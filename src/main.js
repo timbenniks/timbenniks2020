@@ -1,7 +1,6 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import PrismicTextComponent from '~/components/prismic-single-text.vue'
 import Store from './store'
-import VueAnalytics from 'vue-analytics'
 
 // Prismic stuff
 import { common } from 'prismic-vue/components/common'
@@ -43,11 +42,6 @@ export default function (Vue, { router, head, appOptions }) {
 
   Object.entries(common).forEach(([_, component]) => {
     Vue.component(component.name, component)
-  })
-
-  Vue.use(VueAnalytics, {
-    id: 'UA-XXX-X',
-    router,
   })
 
   head.meta.push({

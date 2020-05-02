@@ -1,4 +1,4 @@
-import { loadImages } from './imageTools'
+import { loadImages } from '../prismic/imageTools'
 
 export default {
   mounted() {

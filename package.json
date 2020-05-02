@@ -19,6 +19,7 @@
     "gridsome-plugin-purgecss": "^1.0.12",
     "gridsome-plugin-pwa": "0.0.17",
     "gridsome-source-graphql-prismic": "^0.1.6",
+    "highlight.js": "^10.0.1",
     "node-sass": "^4.13.1",
     "prettier": "^2.0.4",
     "prismic-dom": "^2.1.0",

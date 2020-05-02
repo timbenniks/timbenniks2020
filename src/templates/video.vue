@@ -54,9 +54,9 @@
 </template>
 
 <script>
-import LinkMixin from '../prismic/linkMixin'
-import IframeMixin from '../prismic/iframeMixin'
-import ImageMixin from '../prismic/imageMixin'
+import LinkMixin from '../mixins/linkMixin'
+import IframeMixin from '../mixins/iframeMixin'
+import ImageMixin from '../mixins/imageMixin'
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
