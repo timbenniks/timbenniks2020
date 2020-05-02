@@ -1,5 +1,16 @@
 <template>
+  <div
+    :is="tag"
+    v-if="typeof field === 'string'"
+    class="fancy-title"
+    :class="[color, type, { uppercase }]"
+    :style="{ top: `${offset[0]}rem`, left: `${offset[1]}rem` }"
+  >
+    {{ field }}
+  </div>
+
   <prismic-single-text
+    v-else
     :field="field"
     :tag="tag"
     class="fancy-title"

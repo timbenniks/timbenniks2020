@@ -63,7 +63,8 @@ export default function (type, element, content, children) {
         <figure style="--aspect-ratio:16/9;">
           <iframe 
             width="16" 
-            height="9" 
+            height="9"
+            allow="autoplay"
             allowfullscreen 
             frameborder="0" 
             data-src="${element.oembed.embed_url.replace(
