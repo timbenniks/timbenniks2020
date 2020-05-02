@@ -15,7 +15,7 @@ function addStyleResource(rule) {
 
 module.exports = {
   siteName: 'Tim Benniks',
-  siteUrl: 'https://reverent-lichterman-7d23b1.netlify.app',
+  siteUrl: 'https://timbenniks.nl/',
   icon: './src/favicon.png',
   plugins: [
     {
@@ -57,7 +57,7 @@ module.exports = {
       options: {
         title: 'Tim Benniks',
         disableServiceWorker: false,
-        shortName: 'TimBenniks',
+        shortName: 'timbenniks.nl',
         themeColor: '#3590d5',
         backgroundColor: '#3590d5',
         icon: './src/favicon.png',
