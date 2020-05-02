@@ -15,7 +15,7 @@ function addStyleResource(rule) {
 
 module.exports = {
   siteName: 'Tim Benniks',
-  siteUrl: 'https://timbenniks.nl/',
+  siteUrl: 'https://timbenniks.nl',
   icon: './src/favicon.png',
   plugins: [
     {

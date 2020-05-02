@@ -61,7 +61,7 @@ export default function (Vue, { router, head, appOptions }) {
 
   head.meta.push({
     property: 'twitter:card',
-    content: 'summary',
+    content: 'summary_large_image',
   })
 
   head.meta.push({
