@@ -81,6 +81,24 @@ export default function (fields, pageType, route) {
     ]
   }
 
+  if (pageType === 'video') {
+    metaData.script = [
+      {
+        innerHTML: JSON.stringify({
+          '@context': 'http://schema.org',
+          '@type': 'VideoObject',
+          name: getPropType(fields.body, 'general_card', 'title'),
+          description: getPropType(fields.body, 'general_card', 'description'),
+          thumbnailUrl: [getPropType(fields.body, 'general_card', 'image')],
+          embedUrl: fields.video_embed.embed_url.replace('watch?v=', 'embed/'),
+          contentUrl: `https://timbenniks.nl/writings/${fields._meta.uid}`,
+          uploadDate: `${fields.publication_date}T00:00:00`,
+        }),
+        type: 'application/ld+json',
+      },
+    ]
+  }
+
   if (pageType === 'writing') {
     metaData.script = [
       {
