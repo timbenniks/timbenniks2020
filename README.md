@@ -1,7 +1,7 @@
 # timbenniks.nl
 Thanks for checking out the source code!
 
-This website is a simpel blog which uses [Prismic](https://prismic.io/) as headless CMS and [Gridsome](https://gridsome.org/) as framework to create the blog. The heart of it all is [Vue.js](https://vuejs.org/).
+This website uses [Prismic](https://prismic.io/) as headless CMS and [Gridsome](https://gridsome.org/) as framework to create the blog. The heart of it all is [Vue.js](https://vuejs.org/). It showcases my writing and my videos and it has a calendar of my public speaking engagements.
 
 ### Hosted on Netlify
 
