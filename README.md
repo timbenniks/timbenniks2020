@@ -1,5 +1,5 @@
 # timbenniks.nl
-## Thanks for checking out the source code!
+Thanks for checking out the source code!
 
 This website is a simpel blog which uses [Prismic](https://prismic.io/) as headless CMS and [Gridsome](https://gridsome.org/) as framework to create the blog. The heart of it all is [Vue.js](https://vuejs.org/).
 
@@ -16,3 +16,5 @@ I'm using `gridsome-source-graphql-prismic` to connect to the Prismic GraphQL en
 Read this [blogpost](https://timbenniks.nl/writings/a-new-website/) for more info.
 
 Reach our on Twitter if you have questions: [@timbenniks](https://twitter.com/timbenniks)
+
+![Image of Tim Benniks](https://timbenniks.nl/assets/static/favicon-512.png)
