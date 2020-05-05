@@ -1,6 +1,6 @@
 {
   "name": "timbenniks2020",
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
