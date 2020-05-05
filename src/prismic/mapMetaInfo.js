@@ -91,7 +91,7 @@ export default function (fields, pageType, route) {
           description: getPropType(fields.body, 'general_card', 'description'),
           thumbnailUrl: [getPropType(fields.body, 'general_card', 'image')],
           embedUrl: fields.video_embed.embed_url.replace('watch?v=', 'embed/'),
-          contentUrl: `https://timbenniks.nl/writings/${fields._meta.uid}`,
+          contentUrl: `https://timbenniks.nl/videos/${fields._meta.uid}`,
           uploadDate: `${fields.publication_date}T00:00:00`,
         }),
         type: 'application/ld+json',

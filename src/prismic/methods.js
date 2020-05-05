@@ -28,7 +28,6 @@ export function asYear(date) {
 }
 
 export function asDate(date) {
-  console.log(date)
   return new Date(date)
     .toLocaleString('en-us', {
       year: 'numeric',
