@@ -15,6 +15,6 @@ I'm using `gridsome-source-graphql-prismic` to connect to the Prismic GraphQL en
 
 Read this [blogpost](https://timbenniks.nl/writings/a-new-website/) for more info.
 
-Reach our on Twitter if you have questions: [@timbenniks](https://twitter.com/timbenniks)
+Reach out on Twitter if you have questions: [@timbenniks](https://twitter.com/timbenniks)
 
 ![Image of Tim Benniks](https://timbenniks.nl/assets/static/favicon-512.png)
