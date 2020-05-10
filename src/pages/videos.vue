@@ -20,8 +20,6 @@
             @click="tagClick(tag)"
           >
             {{ tag.tag }}
-
-            <span v-if="tag.selected" class="selected"><span>+</span></span>
           </button>
         </div>
         <div class="posts videos">

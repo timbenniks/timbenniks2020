@@ -15,6 +15,10 @@ export default function (doc) {
     return '/videos'
   }
 
+  if (doc.type === 'about') {
+    return '/about'
+  }
+
   if (doc.type === 'writing') {
     return `/writings/${doc.uid}`
   }
