@@ -27,7 +27,8 @@ export function loadImages() {
   })
 }
 
-export const nativeLazySupported = 'loading' in HTMLImageElement.prototype
+// turned of for now. SSR build is failing...
+export const nativeLazySupported = false // 'loading' in HTMLImageElement.prototype
 
 export function getSrcSet(baseUrl, sizes) {
   let srcset = ''
