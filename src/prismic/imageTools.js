@@ -1,24 +1,33 @@
 export function loadImages() {
-  const images = [...document.querySelectorAll('img.twic')]
+  const images = [...document.querySelectorAll('img.lazy')]
+
+  const setImage = (image) => {
+    if (!image.classList.contains('lazy-done')) {
+      image.srcset = image.getAttribute('data-srcset')
+      image.sizes = image.getAttribute('data-sizes')
+      image.classList.add('lazy-done')
+    }
+  }
 
   images.forEach((image) => {
-    const observer = new IntersectionObserver((changes) => {
-      changes.forEach((change) => {
-        if (change.isIntersecting) {
-          if (!image.classList.contains('twic-done')) {
-            image.srcset = image.getAttribute('data-srcset')
-            image.sizes = image.getAttribute('data-sizes')
-            image.classList.add('twic-done')
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((changes) => {
+        changes.forEach((change) => {
+          if (change.isIntersecting) {
+            setImage(image)
+            observer.unobserve(image)
           }
-
-          observer.unobserve(image)
-        }
+        })
       })
-    })
 
-    observer.observe(image)
+      observer.observe(image)
+    } else {
+      setImage(image)
+    }
   })
 }
+
+export const nativeLazySupported = 'loading' in HTMLImageElement.prototype
 
 export function getSrcSet(baseUrl, sizes) {
   let srcset = ''

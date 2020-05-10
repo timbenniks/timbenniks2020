@@ -1,6 +1,6 @@
 import prismicDOM from 'prismic-dom'
 import linkResolver from './linkResolver'
-import { getSrcSet } from './imageTools'
+import { getSrcSet, nativeLazySupported } from './imageTools'
 
 const Elements = prismicDOM.RichText.Elements
 
@@ -26,19 +26,18 @@ export default function (type, element, content, children) {
       element.dimensions.height
     };">
         <img
-          data-srcset="${getSrcSet(element.url, [
-            300,
-            400,
-            500,
-            600,
-            700,
-            800,
-          ])}"
-          data-sizes="(max-width: 700px) 90vw, (min-width: 880px) 800px"
+          ${
+            nativeLazySupported ? 'srcset' : 'data-srcset'
+          }="${getSrcSet(element.url, [300, 400, 500, 600, 700, 800])}"
+          ${
+            nativeLazySupported ? 'sizes' : 'data-sizes'
+          }="(max-width: 700px) 90vw, (min-width: 880px) 800px"
           alt="${element.alt}"
           title="${element.alt}"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          class="twic"
+          class="${!nativeLazySupported ? 'lazy' : ''}"
+          width="${element.dimensions.width}"
+          height="${element.dimensions.height}"
         />
         <figcaption>${element.alt}</figcaption>
       </figure>

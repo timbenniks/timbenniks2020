@@ -1,14 +1,26 @@
 <template>
   <figure :style="`--aspect-ratio:${ratio};`">
     <img
+      v-if="nativeLazySupported"
+      :srcset="generateSrcSet()"
+      :alt="alt"
+      :title="alt"
+      :sizes="sizes"
+      loading="lazy"
+      :width="parseRatioForWH(ratio, 'width')"
+      :height="parseRatioForWH(ratio, 'height')"
+    >
+
+    <img
+      v-else
       :data-srcset="generateSrcSet()"
       :alt="alt"
       :src="preload"
       :title="alt"
       :data-sizes="sizes"
       :class="extraClass"
-      class="twic"
-    />
+      class="lazy"
+    >
     <figcaption v-if="caption">
       {{ alt }}
     </figcaption>
@@ -16,7 +28,11 @@
 </template>
 
 <script>
-import { loadImages, getSrcSet } from '../prismic/imageTools'
+import {
+  loadImages,
+  getSrcSet,
+  nativeLazySupported,
+} from '../prismic/imageTools'
 
 export default {
   name: 'LazyImage',
@@ -35,11 +51,19 @@ export default {
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     },
   },
+  data() {
+    return {
+      nativeLazySupported,
+    }
+  },
   mounted() {
     loadImages()
   },
 
   methods: {
+    parseRatioForWH(ratio, which) {
+      return Number(ratio.split('/')[which === 'width' ? 0 : 1]) * 10
+    },
     generateSrcSet() {
       return getSrcSet(this.url, this.widths)
     },
