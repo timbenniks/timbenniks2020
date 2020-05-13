@@ -18,6 +18,7 @@
     @include responsive('width', (xs: 100%, m: rem(200px)));
     @include responsive('height', (xs: auto, m: rem(112px)));
     @include responsive('margin', (xs: rem(0 16px 16px 0), m: rem(0 16px 0 0)));
+    
     background: $blue-main;
     border-bottom: 2px solid $blue-main;
     flex: 2;
@@ -36,7 +37,7 @@
     line-height: 1;
 
     a {
-      transition: all .3s ease;
+      transition: all 0.3s ease;
       color: $white;
       text-decoration: none;
       

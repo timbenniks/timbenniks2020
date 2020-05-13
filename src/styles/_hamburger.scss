@@ -17,11 +17,9 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
   padding: $hamburger-padding-y $hamburger-padding-x;
   display: inline-block;
   cursor: pointer;
-
   transition-property: opacity, filter;
   transition-duration: 0.15s;
   transition-timing-function: linear;
-
   font: inherit;
   color: inherit;
   text-transform: none;
@@ -102,7 +100,7 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
 
   .hamburger-inner {
     transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
-      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     &::before,
     &::after {

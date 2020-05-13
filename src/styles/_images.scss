@@ -8,6 +8,7 @@ img {
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;
 }
+
 [style*="--aspect-ratio"] > img {
   height: auto;
 }
@@ -20,6 +21,7 @@ img {
   [style*="--aspect-ratio"]::before {
     content: "";
     display: block;
+    
     --aspect: (var(--aspect-ratio));
     padding-bottom: calc(100% / (var(--aspect)));
   }
