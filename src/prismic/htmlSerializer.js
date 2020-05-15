@@ -1,10 +1,22 @@
-import prismicDOM from 'prismic-dom'
-import linkResolver from './linkResolver'
-import { getSrcSet, nativeLazySupported } from './imageTools'
+const prismicDOM = require('prismic-dom')
+const linkResolver = require('./linkResolver')
+//import { getSrcSet, nativeLazySupported } from './imageTools'
+
+function getSrcSet(baseUrl, sizes) {
+  let srcset = ''
+
+  sizes.forEach((size) => {
+    srcset += `${baseUrl}&w=${size} ${size}w, `
+  })
+
+  return srcset.slice(0, -1)
+}
+
+const nativeLazySupported = false
 
 const Elements = prismicDOM.RichText.Elements
 
-export default function (type, element, content, children) {
+module.exports = function (type, element, content, children) {
   if (type === Elements.hyperlink) {
     let result = ''
     const url = prismicDOM.Link.url(element.data, linkResolver)

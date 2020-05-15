@@ -5,102 +5,29 @@
 
       <main id="main-content">
         <div class="homepage">
-          <lazy-image
-            ratio="1/1"
-            :alt="$prismic.asText($page.Prismic.home.main_title)"
-            :url="$page.Prismic.home.image.url"
-            extra-class="opacity-only"
-            :caption="false"
-            :widths="[200]"
-            sizes="200px"
-          />
-
-          <div class="home-copy-wrapper">
-            <fancy-title
-              :field="$page.Prismic.home.main_title"
-              tag="h1"
-              color="red"
-              type="large"
-              :offset="[0, 1]"
-              :uppercase="true"
-            />
-
-            <fancy-title
-              :field="$page.Prismic.home.sub_title"
-              tag="h2"
-              color="blue-main"
-              type="small"
-              :offset="[-0.18, 0]"
-              :uppercase="true"
-            />
-
-            <prismic-rich-text
-              class="homepage-description"
-              :field="$page.Prismic.home.description"
-            />
-          </div>
+          <h1>hi</h1>
         </div>
       </main>
     </div>
   </Layout>
 </template>
 
+<static-query>
+query {
+  metadata {
+    skiplink
+  }
+}
+</static-query>
+
 <script>
 import Navigation from '../components/navigation.vue'
-import FancyTitle from '../components/title.vue'
-import LazyImage from '../components/lazy-image.vue'
-import LinkMixin from '../mixins/linkMixin'
-import mapMetaInfo from '../prismic/mapMetaInfo'
-
 export default {
   components: {
     Navigation,
-    LazyImage,
-    FancyTitle,
-  },
-  mixins: [LinkMixin],
-  metaInfo() {
-    return mapMetaInfo(
-      this.$page.Prismic.home,
-      'home',
-      this.$router.currentRoute
-    )
   },
 }
 </script>
-
-<page-query>
-query {
-  Prismic {
-    home(uid: "home", lang: "en-us"){
-      main_title
-      sub_title
-      description
-      image
-      body {
-        ... on Prismic_HomeBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
-        }
-        ... on Prismic_HomeBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
-      }
-    }
-  }
-}
-</page-query>
 
 <style lang="scss">
 .homepage {

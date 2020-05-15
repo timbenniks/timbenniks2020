@@ -20,35 +20,35 @@
 </template>
 
 <page-query>
-{
-	Prismic {
-    about(uid: "about-tim-benniks", lang: "en-us"){
-      title
-      sub_title
-      content
-      body {
-        ... on Prismic_AboutBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
-        }
-        ... on Prismic_AboutBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
-      }
-  	}
-	}
-}
+# {
+# 	Prismic {
+#     about(uid: "about-tim-benniks", lang: "en-us"){
+#       title
+#       sub_title
+#       content
+#       body {
+#         ... on Prismic_AboutBodyGeneral_card {
+#           type
+#           primary {
+#             title
+#             description
+#             image
+#           }
+#         }
+#         ... on Prismic_AboutBodyTwitter_card {
+#           type
+#           primary {
+#             twitter_handle
+#             title
+#             description
+#             image
+#           }
+#         }
+#         __typename
+#       }
+#   	}
+# 	}
+# }
 </page-query>
 
 <script>

@@ -18,19 +18,29 @@ module.exports = {
   siteUrl: 'https://timbenniks.nl',
   icon: './src/favicon.png',
   plugins: [
+    // {
+    //   use: 'gridsome-source-graphql-prismic',
+    //   options: {
+    //     url: 'https://timbenniks.prismic.io',
+    //     fieldName: 'Prismic',
+    //     typeName: 'Prismic',
+
+    //     headers: {
+    //       'Prismic-Ref': process.env.PRISMIC_REF,
+    //       Authorization: process.env.PRISMIC_TOKEN,
+    //     },
+
+    //     useMasterRef: true,
+    //   },
+    // },
     {
-      use: 'gridsome-source-graphql-prismic',
+      use: '@timbenniks/gridsome-source-prismic',
       options: {
-        url: 'https://timbenniks.prismic.io',
-        fieldName: 'Prismic',
-        typeName: 'Prismic',
-
-        headers: {
-          'Prismic-Ref': process.env.PRISMIC_REF,
-          Authorization: process.env.PRISMIC_TOKEN,
-        },
-
-        useMasterRef: true,
+        prismic_url: 'https://timbenniks.prismic.io/api/v2',
+        prismic_token: process.env.PRISMIC_TOKEN,
+        collection_prefix: 'Prismic',
+        link_resolver: require('./src/prismic/linkResolver'),
+        html_serializer: require('./src/prismic/htmlSerializer'),
       },
     },
     {

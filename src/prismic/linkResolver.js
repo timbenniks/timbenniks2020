@@ -1,4 +1,4 @@
-export default function (doc) {
+module.exports = function (doc) {
   if (doc.type === 'home') {
     return '/'
   }
