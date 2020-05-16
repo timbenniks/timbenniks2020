@@ -9,6 +9,7 @@
   "dependencies": {
     "@gridsome/plugin-google-analytics": "^0.1.0",
     "@gridsome/plugin-sitemap": "^0.2.3",
+    "@timbenniks/gridsome-source-prismic": "github:timbenniks/gridsome-source-prismic",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",

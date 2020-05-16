@@ -11,32 +11,18 @@
           :uppercase="true"
         />
 
-        <h3 class="post-title-sep">
-          {{ $page.speaking.data.upcoming_talks }}
-        </h3>
+        <h3 class="post-title-sep">{{ $page.speaking.data.upcoming_talks }}</h3>
 
         <div v-if="upcomingTalks.length > 0" class="posts">
-          <talk
-            v-for="talk in upcomingTalks"
-            :key="talk.node.id"
-            :talk="talk.node.data"
-          />
+          <talk v-for="talk in upcomingTalks" :key="talk.node.id" :talk="talk.node.data" />
         </div>
 
-        <p v-else class="no-upcoming-talks">
-          {{ $page.speaking.data.no_upcoming }}
-        </p>
+        <p v-else class="no-upcoming-talks">{{ $page.speaking.data.no_upcoming }}</p>
 
-        <h3 class="post-title-sep">
-          {{ $page.speaking.data.older_talks }}
-        </h3>
+        <h3 class="post-title-sep">{{ $page.speaking.data.older_talks }}</h3>
 
         <div class="posts">
-          <talk
-            v-for="talk in oldTalks"
-            :key="talk.node.id"
-            :talk="talk.node.data"
-          />
+          <talk v-for="talk in oldTalks" :key="talk.node.id" :talk="talk.node.data" />
         </div>
       </main>
     </div>
@@ -101,7 +87,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.speaking.data.social_cards,
+      this.$page.speaking.data,
       'speaking',
       this.$router.currentRoute
     )

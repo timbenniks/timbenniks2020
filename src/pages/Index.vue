@@ -34,10 +34,7 @@
               :uppercase="true"
             />
 
-            <div
-              class="homepage-description"
-              v-html="$page.home.data.description"
-            />
+            <div class="homepage-description" v-html="$page.home.data.description" />
           </div>
         </div>
       </main>
@@ -90,11 +87,7 @@ export default {
   },
   mixins: [LinkMixin],
   metaInfo() {
-    return mapMetaInfo(
-      this.$page.home.data.social_cards,
-      'home',
-      this.$router.currentRoute
-    )
+    return mapMetaInfo(this.$page.home.data, 'home', this.$router.currentRoute)
   },
 }
 </script>

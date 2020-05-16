@@ -13,11 +13,7 @@
           :use-fancy-titles="false"
         />
 
-        <div
-          ref="body"
-          class="post-content"
-          v-html="$page.writing.data.content"
-        />
+        <div ref="body" class="post-content" v-html="$page.writing.data.content" />
       </main>
     </div>
   </Layout>
@@ -39,7 +35,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.writing.data.social_cards,
+      this.$page.writing.data,
       'writing',
       this.$router.currentRoute
     )

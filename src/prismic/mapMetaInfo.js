@@ -1,7 +1,7 @@
 import gridsomeConfig from '../../gridsome.config'
 
 function getPropType(fields, type, prop) {
-  return fields.find((card) => card.type === type)[prop]
+  return fields.social_cards.find((card) => card.type === type).content[prop]
 }
 
 export default function (fields, pageType, route) {
@@ -77,12 +77,9 @@ export default function (fields, pageType, route) {
           name: getPropType(fields, 'general_card', 'title'),
           description: getPropType(fields, 'general_card', 'description'),
           thumbnailUrl: [getPropType(fields, 'general_card', 'image')],
-          embedUrl: fields.data.video_embed.embed_url.replace(
-            'watch?v=',
-            'embed/'
-          ),
+          embedUrl: fields.video_embed.embed_url.replace('watch?v=', 'embed/'),
           contentUrl: `${gridsomeConfig.siteUrl}videos/${fields.id}`,
-          uploadDate: `${fields.data.last_publication_date}T00:00:00`,
+          uploadDate: `${fields.last_publication_date}T00:00:00`,
         }),
         type: 'application/ld+json',
       },
@@ -97,7 +94,7 @@ export default function (fields, pageType, route) {
           '@type': 'BlogPosting',
           headline: getPropType(fields, 'general_card', 'title'),
           image: getPropType(fields, 'general_card', 'image'),
-          wordcount: fields.data.content.split(' ').filter((n) => {
+          wordcount: fields.content.split(' ').filter((n) => {
             return n != ''
           }).length,
           url: `${gridsomeConfig.siteUrl}writings/${fields.id}`,

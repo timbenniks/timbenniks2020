@@ -17,16 +17,10 @@
             :key="tag"
             :to="`/videos/?tag=${tag}`"
             class="filter"
-          >
-            {{ tag }}
-          </g-link>
+          >{{ tag }}</g-link>
         </div>
 
-        <div
-          ref="body"
-          class="post-content"
-          v-html="$page.video.data.content"
-        />
+        <div ref="body" class="post-content" v-html="$page.video.data.content" />
 
         <div class="post-content">
           <figure class="youtube" style="--aspect-ratio: 16/9;">
@@ -64,7 +58,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.video.data.social_cards,
+      this.$page.video.data,
       'video',
       this.$router.currentRoute
     )

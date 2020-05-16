@@ -18,16 +18,10 @@
             class="filter"
             :class="{ selected: tag.selected }"
             @click="tagClick(tag)"
-          >
-            {{ tag.tag }}
-          </button>
+          >{{ tag.tag }}</button>
         </div>
         <div class="posts videos">
-          <article
-            v-for="video in filteredVideos"
-            :key="video.slug"
-            class="post video"
-          >
+          <article v-for="video in filteredVideos" :key="video.slug" class="post video">
             <g-link :to="`/videos/${video.slug}/`">
               <lazy-image
                 ratio="16/9"
@@ -41,14 +35,12 @@
 
             <div class="post-content-wrap">
               <p class="post-title">
-                <g-link :to="`/videos/${video.slug}/`">
-                  {{ video.title }}
-                </g-link>
+                <g-link :to="`/videos/${video.slug}/`">{{ video.title }}</g-link>
               </p>
               <p class="post-tags">
                 <span v-for="(tag, index) in video.tags" :key="tag">
                   <span class="tag">{{ tag }}</span>
-                  <template v-if="index + 1 < video.tags.length">, </template>
+                  <template v-if="index + 1 < video.tags.length">,</template>
                 </span>
               </p>
 
@@ -114,7 +106,7 @@ export default {
 
   metaInfo() {
     return mapMetaInfo(
-      this.$page.youtube.data.social_cards,
+      this.$page.youtube.data,
       'videos',
       this.$router.currentRoute
     )
