@@ -11,7 +11,7 @@ This website uses the [JAMstack](https://jamstack.wtf/) and is hosted for free o
 
 ## How it connects
 
-I'm using `gridsome-source-graphql-prismic` to connect to the Prismic GraphQL endpoint. This however does not create the proper collections in Gridsome. Please check [gridsome.server.js](gridsome.server.js) for the fix/hack.
+I'm using [https://github.com/timbenniks/gridsome-source-prismic](https://github.com/timbenniks/gridsome-source-prismic) to connect to the Prismic GraphQL endpoint. This is a custom Gridsome source plugin specifically build for this website. You cannot use it for you own Gridsome website unless you change it.
 
 Read this [blogpost](https://timbenniks.nl/writings/a-new-website/) for more info.
 
