@@ -7,8 +7,8 @@
         <div class="homepage">
           <lazy-image
             ratio="1/1"
-            :alt="$prismic.asText($page.Prismic.page_not_found.main_title)"
-            :url="$page.Prismic.page_not_found.image.url"
+            :alt="$page.page_not_found.data.main_title"
+            :url="$page.page_not_found.data.image.url"
             extra-class="opacity-only"
             :caption="false"
             :widths="[200]"
@@ -17,7 +17,7 @@
 
           <div class="home-copy-wrapper">
             <fancy-title
-              :field="$page.Prismic.page_not_found.main_title"
+              :field="$page.page_not_found.data.main_title"
               tag="h1"
               color="red"
               type="large"
@@ -26,7 +26,7 @@
             />
 
             <fancy-title
-              :field="$page.Prismic.page_not_found.sub_title"
+              :field="$page.page_not_found.data.sub_title"
               tag="h2"
               color="blue-main"
               type="small"
@@ -44,7 +44,7 @@
 
 <script>
 import Navigation from '../components/navigation.vue'
-import FancyTitle from '../components/title.vue'
+import FancyTitle from '../components/fancy-title.vue'
 import LazyImage from '../components/lazy-image.vue'
 
 export default {
@@ -62,11 +62,15 @@ export default {
 
 <page-query>
 query {
-  Prismic {
-    page_not_found(uid: "page-not-found", lang: "en-us"){
+  page_not_found: prismicSinglePage(id:"page-not-found") {
+    uid,
+    slug,
+    data {
       main_title
       sub_title
-      image
+      image {
+        url
+      }
     }
   }
 }

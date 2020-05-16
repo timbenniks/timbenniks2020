@@ -13,7 +13,7 @@
             target="_blank"
             rel="noopener"
           >
-            {{ $prismic.asText(talk.title) }}
+            {{ talk.title }}
           </a>
         </p>
         <p class="post-subject">

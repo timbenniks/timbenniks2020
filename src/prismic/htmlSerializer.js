@@ -1,6 +1,5 @@
 const prismicDOM = require('prismic-dom')
 const linkResolver = require('./linkResolver')
-//import { getSrcSet, nativeLazySupported } from './imageTools'
 
 function getSrcSet(baseUrl, sizes) {
   let srcset = ''

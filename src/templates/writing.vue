@@ -5,18 +5,18 @@
 
       <main id="main-content">
         <heading
-          :title="$page.Prismic.writing.title"
-          :subtitle="$page.Prismic.writing.sub_title"
+          :title="$page.writing.data.title"
+          :subtitle="$page.writing.data.sub_title"
           :breadcrumb="true"
           titletag="h1"
           subtitletag="h2"
           :use-fancy-titles="false"
         />
 
-        <prismic-rich-text
+        <div
           ref="body"
           class="post-content"
-          :field="$page.Prismic.writing.content"
+          v-html="$page.writing.data.content"
         />
       </main>
     </div>
@@ -39,7 +39,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.writing,
+      this.$page.writing.data.social_cards,
       'writing',
       this.$router.currentRoute
     )
@@ -49,38 +49,26 @@ export default {
 </script>
 
 <page-query>
-query Writing ($uid: String!) {
-  Prismic {
-    writing(uid: $uid, lang: "en-us") {
+query Writing ($id: ID!) {
+  writing: prismicWriting(id: $id) {
+    uid
+    id
+    slug
+    data {
       publication_date
       title
       sub_title
       content
-      image
-      _meta {
-        firstPublicationDate
-        lastPublicationDate
-        uid
+      image {
+        url
       }
-      body {
-        ... on Prismic_WritingBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
+      social_cards {
+        type
+        content {
+          title
+          description
+          image
         }
-        ... on Prismic_WritingBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
       }
     }
   }

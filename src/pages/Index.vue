@@ -5,26 +5,96 @@
 
       <main id="main-content">
         <div class="homepage">
-          <h1>hi</h1>
+          <lazy-image
+            ratio="1/1"
+            :alt="$page.home.data.main_title"
+            :url="$page.home.data.image.url"
+            extra-class="opacity-only"
+            :caption="false"
+            :widths="[200]"
+            sizes="200px"
+          />
+
+          <div class="home-copy-wrapper">
+            <fancy-title
+              :field="$page.home.data.main_title"
+              tag="h1"
+              color="red"
+              type="large"
+              :offset="[0, 1]"
+              :uppercase="true"
+            />
+
+            <fancy-title
+              :field="$page.home.data.sub_title"
+              tag="h2"
+              color="blue-main"
+              type="small"
+              :offset="[-0.18, 0]"
+              :uppercase="true"
+            />
+
+            <div
+              class="homepage-description"
+              v-html="$page.home.data.description"
+            />
+          </div>
         </div>
       </main>
     </div>
   </Layout>
 </template>
 
-<static-query>
+<page-query>
 query {
-  metadata {
-    skiplink
+  home: prismicSinglePage(id:"home") {
+    uid,
+    slug,
+    data {
+      main_title
+      sub_title
+      description
+      image {
+        dimensions {
+          width
+          height
+        }
+        alt
+        url
+      }
+      social_cards {
+        type
+        content {
+          title
+          description
+          image
+        }
+      }
+    }
   }
 }
-</static-query>
+</page-query>
 
 <script>
 import Navigation from '../components/navigation.vue'
+import FancyTitle from '../components/fancy-title.vue'
+import LazyImage from '../components/lazy-image.vue'
+import LinkMixin from '../mixins/linkMixin'
+import mapMetaInfo from '../prismic/mapMetaInfo'
+
 export default {
   components: {
     Navigation,
+    LazyImage,
+    FancyTitle,
+  },
+  mixins: [LinkMixin],
+  metaInfo() {
+    return mapMetaInfo(
+      this.$page.home.data.social_cards,
+      'home',
+      this.$router.currentRoute
+    )
   },
 }
 </script>

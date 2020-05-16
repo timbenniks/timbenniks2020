@@ -7,21 +7,21 @@
         <heading
           :breadcrumb="true"
           titletag="h1"
-          :title="$page.Prismic.writings.title"
+          :title="$page.writing.data.title"
           :uppercase="true"
         />
 
         <div class="posts">
           <article
-            v-for="post in $page.Prismic.allWritings.edges"
-            :key="post.node._meta.uid"
+            v-for="post in $page.writings.edges"
+            :key="post.node.id"
             class="post"
           >
-            <g-link :to="`/writings/${post.node._meta.uid}/`">
+            <g-link :to="`/writings/${post.node.id}/`">
               <lazy-image
                 ratio="16/9"
-                :alt="$prismic.asText(post.node.title)"
-                :url="post.node.image.url"
+                :alt="post.node.data.title"
+                :url="post.node.data.image.url"
                 :caption="false"
                 :widths="[300, 400, 500, 600, 680]"
                 sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
@@ -30,17 +30,17 @@
 
             <div class="post-content-wrapper">
               <p class="post-title fancy-title red">
-                <g-link :to="`/writings/${post.node._meta.uid}/`">
-                  {{ $prismic.asText(post.node.title) }}
+                <g-link :to="`/writings/${post.node.id}/`">
+                  {{ post.node.data.title }}
                 </g-link>
               </p>
               <p class="post-description">
                 <span class="post-date">
-                  {{ $prismic.asDay(post.node.publication_date) }}
-                  {{ $prismic.asMonth(post.node.publication_date) }}
-                  {{ $prismic.asYear(post.node.publication_date) }}
+                  {{ $prismic.asDay(post.node.data.publication_date) }}
+                  {{ $prismic.asMonth(post.node.data.publication_date) }}
+                  {{ $prismic.asYear(post.node.data.publication_date) }}
                 </span>
-                &mdash; {{ $prismic.asText(post.node.sub_title) }}
+                &mdash; {{ post.node.data.sub_title }}
               </p>
             </div>
           </article>
@@ -52,42 +52,35 @@
 
 <page-query>
 query {
-  Prismic {
-    allWritings(sortBy:publication_date_DESC) {
-      edges {
-        node {
-          _meta {
-            uid
-          }
+  writing: prismicSinglePage(id:"writings") {
+    uid,
+    slug,
+    data {
+      title
+      social_cards {
+        type
+        content {
           title
-          sub_title
-          content
+          description
           image
-          publication_date
         }
       }
-    },
-    writings(uid: "writings", lang: "en-us") {
-      title
-      body {
-        ... on Prismic_WritingsBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
+    }
+  },
+  writings: allPrismicWriting {
+    edges {
+      node {
+        id
+        slug
+        uid
+        data {
+          publication_date
+          title
+          sub_title
+          image {
+            url
           }
         }
-        ... on Prismic_WritingsBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
       }
     }
   }
@@ -108,7 +101,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.writings,
+      this.$page.writing.data.social_cards,
       'writings',
       this.$router.currentRoute
     )

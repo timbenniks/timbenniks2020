@@ -7,42 +7,35 @@
         <heading
           :breadcrumb="true"
           titletag="h1"
-          :title="$page.Prismic.speaking.title"
+          :title="$page.speaking.data.title"
           :uppercase="true"
         />
 
-        <prismic-single-text
-          class="post-title-sep"
-          tag="h3"
-          :field="$page.Prismic.speaking.upcoming_talks"
-        />
+        <h3 class="post-title-sep">
+          {{ $page.speaking.data.upcoming_talks }}
+        </h3>
 
         <div v-if="upcomingTalks.length > 0" class="posts">
           <talk
             v-for="talk in upcomingTalks"
-            :key="talk.node._meta.uid"
-            :talk="talk.node"
+            :key="talk.node.id"
+            :talk="talk.node.data"
           />
         </div>
 
-        <prismic-single-text
-          v-else
-          class="no-upcoming-talks"
-          tag="p"
-          :field="$page.Prismic.speaking.no_upcoming"
-        />
+        <p v-else class="no-upcoming-talks">
+          {{ $page.speaking.data.no_upcoming }}
+        </p>
 
-        <prismic-single-text
-          class="post-title-sep"
-          tag="h3"
-          :field="$page.Prismic.speaking.older_talks"
-        />
+        <h3 class="post-title-sep">
+          {{ $page.speaking.data.older_talks }}
+        </h3>
 
         <div class="posts">
           <talk
             v-for="talk in oldTalks"
-            :key="talk.node._meta.uid"
-            :talk="talk.node"
+            :key="talk.node.id"
+            :talk="talk.node.data"
           />
         </div>
       </main>
@@ -52,51 +45,42 @@
 
 <page-query>
 query {
-  Prismic {
-    allTalks {
-      edges {
-        node {
-          _meta {
-            uid
-          }
+  speaking: prismicSinglePage(id:"speaking") {
+    uid,
+    slug,
+    data {
+      title
+      upcoming_talks
+      no_upcoming
+      older_talks
+      social_cards {
+        type
+        content {
+          title
+          description
+          image
+        }
+      }
+    }
+  },
+  talks: allPrismicTalk {
+    edges {
+      node {
+        id
+        slug
+        uid
+        data {
           title
           date
           location
           description
           subject
           link_to_event {
-            ... on Prismic__ExternalLink {
-              url
-              _linkType
-            }
+            link_type
+            url
+            target
           }
         }
-      }
-    },
-    speaking(uid: "speaking", lang: "en-us") {
-      title
-      upcoming_talks
-      older_talks
-      no_upcoming
-      body {
-        ... on Prismic_SpeakingBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
-        }
-        ... on Prismic_SpeakingBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
       }
     }
   }
@@ -117,7 +101,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.speaking,
+      this.$page.speaking.data.social_cards,
       'speaking',
       this.$router.currentRoute
     )
@@ -129,8 +113,8 @@ export default {
     }
   },
   mounted() {
-    this.$page.Prismic.allTalks.edges.forEach((talk) => {
-      if (this.isDateBeforeToday(new Date(talk.node.date))) {
+    this.$page.talks.edges.forEach((talk) => {
+      if (this.isDateBeforeToday(new Date(talk.node.data.date))) {
         this.oldTalks.push(talk)
       } else {
         this.upcomingTalks.push(talk)
@@ -138,11 +122,17 @@ export default {
     })
 
     this.oldTalks.sort((a, b) => {
-      return new Date(b.node.date).getTime() - new Date(a.node.date).getTime()
+      return (
+        new Date(b.node.data.date).getTime() -
+        new Date(a.node.data.date).getTime()
+      )
     })
 
     this.upcomingTalks.sort((a, b) => {
-      return new Date(a.node.date).getTime() - new Date(b.node.date).getTime()
+      return (
+        new Date(a.node.data.date).getTime() -
+        new Date(b.node.data.date).getTime()
+      )
     })
   },
 

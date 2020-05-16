@@ -1,27 +1,14 @@
-import { RichText } from 'prismic-dom'
-import linkResolver from './linkResolver'
-import htmlSerializer from './htmlSerializer'
 import gridsomeConfig from '../../gridsome.config'
 
-function asText(field) {
-  return RichText.asText(field, linkResolver, htmlSerializer)
-}
-
 function getPropType(fields, type, prop) {
-  const field = fields.find((card) => card.type === type).primary[prop]
-
-  if (prop === 'image') {
-    return field.url
-  } else {
-    return asText(field)
-  }
+  return fields.find((card) => card.type === type)[prop]
 }
 
 export default function (fields, pageType, route) {
   const url = `${gridsomeConfig.siteUrl}${route.path}`
 
   const metaData = {
-    title: getPropType(fields.body, 'general_card', 'title'),
+    title: getPropType(fields, 'general_card', 'title'),
     link: [
       {
         rel: 'canonical',
@@ -31,31 +18,31 @@ export default function (fields, pageType, route) {
     meta: [
       {
         property: 'og:title',
-        content: getPropType(fields.body, 'general_card', 'title'),
+        content: getPropType(fields, 'general_card', 'title'),
       },
       {
         property: 'twitter:title',
-        content: getPropType(fields.body, 'twitter_card', 'title'),
+        content: getPropType(fields, 'twitter_card', 'title'),
       },
       {
         name: 'description',
-        content: getPropType(fields.body, 'general_card', 'description'),
+        content: getPropType(fields, 'general_card', 'description'),
       },
       {
         property: 'og:description',
-        content: getPropType(fields.body, 'general_card', 'description'),
+        content: getPropType(fields, 'general_card', 'description'),
       },
       {
         property: 'twitter:description',
-        content: getPropType(fields.body, 'twitter_card', 'description'),
+        content: getPropType(fields, 'twitter_card', 'description'),
       },
       {
         property: 'og:image',
-        content: getPropType(fields.body, 'general_card', 'image'),
+        content: getPropType(fields, 'general_card', 'image'),
       },
       {
         property: 'twitter:image',
-        content: getPropType(fields.body, 'twitter_card', 'image'),
+        content: getPropType(fields, 'twitter_card', 'image'),
       },
       {
         property: 'og:url',
@@ -87,12 +74,15 @@ export default function (fields, pageType, route) {
         innerHTML: JSON.stringify({
           '@context': 'http://schema.org',
           '@type': 'VideoObject',
-          name: getPropType(fields.body, 'general_card', 'title'),
-          description: getPropType(fields.body, 'general_card', 'description'),
-          thumbnailUrl: [getPropType(fields.body, 'general_card', 'image')],
-          embedUrl: fields.video_embed.embed_url.replace('watch?v=', 'embed/'),
-          contentUrl: `https://timbenniks.nl/videos/${fields._meta.uid}`,
-          uploadDate: `${fields.publication_date}T00:00:00`,
+          name: getPropType(fields, 'general_card', 'title'),
+          description: getPropType(fields, 'general_card', 'description'),
+          thumbnailUrl: [getPropType(fields, 'general_card', 'image')],
+          embedUrl: fields.data.video_embed.embed_url.replace(
+            'watch?v=',
+            'embed/'
+          ),
+          contentUrl: `${gridsomeConfig.siteUrl}videos/${fields.id}`,
+          uploadDate: `${fields.data.last_publication_date}T00:00:00`,
         }),
         type: 'application/ld+json',
       },
@@ -105,24 +95,22 @@ export default function (fields, pageType, route) {
         innerHTML: JSON.stringify({
           '@context': 'http://schema.org',
           '@type': 'BlogPosting',
-          headline: getPropType(fields.body, 'general_card', 'title'),
-          image: getPropType(fields.body, 'general_card', 'image'),
-          wordcount: asText(fields.content)
-            .split(' ')
-            .filter((n) => {
-              return n != ''
-            }).length,
-          url: `https://timbenniks.nl/writings/${fields._meta.uid}`,
+          headline: getPropType(fields, 'general_card', 'title'),
+          image: getPropType(fields, 'general_card', 'image'),
+          wordcount: fields.data.content.split(' ').filter((n) => {
+            return n != ''
+          }).length,
+          url: `${gridsomeConfig.siteUrl}writings/${fields.id}`,
           datePublished: `${fields.publication_date}T00:00:00`,
           dateCreated: `${fields.publication_date}T00:00:00`,
-          dateModified: fields._meta.lastPublicationDate,
-          description: getPropType(fields.body, 'general_card', 'description'),
+          dateModified: fields.last_publication_date,
+          description: getPropType(fields, 'general_card', 'description'),
           publisher: {
             '@type': 'Organization',
             name: 'Tim Benniks',
             logo: {
               '@type': 'ImageObject',
-              url: getPropType(fields.body, 'general_card', 'image'),
+              url: getPropType(fields, 'general_card', 'image'),
             },
           },
           author: {

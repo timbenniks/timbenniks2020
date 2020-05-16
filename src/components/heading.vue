@@ -13,7 +13,7 @@
         <g-link to="/" itemtype="https://schema.org/Thing" itemprop="item">
           <span itemprop="name">Home</span>
         </g-link>
-        <meta itemprop="position" content="1" >
+        <meta itemprop="position" content="1" />
       </li>
       <li
         v-for="(crumb, index) in crumbs"
@@ -30,7 +30,7 @@
           <span itemprop="name">{{ crumb.text }}</span>
         </g-link>
 
-        <meta :content="index + 2" itemprop="position" />
+        <meta :content="index + 2" itemprop="position">
       </li>
     </ol>
 
@@ -54,22 +54,18 @@
       :uppercase="uppercase"
     />
 
-    <prismic-single-text
-      v-if="title && !useFancyTitles"
-      :tag="titletag"
-      :field="title"
-    />
+    <div v-if="title && !useFancyTitles" :tag="titletag" v-html="title" />
 
-    <prismic-single-text
+    <div
       v-if="subtitle && !useFancyTitles"
       :tag="subtitletag"
-      :field="subtitle"
+      :v-html="subtitle"
     />
   </div>
 </template>
 
 <script>
-import FancyTitle from '../components/title.vue'
+import FancyTitle from '../components/fancy-title.vue'
 
 export default {
   name: 'Heading',
@@ -78,12 +74,12 @@ export default {
   },
   props: {
     title: {
-      type: [Array, Boolean],
+      type: [String, Boolean],
       required: false,
       default: false,
     },
     subtitle: {
-      type: [Array, Boolean],
+      type: [String, Boolean],
       required: false,
       default: false,
     },

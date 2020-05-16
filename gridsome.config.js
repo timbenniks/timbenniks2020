@@ -17,22 +17,21 @@ module.exports = {
   siteName: 'Tim Benniks',
   siteUrl: 'https://timbenniks.nl',
   icon: './src/favicon.png',
+  templates: {
+    PrismicVideo: [
+      {
+        path: '/videos/:id',
+        component: './src/templates/video.vue',
+      },
+    ],
+    PrismicWriting: [
+      {
+        path: '/writings/:id',
+        component: './src/templates/writing.vue',
+      },
+    ],
+  },
   plugins: [
-    // {
-    //   use: 'gridsome-source-graphql-prismic',
-    //   options: {
-    //     url: 'https://timbenniks.prismic.io',
-    //     fieldName: 'Prismic',
-    //     typeName: 'Prismic',
-
-    //     headers: {
-    //       'Prismic-Ref': process.env.PRISMIC_REF,
-    //       Authorization: process.env.PRISMIC_TOKEN,
-    //     },
-
-    //     useMasterRef: true,
-    //   },
-    // },
     {
       use: '@timbenniks/gridsome-source-prismic',
       options: {

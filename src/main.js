@@ -1,48 +1,23 @@
 import DefaultLayout from '~/layouts/Default.vue'
-import PrismicTextComponent from '~/components/prismic-single-text.vue'
 import Store from './store'
 
-// Prismic stuff
-import { common } from 'prismic-vue/components/common'
-import linkResolver from '~/prismic/linkResolver'
-import htmlSerializer from '~/prismic/htmlSerializer'
-import {
-  asRichText,
-  asText,
-  toType,
-  asLink,
-  asDay,
-  asMonth,
-  asYear,
-  asDate,
-} from '~/prismic/methods'
+import { asDay, asMonth, asYear, asLink } from '~/prismic/methods'
 
 import gridsomeConfig from '../gridsome.config'
 
 import './styles/index.scss'
 
-export default function (Vue, { router, head, appOptions }) {
+export default function (Vue, { head, appOptions }) {
   Vue.prototype.$prismic = {
-    linkResolver,
-    htmlSerializer,
-    asRichText,
-    asText,
-    toType,
-    asLink,
     asDay,
     asMonth,
     asYear,
-    asDate,
+    asLink,
   }
 
   appOptions.store = Store
 
   Vue.component('Layout', DefaultLayout)
-  Vue.component(PrismicTextComponent.name, PrismicTextComponent)
-
-  Object.entries(common).forEach(([_, component]) => {
-    Vue.component(component.name, component)
-  })
 
   head.meta.push({
     name: 'google-site-verification',
@@ -88,15 +63,4 @@ export default function (Vue, { router, head, appOptions }) {
     rel: 'preconnect',
     href: 'https://images.prismic.io',
   })
-
-  // head.link.push({
-  //   rel: 'preload',
-  //   as: 'font',
-  //   href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
-  // })
-
-  // head.link.push({
-  //   rel: 'stylesheet',
-  //   href: 'https://fonts.googleapis.com/css?family=Lato:400,900&display=swap',
-  // })
 }

@@ -122,11 +122,11 @@ export default new Vuex.Store({
     setInitalVideos({ commit }, videosFromPrismic) {
       const videos = videosFromPrismic.map((edge) => {
         return {
-          slug: edge.node._meta.uid,
-          tags: edge.node._meta.tags,
-          title: edge.node.title,
-          image: edge.node.image,
-          date: edge.node.publication_date,
+          slug: edge.node.slug,
+          tags: edge.node.tags,
+          title: edge.node.data.title,
+          image: edge.node.data.image,
+          date: edge.node.data.publication_date,
           shown: true,
         }
       })

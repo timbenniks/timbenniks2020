@@ -5,7 +5,7 @@
 
       <main id="main-content">
         <heading
-          :title="$page.Prismic.video.title"
+          :title="$page.video.data.title"
           :breadcrumb="true"
           titletag="h1"
           :use-fancy-titles="false"
@@ -13,7 +13,7 @@
 
         <div class="filters">
           <g-link
-            v-for="tag in $page.Prismic.video._meta.tags"
+            v-for="tag in $page.video.tags"
             :key="tag"
             :to="`/videos/?tag=${tag}`"
             class="filter"
@@ -22,10 +22,10 @@
           </g-link>
         </div>
 
-        <prismic-rich-text
+        <div
           ref="body"
           class="post-content"
-          :field="$page.Prismic.video.content"
+          v-html="$page.video.data.content"
         />
 
         <div class="post-content">
@@ -36,16 +36,12 @@
               allowfullscreen
               frameborder="0"
               :data-src="
-                $page.Prismic.video.video_embed.embed_url.replace(
+                $page.video.data.video_embed.embed_url.replace(
                   'watch?v=',
                   'embed/'
                 )
               "
             />
-            <!-- <prismic-single-text
-              :field="$page.Prismic.video.title"
-              tag="figcaption"
-            /> -->
           </figure>
         </div>
       </main>
@@ -68,7 +64,7 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.video,
+      this.$page.video.data.social_cards,
       'video',
       this.$router.currentRoute
     )
@@ -78,39 +74,35 @@ export default {
 </script>
 
 <page-query>
-query Video ($uid: String!) {
-  Prismic {
-    video(uid: $uid, lang: "en-us") {
+query Video ($id: ID!) {
+  video: prismicVideo(id: $id) {
+    uid
+    tags
+    id
+    slug
+    data {
       publication_date
       title
       content
-      image
-      video_embed
-      _meta {
-        firstPublicationDate
-        lastPublicationDate
-        uid
-        tags
+      video_embed {
+        width
+        height
+        embed_url
+        type
+        title
+        author_name
+        author_url
+        provider_name
+        provider_url
+        html
       }
-      body {
-        ... on Prismic_VideoBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
+      social_cards {
+        type
+        content {
+          title
+          description
+          image
         }
-        ... on Prismic_VideoBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
       }
     }
   }

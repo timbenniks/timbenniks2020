@@ -7,7 +7,7 @@
         <heading
           :breadcrumb="true"
           titletag="h1"
-          :title="$page.Prismic.youtube.title"
+          :title="$page.youtube.data.title"
           :uppercase="true"
         />
 
@@ -31,7 +31,7 @@
             <g-link :to="`/videos/${video.slug}/`">
               <lazy-image
                 ratio="16/9"
-                :alt="$prismic.asText(video.title)"
+                :alt="video.title"
                 :url="video.image.url"
                 :caption="false"
                 :widths="[300, 400, 500, 600, 680]"
@@ -42,7 +42,7 @@
             <div class="post-content-wrap">
               <p class="post-title">
                 <g-link :to="`/videos/${video.slug}/`">
-                  {{ $prismic.asText(video.title) }}
+                  {{ video.title }}
                 </g-link>
               </p>
               <p class="post-tags">
@@ -67,41 +67,31 @@
 
 <page-query>
 query {
-  Prismic {
-    allVideos(sortBy:publication_date_DESC) {
-      edges {
-        node {
-          _meta {
-            uid
-            tags
-          }
+  videos: allPrismicVideo {
+    edges {
+      node {
+        slug
+        tags
+        data {
           title
-          image
           publication_date
+          image {
+            url
+          }
         }
       }
-    },
-    youtube(uid: "youtube", lang: "en-us") {
+    }
+  },
+  youtube: prismicSinglePage(id:"youtube"){
+    data {
       title
-      body {
-        ... on Prismic_YoutubeBodyGeneral_card {
-          type
-          primary {
-            title
-            description
-            image
-          }
+      social_cards {
+        type
+        content {
+          title
+          description
+          image
         }
-        ... on Prismic_YoutubeBodyTwitter_card {
-          type
-          primary {
-            twitter_handle
-            title
-            description
-            image
-          }
-        }
-        __typename
       }
     }
   }
@@ -124,7 +114,7 @@ export default {
 
   metaInfo() {
     return mapMetaInfo(
-      this.$page.Prismic.youtube,
+      this.$page.youtube.data.social_cards,
       'videos',
       this.$router.currentRoute
     )
@@ -133,7 +123,7 @@ export default {
   computed: mapGetters(['filteredVideos', 'tags']),
 
   mounted() {
-    this.setInitalVideos(this.$page.Prismic.allVideos.edges)
+    this.setInitalVideos(this.$page.videos.edges)
   },
 
   methods: {
