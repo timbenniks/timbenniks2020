@@ -1,10 +1,7 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import Store from './store'
-
-import { asDay, asMonth, asYear, asLink } from '~/prismic/methods'
-
 import gridsomeConfig from '../gridsome.config'
-
+import { asDay, asMonth, asYear, asLink } from '~/prismic/methods'
 import './styles/index.scss'
 
 export default function (Vue, { head, appOptions }) {

@@ -1,4 +1,4 @@
-import { RichText, Link } from 'prismic-dom'
+import { Link } from 'prismic-dom'
 import linkResolver from './linkResolver'
 
 export function asLink(field) {
