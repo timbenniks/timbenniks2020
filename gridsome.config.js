@@ -50,16 +50,6 @@ module.exports = {
     },
     {
       use: '@gridsome/plugin-sitemap',
-      options: {
-        config: {
-          '/writings/*': {
-            changefreq: 'weekly',
-          },
-          '/speaking/': {
-            changefreq: 'weekly',
-          },
-        },
-      },
     },
     {
       use: 'gridsome-plugin-pwa',
