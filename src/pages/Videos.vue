@@ -59,7 +59,7 @@
 
 <page-query>
 query {
-  videos: allPrismicVideo {
+  videos: allPrismicVideo(sortBy: "data.publication_date", order: DESC) {
     edges {
       node {
         slug

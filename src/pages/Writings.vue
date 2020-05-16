@@ -61,7 +61,7 @@ query {
       }
     }
   },
-  writings: allPrismicWriting {
+  writings: allPrismicWriting(sortBy: "data.publication_date", order: DESC) {
     edges {
       node {
         id
