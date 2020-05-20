@@ -45,6 +45,10 @@ export default function (fields, pageType, route) {
         content: getPropType(fields, 'twitter_card', 'image'),
       },
       {
+        property: 'og:type',
+        content: pageType === 'writing' ? 'article' : 'website',
+      },
+      {
         property: 'og:url',
         content: url,
       },

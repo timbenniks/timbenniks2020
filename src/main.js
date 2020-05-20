@@ -22,11 +22,6 @@ export default function (Vue, { head, appOptions }) {
   })
 
   head.meta.push({
-    property: 'og:type',
-    content: 'website',
-  })
-
-  head.meta.push({
     property: 'og:site_name',
     content: gridsomeConfig.siteName,
   })
@@ -38,6 +33,11 @@ export default function (Vue, { head, appOptions }) {
 
   head.meta.push({
     property: 'twitter:handle',
+    content: 'timbenniks',
+  })
+
+  head.meta.push({
+    property: 'twitter:creator',
     content: 'timbenniks',
   })
 
