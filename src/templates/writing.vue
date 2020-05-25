@@ -13,7 +13,11 @@
           :use-fancy-titles="false"
         />
 
-        <div ref="body" class="post-content" v-html="$page.writing.data.content" />
+        <div
+          ref="body"
+          class="post-content"
+          v-html="$page.writing.data.content"
+        ></div>
       </main>
     </div>
   </Layout>

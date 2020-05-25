@@ -2,10 +2,10 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   extends: ['plugin:vue/recommended', 'plugin:prettier/recommended'],
   // required to lint *.vue files
@@ -17,8 +17,19 @@ module.exports = {
     'vue/max-attributes-per-line': [
       'error',
       {
-        singleline: 6
-      }
-    ]
-  }
+        singleline: 6,
+      },
+    ],
+
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'always',
+          normal: 'never',
+          component: 'any',
+        },
+      },
+    ],
+  },
 }

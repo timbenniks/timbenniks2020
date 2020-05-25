@@ -12,7 +12,11 @@
         />
 
         <div class="posts">
-          <article v-for="post in $page.writings.edges" :key="post.node.id" class="post">
+          <article
+            v-for="post in $page.writings.edges"
+            :key="post.node.id"
+            class="post"
+          >
             <g-link :to="`/writings/${post.node.id}/`">
               <lazy-image
                 ratio="16/9"
@@ -26,7 +30,9 @@
 
             <div class="post-content-wrapper">
               <p class="post-title fancy-title red">
-                <g-link :to="`/writings/${post.node.id}/`">{{ post.node.data.title }}</g-link>
+                <g-link :to="`/writings/${post.node.id}/`">
+                  {{ post.node.data.title }}
+                </g-link>
               </p>
               <p class="post-description">
                 <span class="post-date">

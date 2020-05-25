@@ -1,10 +1,10 @@
 export function loadImages() {
-  const images = [...document.querySelectorAll('img.lazy')]
+  const images = [...document.querySelectorAll('img.lazy:not(.lazy-done)')]
 
   const setImage = (image) => {
     if (!image.classList.contains('lazy-done')) {
-      image.srcset = image.getAttribute('data-srcset')
-      image.sizes = image.getAttribute('data-sizes')
+      image.srcset = image.dataset.srcset
+      image.sizes = image.dataset.sizes
       image.classList.add('lazy-done')
     }
   }
@@ -27,8 +27,7 @@ export function loadImages() {
   })
 }
 
-// turned of for now. SSR build is failing...
-export const nativeLazySupported = false // 'loading' in HTMLImageElement.prototype
+export const nativeLazySupported = false //'loading' in HTMLImageElement.prototype
 
 export function getSrcSet(baseUrl, sizes) {
   let srcset = ''

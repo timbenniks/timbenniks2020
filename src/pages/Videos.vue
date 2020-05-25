@@ -18,16 +18,21 @@
             class="filter"
             :class="{ selected: tag.selected }"
             @click="tagClick(tag)"
-          >{{ tag.tag }}</button>
+          >
+            {{ tag.tag }}
+          </button>
         </div>
         <div class="posts videos">
-          <article v-for="video in filteredVideos" :key="video.slug" class="post video">
+          <article
+            v-for="video in filteredVideos"
+            :key="video.slug"
+            class="post video"
+          >
             <g-link :to="`/videos/${video.slug}/`">
               <lazy-image
                 ratio="16/9"
                 :alt="video.title"
                 :url="video.image.url"
-                :caption="false"
                 :widths="[300, 400, 500, 600, 680]"
                 sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
               />
@@ -35,7 +40,9 @@
 
             <div class="post-content-wrap">
               <p class="post-title">
-                <g-link :to="`/videos/${video.slug}/`">{{ video.title }}</g-link>
+                <g-link :to="`/videos/${video.slug}/`">
+                  {{ video.title }}
+                </g-link>
               </p>
               <p class="post-tags">
                 <span v-for="(tag, index) in video.tags" :key="tag">

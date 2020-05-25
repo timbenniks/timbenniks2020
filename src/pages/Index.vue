@@ -34,7 +34,10 @@
               :uppercase="true"
             />
 
-            <div class="homepage-description" v-html="$page.home.data.description" />
+            <div
+              class="homepage-description"
+              v-html="$page.home.data.description"
+            />
           </div>
         </div>
       </main>

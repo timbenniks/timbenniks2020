@@ -9,8 +9,7 @@
       loading="lazy"
       :width="parseRatioForWH(ratio, 'width')"
       :height="parseRatioForWH(ratio, 'height')"
-    >
-
+    />
     <img
       v-else
       :data-srcset="generateSrcSet()"
@@ -20,7 +19,7 @@
       :data-sizes="sizes"
       :class="extraClass"
       class="lazy"
-    >
+    />
     <figcaption v-if="caption">
       {{ alt }}
     </figcaption>
@@ -42,7 +41,7 @@ export default {
     url: { type: String, required: true },
     sizes: { type: String, required: false, default: '' },
     widths: { type: Array, required: true },
-    caption: { type: Boolean, required: false, default: true },
+    caption: { type: Boolean, required: false, default: false },
     extraClass: { type: String, required: false, default: '' },
     preload: {
       type: String,
