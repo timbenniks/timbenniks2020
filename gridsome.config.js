@@ -66,6 +66,23 @@ module.exports = {
     {
       use: 'gridsome-plugin-purgecss',
     },
+    {
+      use: 'gridsome-plugin-feed',
+      options: {
+        contentTypes: ['PrismicWriting'],
+        feedOptions: {
+          title: 'Tim Benniks',
+          description:
+            'This is the personal website of Tim Benniks. This is the place where you can find my public speaking schedule and where I share my opinions! Check out my videos and blog posts.',
+        },
+
+        nodeToFeedItem: (node) => ({
+          title: node.data.title,
+          date: new Date(node.data.publication_date),
+          content: node.data.social_cards[0].content.description,
+        }),
+      },
+    },
   ],
   chainWebpack(config) {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']

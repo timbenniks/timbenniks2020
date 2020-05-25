@@ -60,4 +60,11 @@ export default function (Vue, { head, appOptions }) {
     rel: 'preconnect',
     href: 'https://images.prismic.io',
   })
+
+  head.link.push({
+    rel: 'alternate',
+    type: 'application/rss+xml',
+    title: 'Tim Benniks Feed',
+    href: 'https://timbenniks.nl/feed.xml',
+  })
 }

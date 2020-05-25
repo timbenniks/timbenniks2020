@@ -16,6 +16,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^6.2.2",
     "gridsome": "^0.7.0",
+    "gridsome-plugin-feed": "^1.0.2",
     "gridsome-plugin-purgecss": "^1.0.12",
     "gridsome-plugin-pwa": "0.0.17",
     "gridsome-source-graphql-prismic": "^0.1.6",
