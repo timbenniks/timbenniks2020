@@ -82,7 +82,7 @@ export default function (fields, pageType, route) {
           description: getPropType(fields, 'general_card', 'description'),
           thumbnailUrl: [getPropType(fields, 'general_card', 'image')],
           embedUrl: fields.video_embed.embed_url.replace('watch?v=', 'embed/'),
-          contentUrl: `${gridsomeConfig.siteUrl}videos/${fields.id}`,
+          contentUrl: `${gridsomeConfig.siteUrl}/videos/${fields.id}`,
           uploadDate: `${fields.last_publication_date}T00:00:00`,
         }),
         type: 'application/ld+json',
@@ -101,7 +101,7 @@ export default function (fields, pageType, route) {
           wordcount: fields.content.split(' ').filter((n) => {
             return n != ''
           }).length,
-          url: `${gridsomeConfig.siteUrl}writings/${fields.id}`,
+          url: `${gridsomeConfig.siteUrl}/writings/${fields.id}`,
           datePublished: `${fields.publication_date}T00:00:00`,
           dateCreated: `${fields.publication_date}T00:00:00`,
           dateModified: fields.last_publication_date,

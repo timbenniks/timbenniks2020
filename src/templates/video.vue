@@ -17,10 +17,16 @@
             :key="tag"
             :to="`/videos/?tag=${tag}`"
             class="filter"
-          >{{ tag }}</g-link>
+          >
+            {{ tag }}
+          </g-link>
         </div>
 
-        <div ref="body" class="post-content" v-html="$page.video.data.content" />
+        <div
+          ref="body"
+          class="post-content"
+          v-html="$page.video.data.content"
+        ></div>
 
         <div class="post-content">
           <figure class="youtube" style="--aspect-ratio: 16/9;">
@@ -35,7 +41,7 @@
                   'embed/'
                 )
               "
-            />
+            ></iframe>
           </figure>
         </div>
       </main>
@@ -58,7 +64,11 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.video.data,
+      {
+        id: this.$page.video.id,
+        last_publication_date: this.$page.video.last_publication_date,
+        ...this.$page.video.data,
+      },
       'video',
       this.$router.currentRoute
     )
@@ -74,6 +84,7 @@ query Video ($id: ID!) {
     tags
     id
     slug
+    last_publication_date
     data {
       publication_date
       title

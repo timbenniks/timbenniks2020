@@ -39,7 +39,11 @@ export default {
   },
   metaInfo() {
     return mapMetaInfo(
-      this.$page.writing.data,
+      {
+        id: this.$page.writing.id,
+        last_publication_date: this.$page.writing.last_publication_date,
+        ...this.$page.writing.data,
+      },
       'writing',
       this.$router.currentRoute
     )
@@ -54,6 +58,7 @@ query Writing ($id: ID!) {
     uid
     id
     slug
+    last_publication_date
     data {
       publication_date
       title
