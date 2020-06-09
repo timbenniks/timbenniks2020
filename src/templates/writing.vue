@@ -10,7 +10,7 @@
           :breadcrumb="true"
           titletag="h1"
           subtitletag="h2"
-          :use-fancy-titles="false"
+          :use-fancy-titles="true"
         />
 
         <div

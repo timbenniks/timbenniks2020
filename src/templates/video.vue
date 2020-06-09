@@ -8,7 +8,7 @@
           :title="$page.video.data.title"
           :breadcrumb="true"
           titletag="h1"
-          :use-fancy-titles="false"
+          :use-fancy-titles="true"
         />
 
         <div class="filters">

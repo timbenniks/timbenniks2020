@@ -30,7 +30,7 @@
           <span itemprop="name">{{ crumb.text }}</span>
         </g-link>
 
-        <meta :content="index + 2" itemprop="position">
+        <meta :content="index + 2" itemprop="position" />
       </li>
     </ol>
 
@@ -54,13 +54,12 @@
       :uppercase="uppercase"
     />
 
-    <div v-if="title && !useFancyTitles" :tag="titletag" v-html="title" />
-
+    <div :is="titletag" v-if="title && !useFancyTitles" v-html="title"></div>
     <div
+      :is="subtitletag"
       v-if="subtitle && !useFancyTitles"
-      :tag="subtitletag"
-      :v-html="subtitle"
-    />
+      v-html="subtitle"
+    ></div>
   </div>
 </template>
 
