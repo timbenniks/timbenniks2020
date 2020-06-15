@@ -37,7 +37,7 @@
             <div
               class="homepage-description"
               v-html="$page.home.data.description"
-            />
+            ></div>
           </div>
         </div>
       </main>
