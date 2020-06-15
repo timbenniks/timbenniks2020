@@ -22,7 +22,7 @@
       @click="showMenu"
     >
       <span class="hamburger-box">
-        <span class="hamburger-inner" />
+        <span class="hamburger-inner"></span>
       </span>
     </button>
     <ul id="menu" class="dropdown-menu">
@@ -45,6 +45,11 @@
       <li>
         <g-link to="/speaking/">
           Speaking
+        </g-link>
+      </li>
+      <li>
+        <g-link to="/about/">
+          About
         </g-link>
       </li>
     </ul>
