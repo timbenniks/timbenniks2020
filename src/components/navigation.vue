@@ -176,11 +176,11 @@ export default {
   @include responsive('text-align', (xs: left, m: right));
 
   // prettier-ignore
-  @include responsive('padding', (xs: rem(10px 10px 16px), m: rem(15px 0 0 0)));
+  @include responsive('padding', (xs: rem(10px 10px 0), m: rem(15px 0 0 0)));
 
   a {
     display: inline-block;
-    margin: rem(0 11px 0 0);
+    margin: rem(0 11px 11px 0);
     padding: rem(0 8px);
     font-weight: 900;
     letter-spacing: 0.01em;
