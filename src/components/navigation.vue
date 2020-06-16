@@ -22,7 +22,7 @@
       @click="showMenu"
     >
       <span class="hamburger-box">
-        <span class="hamburger-inner" />
+        <span class="hamburger-inner"></span>
       </span>
     </button>
     <ul id="menu" class="dropdown-menu">
@@ -168,7 +168,7 @@ export default {
   @include responsive('display', (xs: none, m: block));
 
   // prettier-ignore
-  @include responsive('text-align', (xs: center, m: right));
+  @include responsive('text-align', (xs: left, m: right));
 
   // prettier-ignore
   @include responsive('padding', (xs: rem(10px 10px 16px), m: rem(15px 0 0 0)));
