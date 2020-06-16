@@ -47,6 +47,11 @@
           Speaking
         </g-link>
       </li>
+      <li>
+        <g-link to="/about/">
+          About
+        </g-link>
+      </li>
     </ul>
   </nav>
 </template>
