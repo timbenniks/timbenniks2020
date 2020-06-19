@@ -5,28 +5,28 @@ img {
   display: block;
 }
 
-[style*="--aspect-ratio"] > :first-child {
+[style*='--aspect-ratio'] > :first-child {
   width: 100%;
 }
 
-[style*="--aspect-ratio"] > img {
+[style*='--aspect-ratio'] > img {
   height: auto;
 }
 
-@supports (--custom:property) {
-  [style*="--aspect-ratio"] {
+@supports (--custom: property) {
+  [style*='--aspect-ratio'] {
     position: relative;
   }
 
-  [style*="--aspect-ratio"]::before {
-    content: "";
+  [style*='--aspect-ratio']::before {
+    content: '';
     display: block;
-    
+
     --aspect: (var(--aspect-ratio));
     padding-bottom: calc(100% / (var(--aspect)));
   }
 
-  [style*="--aspect-ratio"] > :first-child {
+  [style*='--aspect-ratio'] > :first-child {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,7 +45,6 @@ img.lazy-done {
   opacity: 1;
   transform: translateY(0px);
 }
-
 
 img.opacity-only.lazy {
   opacity: 0;

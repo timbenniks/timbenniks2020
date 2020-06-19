@@ -2,15 +2,29 @@
   <Layout>
     <div class="content-wrapper blogpost">
       <navigation />
-
       <main id="main-content">
+        <div class="video-header">
+          <figure class="youtube" style="--aspect-ratio: 16/9;">
+            <iframe
+              width="16"
+              height="9"
+              allowfullscreen
+              frameborder="0"
+              :data-src="
+                $page.video.data.video_embed.embed_url.replace(
+                  'watch?v=',
+                  'embed/'
+                ) + '?autoplay=1'
+              "
+            ></iframe>
+          </figure>
+        </div>
         <heading
           :title="$page.video.data.title"
           :breadcrumb="true"
           titletag="h1"
           :use-fancy-titles="true"
         />
-
         <div class="filters">
           <g-link
             v-for="tag in $page.video.tags"
@@ -28,22 +42,7 @@
           v-html="$page.video.data.content"
         ></div>
 
-        <div class="post-content">
-          <figure class="youtube" style="--aspect-ratio: 16/9;">
-            <iframe
-              width="16"
-              height="9"
-              allowfullscreen
-              frameborder="0"
-              :data-src="
-                $page.video.data.video_embed.embed_url.replace(
-                  'watch?v=',
-                  'embed/'
-                )
-              "
-            ></iframe>
-          </figure>
-        </div>
+        <related-videos :videos="filteredVideos" />
       </main>
     </div>
   </Layout>
@@ -55,12 +54,16 @@ import IframeMixin from '../mixins/iframeMixin'
 import ImageMixin from '../mixins/imageMixin'
 import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
+import RelatedVideos from '../components/related-videos.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
+
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Navigation,
     Heading,
+    RelatedVideos,
   },
   metaInfo() {
     return mapMetaInfo(
@@ -74,6 +77,17 @@ export default {
     )
   },
   mixins: [LinkMixin, IframeMixin, ImageMixin],
+  computed: mapGetters(['filteredVideos']),
+  created() {
+    this.setInitalVideos(this.$static.videos.edges)
+    this.$page.video.tags.forEach((tag) => {
+      this.filter({ tag, selected: true })
+    })
+  },
+  mounted() {},
+  methods: {
+    ...mapActions(['setInitalVideos', 'filter']),
+  },
 }
 </script>
 
@@ -114,15 +128,37 @@ query Video ($id: ID!) {
 }
 </page-query>
 
+<static-query>
+query {
+  videos: allPrismicVideo(sortBy: "data.publication_date", order: DESC) {
+    edges {
+      node {
+        slug
+        tags
+        data {
+          title
+          publication_date
+          image {
+            url
+          }
+        }
+      }
+    }
+  }
+}
+</static-query>
+
 <style lang="scss">
 .blogpost .heading {
   margin: rem(0 auto 20px) !important;
   max-width: rem(800px);
 }
 
-.youtube {
-  max-width: rem(800px);
-  margin: 0 auto 0.7rem;
+.video-header {
+  width: 100%;
+  height: auto;
+  max-width: rem(1440px);
+  margin: 0 auto 3.75rem;
 }
 
 .post-content {
