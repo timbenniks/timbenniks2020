@@ -78,15 +78,15 @@ export default {
   },
   mixins: [LinkMixin, IframeMixin, ImageMixin],
   computed: mapGetters(['filteredVideos']),
-  created() {
+  mounted() {
     this.setInitalVideos(this.$static.videos.edges)
     this.$page.video.tags.forEach((tag) => {
+      this.useUrl(false)
       this.filter({ tag, selected: true })
     })
   },
-  mounted() {},
   methods: {
-    ...mapActions(['setInitalVideos', 'filter']),
+    ...mapActions(['setInitalVideos', 'filter', 'useUrl']),
   },
 }
 </script>

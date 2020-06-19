@@ -57,6 +57,7 @@ export default new Vuex.Store({
     videos: [],
     tags: [],
     filteredVideos: [],
+    useUrl: true,
   },
   getters: {
     filteredVideos(state) {
@@ -71,6 +72,10 @@ export default new Vuex.Store({
     setVideos(state, videos) {
       state.videos = videos
       state.filteredVideos = videos
+    },
+
+    useUrl(state, use) {
+      state.useUrl = use
     },
 
     setTags(state) {
@@ -98,7 +103,9 @@ export default new Vuex.Store({
         }
       })
 
-      setUrl(selectedTags)
+      if (state.useUrl) {
+        setUrl(selectedTags)
+      }
     },
 
     filterVideos(state) {
@@ -134,6 +141,10 @@ export default new Vuex.Store({
       commit('setVideos', videos)
       commit('setTags', videos)
       commit('filterVideos')
+    },
+
+    useUrl({ commit }, use) {
+      commit('useUrl', use)
     },
 
     filter({ commit }, tag) {

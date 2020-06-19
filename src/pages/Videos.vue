@@ -97,10 +97,11 @@ export default {
 
   methods: {
     tagClick(tag) {
+      this.useUrl(true)
       this.filter(tag)
     },
 
-    ...mapActions(['setInitalVideos', 'filter']),
+    ...mapActions(['setInitalVideos', 'filter', 'useUrl']),
   },
 }
 </script>
