@@ -58,6 +58,7 @@ export default new Vuex.Store({
     tags: [],
     filteredVideos: [],
     useUrl: true,
+    youTubeStats: {},
   },
   getters: {
     filteredVideos(state) {
@@ -66,6 +67,10 @@ export default new Vuex.Store({
 
     tags(state) {
       return state.tags
+    },
+
+    youTubeStats(state) {
+      return state.youTubeStats
     },
   },
   mutations: {
@@ -124,6 +129,10 @@ export default new Vuex.Store({
         state.filteredVideos = [...new Set(state.filteredVideos)]
       }
     },
+
+    setYouTubeStats(state, stats) {
+      state.youTubeStats = stats.channelStats.statistics
+    },
   },
   actions: {
     setInitalVideos({ commit }, videosFromPrismic) {
@@ -150,6 +159,15 @@ export default new Vuex.Store({
     filter({ commit }, tag) {
       commit('updateTag', tag)
       commit('filterVideos')
+    },
+
+    getYouTubeStats({ commit }) {
+      fetch('https://tims-startpage.azurewebsites.net/api/yt-stats', {
+        cache: 'no-cache',
+      })
+        .then((response) => response.json())
+        .then((stats) => commit('setYouTubeStats', stats))
+        .catch(console.error)
     },
   },
 })
