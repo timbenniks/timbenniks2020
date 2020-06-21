@@ -21,13 +21,18 @@
           :uppercase="true"
         />
 
-        <div class="search">
-          <form method="GET" action="https://www.google.com/search">
+        <div class="search sr-only">
+          <form
+            method="GET"
+            action="https://www.google.com/search"
+            autocomplete="off"
+          >
             <input
               autofocus
               type="search"
               name="q"
               placeholder="Search Google"
+              autocomplete="false"
             />
           </form>
         </div>
@@ -54,7 +59,7 @@
             image="reddit.png"
           />
           <quick-link
-            url="https://amazon.com"
+            url="https://amazon.fr"
             label="Amazon"
             image="amazon.png"
           />
@@ -167,25 +172,9 @@ export default {
     }
   }
 
-  .search {
-    margin: 1rem 0 1rem 1rem;
-    input {
-      text-transform: uppercase;
-      font-weight: bold;
-      display: block;
-      width: rem(350px);
-      line-height: rem(40px);
-      padding: rem(10px);
-      font-family: Lato, sans-serif;
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
   .stats-wrapper {
     display: flex;
+    margin: 2rem 0 0 0;
   }
 
   .quicklinks {
@@ -193,6 +182,18 @@ export default {
     max-width: 40rem;
     margin: rem(30px 0 0 15px);
     columns: 3;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 }
 </style>
