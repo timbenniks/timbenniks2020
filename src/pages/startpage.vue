@@ -192,7 +192,7 @@ export default {
     list-style: none;
     max-width: rem(400px);
     margin: rem(30px 0 0 15px);
-    columns: 2;
+    columns: 3;
   }
 }
 </style>
