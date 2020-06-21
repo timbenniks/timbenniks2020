@@ -21,7 +21,10 @@
           :uppercase="true"
         />
 
-        <YTStats />
+        <div class="stats-wrapper">
+          <YTStats />
+          <TWStats />
+        </div>
 
         <ul class="quicklinks">
           <quick-link
@@ -113,6 +116,7 @@ import FancyTitle from '../components/fancy-title.vue'
 import LazyImage from '../components/lazy-image.vue'
 import QuickLink from '../components/quick-link.vue'
 import YTStats from '../components/yt-stats.vue'
+import TWStats from '../components/tw-stats.vue'
 
 export default {
   components: {
@@ -120,6 +124,7 @@ export default {
     FancyTitle,
     QuickLink,
     YTStats,
+    TWStats,
   },
   metaInfo: {
     title: "Tim's Startpage",
@@ -131,11 +136,11 @@ export default {
 <style lang="scss">
 .startpage {
   max-width: rem(800px);
+  margin: 0;
 
-  // prettier-ignore
-  @include responsive('width', (xs: 100%, m: 80%));
-  // prettier-ignore
-  @include responsive('margin', (xs: rem(45px auto 0), m: rem(0)));
+  main {
+    padding: 0.5rem 1.25rem 2.5rem;
+  }
 
   figure {
     position: relative;
@@ -149,6 +154,10 @@ export default {
       border-radius: 100%;
       border: 5px solid $white;
     }
+  }
+
+  .stats-wrapper {
+    display: flex;
   }
 
   .quicklinks {

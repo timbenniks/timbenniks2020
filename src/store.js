@@ -58,7 +58,14 @@ export default new Vuex.Store({
     tags: [],
     filteredVideos: [],
     useUrl: true,
-    youTubeStats: {},
+    youTubeStats: {
+      subscriberCount: 0,
+      viewCount: 0,
+      videoCount: 0,
+    },
+    twitterStats: {
+      followers: 0,
+    },
   },
   getters: {
     filteredVideos(state) {
@@ -71,6 +78,10 @@ export default new Vuex.Store({
 
     youTubeStats(state) {
       return state.youTubeStats
+    },
+
+    twitterStats(state) {
+      return state.twitterStats
     },
   },
   mutations: {
@@ -131,7 +142,11 @@ export default new Vuex.Store({
     },
 
     setYouTubeStats(state, stats) {
-      state.youTubeStats = stats.channelStats.statistics
+      state.youTubeStats = stats.channelStats
+    },
+
+    setTwitterStats(state, stats) {
+      state.twitterStats = stats.userData
     },
   },
   actions: {
@@ -167,6 +182,15 @@ export default new Vuex.Store({
       })
         .then((response) => response.json())
         .then((stats) => commit('setYouTubeStats', stats))
+        .catch(console.error)
+    },
+
+    getTwitterStats({ commit }) {
+      fetch('https://tims-startpage.azurewebsites.net/api/tw-stats', {
+        cache: 'no-cache',
+      })
+        .then((response) => response.json())
+        .then((stats) => commit('setTwitterStats', stats))
         .catch(console.error)
     },
   },

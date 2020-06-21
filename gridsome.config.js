@@ -50,6 +50,9 @@ module.exports = {
     },
     {
       use: '@gridsome/plugin-sitemap',
+      options: {
+        exclude: ['/startpage'],
+      },
     },
     {
       use: 'gridsome-plugin-pwa',

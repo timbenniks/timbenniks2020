@@ -1,5 +1,5 @@
 <template>
-  <div class="youtube-stats">
+  <div class="stats">
     <fancy-title
       field="YouTube Stats"
       tag="h1"
@@ -9,20 +9,20 @@
       :uppercase="true"
     />
     <div class="stats-wrap">
-      <div class="stats">
+      <div class="stat">
         <h6>SUBSCRIBERS</h6>
         <p>{{ youTubeStats.subscriberCount }}</p>
       </div>
-      <div class="stats">
+      <div class="stat">
         <h6>VIEWS</h6>
         <p>{{ youTubeStats.viewCount }}</p>
       </div>
-      <div class="stats">
+      <div class="stat">
         <h6>VIDOES</h6>
         <p>{{ youTubeStats.videoCount }}</p>
       </div>
     </div>
-    <p class="yt-quick-links">
+    <p class="quick-links">
       Go to: <a href="https://studio.youtube.com/" target="blank">Studio</a>,
       <a href="https://youtube.com/timbenniks" target="blank">Channel</a>,
       <a href="https://trello.com/b/YsxqLr2C/youtube" target="blank">Trello</a>.
@@ -50,13 +50,13 @@ export default {
 </script>
 
 <style lang="scss">
-.youtube-stats {
+.stats {
   background: $blue-main;
   padding: 1rem;
   margin: 1rem 0 0 1rem;
-  max-width: rem(400px);
+  width: rem(350px);
 
-  .yt-quick-links {
+  .quick-links {
     margin: rem(10px 0 0);
     font-size: rem(14px);
   }
@@ -65,7 +65,7 @@ export default {
     display: flex;
     margin: rem(20px 0);
 
-    .stats {
+    .stat {
       flex: 1;
       max-width: rem(120px);
 
