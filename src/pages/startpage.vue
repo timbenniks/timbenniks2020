@@ -190,7 +190,7 @@ export default {
 
   .quicklinks {
     list-style: none;
-    max-width: rem(400px);
+    max-width: 40rem;
     margin: rem(30px 0 0 15px);
     columns: 3;
   }
