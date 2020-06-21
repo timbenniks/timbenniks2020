@@ -21,6 +21,17 @@
           :uppercase="true"
         />
 
+        <div class="search">
+          <form method="GET" action="https://www.google.com/search">
+            <input
+              autofocus
+              type="search"
+              name="q"
+              placeholder="Search Google"
+            />
+          </form>
+        </div>
+
         <div class="stats-wrapper">
           <YTStats />
           <TWStats />
@@ -153,6 +164,23 @@ export default {
     img {
       border-radius: 100%;
       border: 5px solid $white;
+    }
+  }
+
+  .search {
+    margin: 1rem 0 1rem 1rem;
+    input {
+      text-transform: uppercase;
+      font-weight: bold;
+      display: block;
+      width: rem(350px);
+      line-height: rem(40px);
+      padding: rem(10px);
+      font-family: Lato, sans-serif;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 

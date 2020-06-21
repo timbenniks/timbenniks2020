@@ -53,7 +53,7 @@ export default {
 .stats {
   background: $blue-main;
   padding: 1rem;
-  margin: 1rem 0 0 1rem;
+  margin: 0 0 0 1rem;
   width: rem(350px);
 
   .quick-links {
