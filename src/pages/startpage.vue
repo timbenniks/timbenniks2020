@@ -44,6 +44,39 @@
 
         <ul class="quicklinks">
           <quick-link
+            url="https://twitter.com"
+            label="Twitter"
+            image="twitter.png"
+          />
+          <quick-link
+            url="https://youtube.com"
+            label="youtube"
+            image="youtube.png"
+          />
+
+          <quick-link
+            url="https://app.netlify.com/teams/timbenniks/sites"
+            label="Netlify"
+            image="netlify.png"
+          />
+          <quick-link
+            url="https://github.com"
+            label="Github"
+            image="github.png"
+          />
+          <quick-link
+            url="https://gitlab.com"
+            label="Gitlab"
+            image="gitlab.png"
+          />
+
+          <quick-link
+            url="https://trello.com/timbenniks/boards"
+            label="Trello"
+            image="trello.png"
+          />
+
+          <quick-link
             url="https://instagram.com"
             label="Instagram"
             image="instagram.png"
@@ -69,42 +102,14 @@
             image="linkedin.png"
           />
           <quick-link url="https://app.put.io" label="Put.io" image="put.png" />
-          <quick-link
-            url="https://netlify.com"
-            label="Netlify"
-            image="netlify.png"
-          />
-          <quick-link
-            url="https://gitlab.com"
-            label="Gitlab"
-            image="gitlab.png"
-          />
-          <quick-link
-            url="https://github.com"
-            label="Github"
-            image="github.png"
-          />
-          <quick-link
-            url="https://trello.com/timbenniks/boards"
-            label="Trello"
-            image="trello.png"
-          />
+
           <quick-link
             url="https://web.whatsapp.com"
             label="WhatsApp"
             image="whatsapp.png"
           />
           <quick-link url="https://gmail.com" label="Gmail" image="gmail.png" />
-          <quick-link
-            url="https://twitter.com"
-            label="Twitter"
-            image="twitter.png"
-          />
-          <quick-link
-            url="https://youtube.com"
-            label="youtube"
-            image="youtube.png"
-          />
+
           <quick-link
             url="https://timbenniks.nl"
             label="Tim Benniks"

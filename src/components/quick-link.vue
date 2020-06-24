@@ -1,6 +1,6 @@
 <template>
   <li class="quicklink">
-    <a :href="url" target="blank">
+    <a :href="url">
       <g-image :src="imgUrl" width="18" :immediate="true" quality="100" />
       {{ label }}
     </a>
