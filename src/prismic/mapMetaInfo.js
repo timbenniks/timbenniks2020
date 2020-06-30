@@ -45,10 +45,6 @@ export default function (fields, pageType, route) {
         content: getPropType(fields, 'twitter_card', 'image'),
       },
       {
-        property: 'og:type',
-        content: pageType === 'writing' ? 'article' : 'website',
-      },
-      {
         property: 'og:url',
         content: url,
       },
@@ -57,6 +53,18 @@ export default function (fields, pageType, route) {
         content: url,
       },
     ],
+  }
+
+  if (
+    pageType === 'speaking' ||
+    pageType === 'videos' ||
+    pageType === 'home' ||
+    pageType === 'writings'
+  ) {
+    metaData.meta.push({
+      property: 'og:type',
+      content: 'website',
+    })
   }
 
   if (pageType === 'home') {
@@ -73,6 +81,16 @@ export default function (fields, pageType, route) {
   }
 
   if (pageType === 'video') {
+    metaData.meta.push({
+      property: 'og:video',
+      content: fields.video_embed.embed_url,
+    })
+
+    metaData.meta.push({
+      property: 'og:type',
+      content: 'video',
+    })
+
     metaData.script = [
       {
         innerHTML: JSON.stringify({
@@ -91,6 +109,11 @@ export default function (fields, pageType, route) {
   }
 
   if (pageType === 'writing') {
+    metaData.meta.push({
+      property: 'og:type',
+      content: 'article',
+    })
+
     metaData.script = [
       {
         innerHTML: JSON.stringify({
