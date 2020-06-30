@@ -58,6 +58,7 @@ export default function (fields, pageType, route) {
   if (
     pageType === 'speaking' ||
     pageType === 'videos' ||
+    pageType === 'video' ||
     pageType === 'home' ||
     pageType === 'writings'
   ) {
@@ -84,11 +85,6 @@ export default function (fields, pageType, route) {
     metaData.meta.push({
       property: 'og:video',
       content: fields.video_embed.embed_url,
-    })
-
-    metaData.meta.push({
-      property: 'og:type',
-      content: 'video',
     })
 
     metaData.script = [
