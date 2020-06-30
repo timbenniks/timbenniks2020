@@ -87,6 +87,12 @@ export default function (fields, pageType, route) {
       content: fields.video_embed.embed_url,
     })
 
+    metaData.meta.push({
+      property: 'og:publish_date',
+      content: `${fields.last_publication_date}T00:00:00`,
+      name: 'publish_date',
+    })
+
     metaData.script = [
       {
         innerHTML: JSON.stringify({
@@ -108,6 +114,12 @@ export default function (fields, pageType, route) {
     metaData.meta.push({
       property: 'og:type',
       content: 'article',
+    })
+
+    metaData.meta.push({
+      property: 'og:publish_date',
+      content: `${fields.last_publication_date}T00:00:00`,
+      name: 'publish_date',
     })
 
     metaData.script = [
