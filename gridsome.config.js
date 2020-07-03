@@ -13,6 +13,43 @@ function addStyleResource(rule) {
     })
 }
 
+const AlgoliaCollection = [
+  {
+    query: `{
+      vidoes: allPrismicVideo(sortBy: "data.publication_date", order: DESC) {
+        edges {
+          node {
+            uid
+            tags
+            slug
+            last_publication_date
+            data {
+              publication_date
+              title
+              image {
+                url
+              }
+            }
+          }
+        }
+      }
+    }`,
+    transformer: ({ data }) => data.vidoes.edges.map(({ node }) => node),
+    indexName: process.env.ALGOLIA_INDEX_NAME,
+    itemFormatter: (item) => {
+      return {
+        objectID: item.uid,
+        title: item.data.title,
+        image: item.data.image.url,
+        tags: item.tags,
+        slug: item.slug,
+        publication_date: item.data.publication_date,
+        modified: item.last_publication_date,
+      }
+    },
+  },
+]
+
 module.exports = {
   siteName: 'Tim Benniks',
   siteUrl: 'https://timbenniks.nl',
@@ -84,6 +121,15 @@ module.exports = {
           date: new Date(node.data.publication_date),
           content: node.data.social_cards[0].content.description,
         }),
+      },
+    },
+    {
+      use: 'gridsome-plugin-algolia',
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        collections: AlgoliaCollection,
+        chunkSize: 10000,
       },
     },
   ],

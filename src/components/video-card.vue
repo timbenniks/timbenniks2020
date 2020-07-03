@@ -4,7 +4,7 @@
       <lazy-image
         ratio="16/9"
         :alt="video.title"
-        :url="video.image.url"
+        :url="video.image"
         :widths="[300, 400, 500, 600, 680]"
         sizes="(max-width: 400px) 100vw, (min-width: 700px) 210px"
       />
@@ -24,9 +24,9 @@
       </p>
 
       <p class="post-date fancy-title yellow">
-        {{ $prismic.asDay(video.date) }}
-        {{ $prismic.asMonth(video.date) }}
-        {{ $prismic.asYear(video.date) }}
+        {{ $prismic.asDay(video.publication_date) }}
+        {{ $prismic.asMonth(video.publication_date) }}
+        {{ $prismic.asYear(video.publication_date) }}
       </p>
     </div>
   </article>

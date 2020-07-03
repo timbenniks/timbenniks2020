@@ -11,7 +11,23 @@
           :uppercase="true"
         />
 
-        <div class="filters">
+        <ais-instant-search
+          :search-client="searchClient"
+          index-name="dev_VIDEOS"
+        >
+          <ais-search-box />
+          <ais-hits>
+            <div slot-scope="{ items }" class="posts videos">
+              <video-card
+                v-for="item in items"
+                :key="item.slug"
+                :video="item"
+              />
+            </div>
+          </ais-hits>
+        </ais-instant-search>
+
+        <!-- <div class="filters">
           <button
             v-for="tag in tags"
             :key="tag.tag"
@@ -21,14 +37,14 @@
           >
             {{ tag.tag }}
           </button>
-        </div>
-        <div class="posts videos">
+        </div> -->
+        <!-- <div class="posts videos">
           <video-card
             v-for="video in filteredVideos"
             :key="video.slug"
             :video="video"
           />
-        </div>
+        </div> -->
       </main>
     </div>
   </Layout>
@@ -73,12 +89,18 @@ import Heading from '../components/heading.vue'
 import VideoCard from '../components/video-card.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
 import { mapGetters, mapActions } from 'vuex'
+import algoliasearch from 'algoliasearch'
+
+import { AisInstantSearch, AisSearchBox, AisHits } from 'vue-instantsearch'
 
 export default {
   components: {
     Navigation,
     Heading,
     VideoCard,
+    AisInstantSearch,
+    AisSearchBox,
+    AisHits,
   },
 
   metaInfo() {
@@ -87,6 +109,15 @@ export default {
       'videos',
       this.$router.currentRoute
     )
+  },
+
+  data() {
+    return {
+      searchClient: algoliasearch(
+        'LTRZ8EDRZF',
+        'b026a037e416510c0af71195118d465c'
+      ),
+    }
   },
 
   computed: mapGetters(['filteredVideos', 'tags']),
