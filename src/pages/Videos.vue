@@ -15,7 +15,29 @@
           :search-client="searchClient"
           index-name="dev_VIDEOS"
         >
-          <ais-search-box />
+          <div class="filters">
+            <ais-refinement-list attribute="tags" operator="or">
+              <button
+                slot="item"
+                slot-scope="{ item, refine }"
+                :class="{ selected: item.isRefined }"
+                class="filter"
+                @click.prevent="refine(item.value)"
+              >
+                {{ item.label }} {{ item.count.toLocaleString() }}
+              </button>
+              <!-- <a
+              slot="item"
+              slot-scope="{ item, refine, createURL }"
+              :href="createURL(item.value)"
+              :style="{ fontWeight: item.isRefined ? 'bold' : '' }"
+              @click.prevent="refine(item.value)"
+            >
+              {{ item.label }}
+              ({{ item.count.toLocaleString() }})
+            </a> -->
+            </ais-refinement-list>
+          </div>
           <ais-hits>
             <div slot-scope="{ items }" class="posts videos">
               <video-card
@@ -91,7 +113,7 @@ import mapMetaInfo from '../prismic/mapMetaInfo'
 import { mapGetters, mapActions } from 'vuex'
 import algoliasearch from 'algoliasearch'
 
-import { AisInstantSearch, AisSearchBox, AisHits } from 'vue-instantsearch'
+import { AisInstantSearch, AisRefinementList, AisHits } from 'vue-instantsearch'
 
 export default {
   components: {
@@ -99,7 +121,7 @@ export default {
     Heading,
     VideoCard,
     AisInstantSearch,
-    AisSearchBox,
+    AisRefinementList,
     AisHits,
   },
 
