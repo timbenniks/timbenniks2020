@@ -26,16 +26,6 @@
               >
                 {{ item.label }} {{ item.count.toLocaleString() }}
               </button>
-              <!-- <a
-              slot="item"
-              slot-scope="{ item, refine, createURL }"
-              :href="createURL(item.value)"
-              :style="{ fontWeight: item.isRefined ? 'bold' : '' }"
-              @click.prevent="refine(item.value)"
-            >
-              {{ item.label }}
-              ({{ item.count.toLocaleString() }})
-            </a> -->
             </ais-refinement-list>
           </div>
           <ais-hits>
