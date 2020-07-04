@@ -13,7 +13,7 @@
 
         <ais-instant-search
           :search-client="searchClient"
-          index-name="dev_VIDEOS"
+          :index-name="$algolia.index"
           :routing="routing"
         >
           <ais-refinement-list
@@ -127,15 +127,12 @@ export default {
 
   data() {
     return {
-      searchClient: algoliasearch(
-        'LTRZ8EDRZF',
-        'b026a037e416510c0af71195118d465c'
-      ),
+      searchClient: algoliasearch(this.$algolia.appId, this.$algolia.apiKey),
       routing: {
         router: history({
           writeDelay: 10,
         }),
-        stateMapping: singleIndexMapping('dev_VIDEOS'),
+        stateMapping: singleIndexMapping(this.$algolia.index),
       },
     }
   },

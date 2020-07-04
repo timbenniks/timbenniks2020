@@ -8,7 +8,10 @@
       :offset="[0, 0]"
       uppercase="uppercase"
     />
-    <ais-instant-search :search-client="searchClient" index-name="dev_VIDEOS">
+    <ais-instant-search
+      :search-client="searchClient"
+      :index-name="$algolia.index"
+    >
       <ais-configure :hits-per-page.camel="3">
         <ais-experimental-configure-related-items
           :hit="hit"
@@ -60,10 +63,7 @@ export default {
       matchingPatterns: {
         tags: { score: 3 },
       },
-      searchClient: algoliasearch(
-        'LTRZ8EDRZF',
-        'b026a037e416510c0af71195118d465c'
-      ),
+      searchClient: algoliasearch(this.$algolia.appId, this.$algolia.apiKey),
     }
   },
   created() {

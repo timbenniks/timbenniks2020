@@ -126,8 +126,8 @@ module.exports = {
     {
       use: 'gridsome-plugin-algolia',
       options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        appId: process.env.GRIDSOME_ALGOLIA_APP_ID,
+        apiKey: process.env.GRIDSOME_ALGOLIA_ADMIN_KEY,
         collections: AlgoliaCollection,
         chunkSize: 10000,
       },
