@@ -12,13 +12,19 @@ export default function (Vue, { head, appOptions }) {
     asLink,
   }
 
+  Vue.prototype.$algolia = {
+    index: process.env.GRIDSOME_ALGOLIA_INDEX_NAME,
+    apiKey: process.env.GRIDSOME_ALGOLIA_ADMIN_KEY,
+    appId: process.env.GRIDSOME_ALGOLIA_APP_ID,
+  }
+
   appOptions.store = Store
 
   Vue.component('Layout', DefaultLayout)
 
   head.meta.push({
     name: 'google-site-verification',
-    content: 'El5Wtr19CHQY1u_sQOjbuusrXqYCt6I6n3OJSyZEPAg',
+    content: process.env.GRIDSOME_GOOGLE_SITE_VERIFICATION,
   })
 
   head.meta.push({

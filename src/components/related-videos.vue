@@ -8,24 +8,69 @@
       :offset="[0, 0]"
       uppercase="uppercase"
     />
-    <div class="videos">
-      <video-card v-for="video in videos" :key="video.slug" :video="video" />
-    </div>
+    <ais-instant-search
+      :search-client="searchClient"
+      :index-name="$algolia.index"
+    >
+      <ais-configure :hits-per-page.camel="3">
+        <ais-experimental-configure-related-items
+          :hit="hit"
+          :matching-patterns="matchingPatterns"
+        />
+        <ais-hits>
+          <div slot-scope="{ items }" class="posts">
+            <div class="videos">
+              <video-card
+                v-for="item in items"
+                :key="item.slug"
+                :video="item"
+              />
+            </div>
+          </div>
+        </ais-hits>
+      </ais-configure>
+    </ais-instant-search>
   </div>
 </template>
 
 <script>
 import VideoCard from './video-card.vue'
 import FancyTitle from './fancy-title.vue'
+import algoliasearch from 'algoliasearch'
+import {
+  AisInstantSearch,
+  AisExperimentalConfigureRelatedItems,
+  AisHits,
+  AisConfigure,
+} from 'vue-instantsearch'
 
 export default {
   name: 'RelatedVideos',
   components: {
     VideoCard,
     FancyTitle,
+    AisInstantSearch,
+    AisExperimentalConfigureRelatedItems,
+    AisHits,
+    AisConfigure,
   },
   props: {
-    videos: { type: Array, required: true },
+    video: { type: Object, required: true },
+  },
+  data() {
+    return {
+      hit: null,
+      matchingPatterns: {
+        tags: { score: 3 },
+      },
+      searchClient: algoliasearch(this.$algolia.appId, this.$algolia.apiKey),
+    }
+  },
+  created() {
+    this.hit = {
+      objectID: this.video.uid,
+      tags: this.video.tags,
+    }
   },
 }
 </script>

@@ -11,24 +11,46 @@
           :uppercase="true"
         />
 
-        <div class="filters">
-          <button
-            v-for="tag in tags"
-            :key="tag.tag"
-            class="filter"
-            :class="{ selected: tag.selected }"
-            @click="tagClick(tag)"
+        <ais-instant-search
+          :search-client="searchClient"
+          :index-name="$algolia.index"
+        >
+          <ais-refinement-list
+            attribute="tags"
+            operator="or"
+            :sort-by="['name:asc']"
+            :class-names="{ 'ais-RefinementList': 'test' }"
           >
-            {{ tag.tag }}
-          </button>
-        </div>
-        <div class="posts videos">
-          <video-card
-            v-for="video in filteredVideos"
-            :key="video.slug"
-            :video="video"
-          />
-        </div>
+            <div slot-scope="{ items, refine, createURL }" class="filters">
+              <button
+                v-for="item in items"
+                :key="item.value"
+                :class="{ selected: item.isRefined }"
+                class="filter"
+                :data-href="createURL(item)"
+                @click.prevent="refine(item.value)"
+              >
+                {{ item.label }}
+                <span>{{ item.count.toLocaleString() }}</span>
+              </button>
+            </div>
+          </ais-refinement-list>
+          <ais-stats :class-names="{ 'ais-Stats': 'posts' }" />
+          <ais-infinite-hits>
+            <div slot-scope="{ items, isLastPage, refineNext }" class="posts">
+              <div class="videos">
+                <video-card
+                  v-for="item in items"
+                  :key="item.slug"
+                  :video="item"
+                />
+              </div>
+              <button v-if="!isLastPage" class="load-more" @click="refineNext">
+                Load More Results
+              </button>
+            </div>
+          </ais-infinite-hits>
+        </ais-instant-search>
       </main>
     </div>
   </Layout>
@@ -72,13 +94,26 @@ import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import VideoCard from '../components/video-card.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
-import { mapGetters, mapActions } from 'vuex'
+import algoliasearch from 'algoliasearch'
+import { history } from 'instantsearch.js/es/lib/routers'
+import { singleIndex as singleIndexMapping } from 'instantsearch.js/es/lib/stateMappings'
+
+import {
+  AisInstantSearch,
+  AisRefinementList,
+  AisInfiniteHits,
+  AisStats,
+} from 'vue-instantsearch'
 
 export default {
   components: {
     Navigation,
     Heading,
     VideoCard,
+    AisInstantSearch,
+    AisRefinementList,
+    AisInfiniteHits,
+    AisStats,
   },
 
   metaInfo() {
@@ -89,19 +124,16 @@ export default {
     )
   },
 
-  computed: mapGetters(['filteredVideos', 'tags']),
-
-  mounted() {
-    this.setInitalVideos(this.$page.videos.edges)
-  },
-
-  methods: {
-    tagClick(tag) {
-      this.useUrl(true)
-      this.filter(tag)
-    },
-
-    ...mapActions(['setInitalVideos', 'filter', 'useUrl']),
+  data() {
+    return {
+      searchClient: algoliasearch(this.$algolia.appId, this.$algolia.apiKey),
+      routing: {
+        router: history({
+          writeDelay: 10,
+        }),
+        stateMapping: singleIndexMapping(this.$algolia.index),
+      },
+    }
   },
 }
 </script>
