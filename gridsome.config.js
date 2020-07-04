@@ -36,6 +36,7 @@ const AlgoliaCollection = [
     }`,
     transformer: ({ data }) => data.vidoes.edges.map(({ node }) => node),
     indexName: process.env.ALGOLIA_INDEX_NAME,
+    matchFields: ['slug', 'modified'],
     itemFormatter: (item) => {
       return {
         objectID: item.uid,
@@ -130,6 +131,7 @@ module.exports = {
         apiKey: process.env.GRIDSOME_ALGOLIA_ADMIN_KEY,
         collections: AlgoliaCollection,
         chunkSize: 10000,
+        enablePartialUpdates: true,
       },
     },
   ],
