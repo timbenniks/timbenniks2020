@@ -14,7 +14,6 @@
         <ais-instant-search
           :search-client="searchClient"
           :index-name="$algolia.index"
-          :routing="routing"
         >
           <ais-refinement-list
             attribute="tags"

@@ -26,14 +26,17 @@
           :use-fancy-titles="true"
         />
         <div class="filters no-count">
-          <g-link
+          <!-- <g-link
             v-for="tag in $page.video.tags"
             :key="tag"
             :to="`/videos/?refinementList[tags][0]=${tag}`"
             class="filter"
           >
             {{ tag }}
-          </g-link>
+          </g-link> -->
+          <span v-for="tag in $page.video.tags" :key="tag" class="filter">{{
+            tag
+          }}</span>
         </div>
 
         <div
