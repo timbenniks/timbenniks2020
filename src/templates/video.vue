@@ -25,11 +25,11 @@
           titletag="h1"
           :use-fancy-titles="true"
         />
-        <div class="filters">
+        <div class="filters no-count">
           <g-link
             v-for="tag in $page.video.tags"
             :key="tag"
-            :to="`/videos/?tag=${tag}`"
+            :to="`/videos/?refinementList[tags][0]=${tag}`"
             class="filter"
           >
             {{ tag }}
@@ -42,7 +42,7 @@
           v-html="$page.video.data.content"
         ></div>
 
-        <related-videos :videos="filteredVideos" />
+        <related-videos :video="$page.video" />
       </main>
     </div>
   </Layout>
@@ -56,8 +56,6 @@ import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import RelatedVideos from '../components/related-videos.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
-
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -77,17 +75,6 @@ export default {
     )
   },
   mixins: [LinkMixin, IframeMixin, ImageMixin],
-  computed: mapGetters(['filteredVideos']),
-  mounted() {
-    this.setInitalVideos(this.$static.videos.edges)
-    this.$page.video.tags.forEach((tag) => {
-      this.useUrl(false)
-      this.filter({ tag, selected: true })
-    })
-  },
-  methods: {
-    ...mapActions(['setInitalVideos', 'filter', 'useUrl']),
-  },
 }
 </script>
 
@@ -103,6 +90,9 @@ query Video ($id: ID!) {
       publication_date
       title
       content
+      image {
+        url
+      }
       video_embed {
         width
         height
@@ -127,26 +117,6 @@ query Video ($id: ID!) {
   }
 }
 </page-query>
-
-<static-query>
-query {
-  videos: allPrismicVideo(sortBy: "data.publication_date", order: DESC) {
-    edges {
-      node {
-        slug
-        tags
-        data {
-          title
-          publication_date
-          image {
-            url
-          }
-        }
-      }
-    }
-  }
-}
-</static-query>
 
 <style lang="scss">
 .blogpost .heading {

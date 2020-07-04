@@ -14,6 +14,7 @@
         <ais-instant-search
           :search-client="searchClient"
           index-name="dev_VIDEOS"
+          :routing="routing"
         >
           <ais-refinement-list
             attribute="tags"
@@ -51,25 +52,6 @@
             </div>
           </ais-infinite-hits>
         </ais-instant-search>
-
-        <!-- <div class="filters">
-          <button
-            v-for="tag in tags"
-            :key="tag.tag"
-            class="filter"
-            :class="{ selected: tag.selected }"
-            @click="tagClick(tag)"
-          >
-            {{ tag.tag }}
-          </button>
-        </div> -->
-        <!-- <div class="posts videos">
-          <video-card
-            v-for="video in filteredVideos"
-            :key="video.slug"
-            :video="video"
-          />
-        </div> -->
       </main>
     </div>
   </Layout>
@@ -113,8 +95,9 @@ import Navigation from '../components/navigation.vue'
 import Heading from '../components/heading.vue'
 import VideoCard from '../components/video-card.vue'
 import mapMetaInfo from '../prismic/mapMetaInfo'
-import { mapGetters, mapActions } from 'vuex'
 import algoliasearch from 'algoliasearch'
+import { history } from 'instantsearch.js/es/lib/routers'
+import { singleIndex as singleIndexMapping } from 'instantsearch.js/es/lib/stateMappings'
 
 import {
   AisInstantSearch,
@@ -148,22 +131,13 @@ export default {
         'LTRZ8EDRZF',
         'b026a037e416510c0af71195118d465c'
       ),
+      routing: {
+        router: history({
+          writeDelay: 10,
+        }),
+        stateMapping: singleIndexMapping('dev_VIDEOS'),
+      },
     }
-  },
-
-  computed: mapGetters(['filteredVideos', 'tags']),
-
-  mounted() {
-    this.setInitalVideos(this.$page.videos.edges)
-  },
-
-  methods: {
-    tagClick(tag) {
-      this.useUrl(true)
-      this.filter(tag)
-    },
-
-    ...mapActions(['setInitalVideos', 'filter', 'useUrl']),
   },
 }
 </script>

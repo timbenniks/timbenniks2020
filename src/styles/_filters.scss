@@ -53,6 +53,10 @@
   max-width: rem(800px);
   margin: 0 auto 0.7rem;
 
+  &.no-count .filter {
+    padding: rem(4px 6px);
+  }
+
   .filter {
     background: none;
     padding: 0;

@@ -18,8 +18,8 @@
       </p>
       <p class="post-tags">
         <span v-for="(tag, index) in video.tags" :key="tag">
-          <span class="tag">{{ tag }}</span>
-          <template v-if="index + 1 < video.tags.length">,</template>
+          {{ tag }}
+          <template v-if="index + 1 < video.tags.length">, </template>
         </span>
       </p>
 
