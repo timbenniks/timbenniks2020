@@ -15,28 +15,41 @@
           :search-client="searchClient"
           index-name="dev_VIDEOS"
         >
-          <div class="filters">
-            <ais-refinement-list attribute="tags" operator="or">
+          <ais-refinement-list
+            attribute="tags"
+            operator="or"
+            :sort-by="['name:asc']"
+            :class-names="{ 'ais-RefinementList': 'test' }"
+          >
+            <div slot-scope="{ items, refine, createURL }" class="filters">
               <button
-                slot="item"
-                slot-scope="{ item, refine }"
+                v-for="item in items"
+                :key="item.value"
                 :class="{ selected: item.isRefined }"
                 class="filter"
+                :data-href="createURL(item)"
                 @click.prevent="refine(item.value)"
               >
-                {{ item.label }} {{ item.count.toLocaleString() }}
+                {{ item.label }}
+                <span>{{ item.count.toLocaleString() }}</span>
               </button>
-            </ais-refinement-list>
-          </div>
-          <ais-hits>
-            <div slot-scope="{ items }" class="posts videos">
-              <video-card
-                v-for="item in items"
-                :key="item.slug"
-                :video="item"
-              />
             </div>
-          </ais-hits>
+          </ais-refinement-list>
+          <ais-stats :class-names="{ 'ais-Stats': 'posts' }" />
+          <ais-infinite-hits>
+            <div slot-scope="{ items, isLastPage, refineNext }" class="posts">
+              <div class="videos">
+                <video-card
+                  v-for="item in items"
+                  :key="item.slug"
+                  :video="item"
+                />
+              </div>
+              <button v-if="!isLastPage" class="load-more" @click="refineNext">
+                Load More Results
+              </button>
+            </div>
+          </ais-infinite-hits>
         </ais-instant-search>
 
         <!-- <div class="filters">
@@ -103,7 +116,12 @@ import mapMetaInfo from '../prismic/mapMetaInfo'
 import { mapGetters, mapActions } from 'vuex'
 import algoliasearch from 'algoliasearch'
 
-import { AisInstantSearch, AisRefinementList, AisHits } from 'vue-instantsearch'
+import {
+  AisInstantSearch,
+  AisRefinementList,
+  AisInfiniteHits,
+  AisStats,
+} from 'vue-instantsearch'
 
 export default {
   components: {
@@ -112,7 +130,8 @@ export default {
     VideoCard,
     AisInstantSearch,
     AisRefinementList,
-    AisHits,
+    AisInfiniteHits,
+    AisStats,
   },
 
   metaInfo() {
