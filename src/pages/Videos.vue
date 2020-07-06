@@ -19,15 +19,13 @@
             attribute="tags"
             operator="or"
             :sort-by="['name:asc']"
-            :class-names="{ 'ais-RefinementList': 'test' }"
           >
-            <div slot-scope="{ items, refine, createURL }" class="filters">
+            <div slot-scope="{ items, refine }" class="filters">
               <button
                 v-for="item in items"
                 :key="item.value"
                 :class="{ selected: item.isRefined }"
                 class="filter"
-                :data-href="createURL(item)"
                 @click.prevent="refine(item.value)"
               >
                 {{ item.label }}
