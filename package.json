@@ -23,7 +23,7 @@
     "gridsome-plugin-pwa": "0.0.17",
     "gridsome-source-graphql-prismic": "^0.1.6",
     "highlight.js": "^10.1.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "prettier": "^2.0.5",
     "prismic-dom": "^2.2.3",
     "sass-loader": "^8.0.2",
